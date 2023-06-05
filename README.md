@@ -1,5 +1,5 @@
 - 👋 Hi, ich bin Leon Pllana
-- 👀 I’m interested in Coding in general
+- 👀 I’m interested in coding in general
 - 🌱 I’m currently learning new stuff everyday
 - 📫 How to reach me https://www.linkedin.com/in/leon-p-b8b143209/
 
