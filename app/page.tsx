@@ -358,7 +358,7 @@ function ContactSection() {
           </div>
 
           <div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8">
-            <p className="text-sm text-muted-foreground">Sie finden mich außerdem hier:</p>
+            <p className="text-sm text-muted-foreground">Sie finden uns außerdem hier:</p>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild size="lg" variant="outline">
                 <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
