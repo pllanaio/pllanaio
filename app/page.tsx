@@ -4,7 +4,30 @@ import { Button } from "@/components/button";
 import { FadeIn } from "@/components/motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Section, SectionEyebrow, SectionTitle } from "@/components/ui/section";
-import { capabilities, caseStudies, faqs, methodologySteps, painPoints, siteNav } from "@/lib/site-content";
+import { capabilities, caseStudies, faqs, methodologySteps, siteNav } from "@/lib/site-content";
+
+const thinkingSteps = [
+  {
+    number: "01",
+    title: "Historisch gewachsene Prozesse.",
+    text: "Was heute komplex wirkt, war oft einmal die richtige Entscheidung. Über Jahre entstehen neue Ausnahmen, zusätzliche Werkzeuge und manuelle Zwischenschritte. Irgendwann kennt niemand mehr den gesamten Prozess.",
+  },
+  {
+    number: "02",
+    title: "Teams arbeiten mit Tools, die nicht miteinander sprechen.",
+    text: "Informationen werden mehrfach erfasst, kopiert oder per E-Mail weitergegeben. Dadurch entstehen Medienbrüche, Zeitverluste und Fehler, die sich im Alltag summieren.",
+  },
+  {
+    number: "03",
+    title: "Entscheidungen entstehen aus Bauchgefühl statt Transparenz.",
+    text: "Wenn aktuelle Daten fehlen, werden Entscheidungen langsamer und unsicherer. Transparenz schafft Orientierung und ermöglicht fundierte Entscheidungen in jedem Bereich des Unternehmens.",
+  },
+  {
+    number: "04",
+    title: "IT löst Symptome, aber nicht die Ursache.",
+    text: "Neue Software macht einen schlechten Prozess nicht besser. Erst wenn Abläufe verstanden und optimiert werden, entfaltet Technologie ihren eigentlichen Mehrwert.",
+  },
+];
 
 function Header() {
   return (
@@ -165,18 +188,16 @@ function ThinkingSection() {
           <div className="relative">
             <div className="absolute left-5 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-border to-transparent md:block" />
             <div className="space-y-2">
-              {painPoints.map((pain, index) => (
-                <FadeIn key={pain} delay={index * 0.06}>
+              {thinkingSteps.map((step, index) => (
+                <FadeIn key={step.number} delay={index * 0.06}>
                   <div className="group relative grid gap-5 border-b border-border/80 py-9 pl-0 md:grid-cols-[96px_1fr] md:pl-14">
                     <div className="hidden md:block">
                       <div className="absolute left-3 top-11 h-4 w-4 rounded-full border border-border bg-background transition group-hover:border-accent group-hover:shadow-glow" />
-                      <p className="text-sm text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
+                      <p className="text-sm text-muted-foreground">{step.number}</p>
                     </div>
                     <div>
-                      <p className="text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl">{pain}</p>
-                      <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
-                        Der erste Schritt ist nicht ein neues Tool. Der erste Schritt ist Klarheit darüber, warum der aktuelle Ablauf genau so entstanden ist.
-                      </p>
+                      <p className="text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl">{step.title}</p>
+                      <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{step.text}</p>
                     </div>
                   </div>
                 </FadeIn>
