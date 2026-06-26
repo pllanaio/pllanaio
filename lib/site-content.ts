@@ -11,6 +11,7 @@ export const socialLinks = {
 export type PartnerCompany = {
   name: string;
   logo?: string;
+  url?: string;
 };
 
 export const partnerCompanies: PartnerCompany[] = [
