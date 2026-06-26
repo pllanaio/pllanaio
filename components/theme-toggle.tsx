@@ -34,12 +34,10 @@ export function ThemeToggle() {
   }, []);
 
   function toggleTheme() {
-    setIsDark((current) => {
-      const next = !current;
-      applyTheme(next);
-      setTheme(next ? "dark" : "light");
-      return next;
-    });
+    const next = !isDark;
+    applyTheme(next);
+    setIsDark(next);
+    setTheme(next ? "dark" : "light");
   }
 
   return (
