@@ -29,6 +29,10 @@ export function AtSign(props: SVGProps<SVGSVGElement>) {
 
 export const Instagram = AtSign;
 
+export function Linkedin(props: SVGProps<SVGSVGElement>) {
+  return <Icon {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></Icon>;
+}
+
 export function Check(props: SVGProps<SVGSVGElement>) {
   return <Icon {...props}><path d="m20 6-11 11-5-5" /></Icon>;
 }
