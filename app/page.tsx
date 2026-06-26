@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Instagram, MessageCircle } from "lucide-react";
+import { ArrowRight, Check, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { Button } from "@/components/button";
 import { FadeIn } from "@/components/motion";
 import { PartnerLogoMarquee } from "@/components/partner-logo-marquee";
@@ -34,8 +35,9 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link href="#" className="text-sm font-semibold tracking-[-0.02em]">
-          Leon Pllana IT-Solutions
+        <Link href="#" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em]">
+          <Image src="/logo.svg" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority />
+          <span>Leon Pllana IT-Solutions</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Hauptnavigation">
           {siteNav.map((item) => (
@@ -346,7 +348,7 @@ function ContactSection() {
           <SectionEyebrow>Kontakt</SectionEyebrow>
           <h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">Lassen Sie uns herausfinden, welcher Schritt Ihr Unternehmen besser macht.</h2>
           <p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">Ein erstes Gespräch muss nichts verkaufen. Es muss verstehen, wo heute Potenzial verborgen ist.</p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg">
               <a href={`mailto:${contactEmail}`}>
                 Gespräch anfragen <ArrowRight className="ml-2 h-4 w-4" />
@@ -355,6 +357,11 @@ function ContactSection() {
             <Button asChild size="lg" variant="outline">
               <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
                 <Instagram className="mr-2 h-4 w-4" /> Instagram
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
+                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
