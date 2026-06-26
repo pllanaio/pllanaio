@@ -31,7 +31,7 @@ const thinkingSteps = [
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/75 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="#" className="text-sm font-semibold tracking-[-0.02em]">
           Leon Pllana IT-Solutions
@@ -44,7 +44,9 @@ function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
           <Button asChild size="sm">
             <Link href="#kontakt">Gespräch starten</Link>
           </Button>
@@ -237,20 +239,21 @@ function MethodologySection() {
 
 function CapabilitiesSection() {
   return (
-    <section id="kompetenzen" className="bg-foreground px-6 py-28 text-background dark:bg-card dark:text-foreground">
-      <div className="mx-auto max-w-7xl">
+    <section id="kompetenzen" className="premium-frame relative overflow-hidden bg-muted/35 px-6 py-28 text-foreground">
+      <div className="architecture-grid absolute inset-0 opacity-35" />
+      <div className="relative mx-auto max-w-7xl">
         <FadeIn>
           <SectionEyebrow>Kompetenzen</SectionEyebrow>
           <SectionTitle>Eine Beratungsperspektive. Eine technische Umsetzungskraft.</SectionTitle>
         </FadeIn>
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-background/15 bg-background/15 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {capabilities.map((capability) => {
             const Icon = capability.icon;
             return (
-              <div key={capability.title} className="bg-foreground p-8 dark:bg-card">
-                <Icon className="h-6 w-6" />
+              <div key={capability.title} className="bg-card p-8">
+                <Icon className="h-6 w-6 text-foreground" />
                 <h3 className="mt-10 text-2xl font-semibold tracking-[-0.03em]">{capability.title}</h3>
-                <p className="mt-4 leading-7 text-background/65 dark:text-muted-foreground">{capability.copy}</p>
+                <p className="mt-4 leading-7 text-muted-foreground">{capability.copy}</p>
               </div>
             );
           })}
