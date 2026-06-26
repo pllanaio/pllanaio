@@ -18,9 +18,9 @@ export type PartnerCompany = {
 };
 
 export const partnerCompanies: PartnerCompany[] = [
-  { name: "Segnitz Bau", logo: "/partners/segnitz-bau.png", width: 260, height: 72, offsetY: 0 },
-  { name: "HVAC Chicago LLC", logo: "/partners/hvac-chicago.jpeg", width: 300, height: 86, offsetY: 0 },
-  { name: "LeCom Sh.p.k", logo: "/partners/lecom.png", width: 250, height: 70, offsetY: 0 },
+  { name: "Segnitz Bau", logo: "/partners/segnitz-bau.png", width: 260, height: 150, offsetY: 0 },
+  { name: "HVAC Chicago LLC", logo: "/partners/hvac-chicago.jpg", width: 300, height: 150, offsetY: 0 },
+  { name: "LeCom Sh.p.k", logo: "/partners/lecom.png", width: 250, height: 150, offsetY: 0 },
 ];
 
 export const siteNav = [
