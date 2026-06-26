@@ -11,14 +11,13 @@ export default function DatenschutzPage() {
   return (
     <LegalPage
       title="Datenschutzerklärung"
-      description="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website und bei der Kontaktaufnahme verarbeitet werden. Sie ist auf die aktuelle statische Next.js-Website ohne WordPress ausgerichtet."
+      description="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website und bei der Kontaktaufnahme verarbeitet werden. Die Website basiert auf Next.js und wird ohne WordPress betrieben."
       sections={[
         {
           id: "verantwortlicher",
           title: "Verantwortlicher",
           children: (
             <p>
-              Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:<br />
               Leon Pllana IT-Solutions<br />
               Leon Pllana<br />
               TODO: Straße und Hausnummer<br />
@@ -29,25 +28,25 @@ export default function DatenschutzPage() {
         },
         {
           id: "grundsatz",
-          title: "Grundsatz der Datenverarbeitung",
+          title: "Grundsatz",
           children: (
             <p>
-              Diese Website ist als statische Website auf Basis von Next.js umgesetzt. Es werden keine Benutzerkonten, Kommentarfunktionen, Newsletter-Anmeldungen oder WordPress-Plugins betrieben. Personenbezogene Daten werden nur verarbeitet, soweit dies für den Betrieb der Website, die Sicherheit der technischen Infrastruktur oder die Bearbeitung einer Kontaktanfrage erforderlich ist.
+              Diese Website nutzt keine WordPress-Installation und keine WordPress-Plugins. Daten werden verarbeitet, soweit dies für Betrieb, Sicherheit, Kontaktaufnahme oder Webanalyse erforderlich ist.
             </p>
           ),
         },
         {
           id: "hosting",
-          title: "Hosting und Bereitstellung",
+          title: "Hosting bei Hetzner in Deutschland",
           children: (
             <>
               <p>
-                Die Website wird über Vercel bereitgestellt. Beim Aufruf der Website werden technische Verbindungsdaten verarbeitet, damit die Inhalte sicher und zuverlässig ausgeliefert werden können.
+                Diese Website wird bei Hetzner in Deutschland betrieben. Beim Aufruf der Website können technische Zugriffsdaten verarbeitet werden, damit die Website sicher und zuverlässig ausgeliefert werden kann.
               </p>
               <p>
-                Zu diesen Daten können insbesondere IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene URL, Referrer-URL, Browsertyp, Betriebssystem sowie technische Statusinformationen gehören. Die Verarbeitung erfolgt zur technischen Bereitstellung, Stabilität und Sicherheit der Website.
+                Dazu können IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten, Browserinformationen, Betriebssystem, Referrer und technische Statusinformationen gehören.
               </p>
-              <p>TODO: Vercel-Vertrag, Region, Aufbewahrungsfristen und gegebenenfalls weitere Infrastrukturangaben final prüfen und ergänzen.</p>
+              <p>TODO: genaue Hetzner-Produktangaben, Log-Aufbewahrungsfristen und Vertragsdetails ergänzen.</p>
             </>
           ),
         },
@@ -56,17 +55,17 @@ export default function DatenschutzPage() {
           title: "Kontaktaufnahme per E-Mail",
           children: (
             <p>
-              Wenn Sie per E-Mail Kontakt aufnehmen, werden die von Ihnen übermittelten Angaben verarbeitet, um Ihre Anfrage zu bearbeiten und Anschlussfragen zu ermöglichen. Dazu gehören insbesondere Ihre E-Mail-Adresse, Ihr Name, der Inhalt Ihrer Nachricht und gegebenenfalls weitere freiwillig übermittelte Informationen.
+              Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung Ihrer Anfrage verwendet. Dazu können Name, E-Mail-Adresse, Inhalt der Nachricht und freiwillige Zusatzangaben gehören.
             </p>
           ),
         },
         {
           id: "social",
-          title: "Instagram und WhatsApp Links",
+          title: "Instagram und WhatsApp",
           children: (
             <>
               <p>
-                Auf der Website befinden sich Links zu externen Angeboten, derzeit Instagram und WhatsApp. Beim bloßen Besuch dieser Website werden über diese Links keine Inhalte der jeweiligen Anbieter eingebettet. Erst wenn Sie einen dieser Links aktiv anklicken, verlassen Sie diese Website und es gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
+                Auf dieser Website befinden sich Links zu Instagram und WhatsApp. Beim bloßen Besuch dieser Website werden keine Inhalte dieser Anbieter eingebettet. Erst beim Anklicken verlassen Sie diese Website.
               </p>
               <p>
                 Instagram: <a className="text-foreground underline underline-offset-4" href={socialLinks.instagram} target="_blank" rel="noreferrer">{socialLinks.instagram}</a><br />
@@ -76,65 +75,57 @@ export default function DatenschutzPage() {
           ),
         },
         {
-          id: "cookies",
-          title: "Cookies und Tracking",
+          id: "gtm",
+          title: "Google Tag Manager",
           children: (
             <p>
-              Nach aktuellem Stand setzt diese Website keine Analyse- oder Marketing-Cookies und verwendet keine Tracking-Tools wie Google Analytics, Meta Pixel oder vergleichbare Dienste. Sollte sich dies künftig ändern, wird diese Datenschutzerklärung entsprechend angepasst.
+              Diese Website wird Google Tag Manager nutzen, um Tags zentral zu verwalten. Über den Google Tag Manager können weitere Dienste wie Google Analytics eingebunden werden. TODO: Container-ID und Consent-Konfiguration ergänzen.
+            </p>
+          ),
+        },
+        {
+          id: "analytics",
+          title: "Google Analytics",
+          children: (
+            <p>
+              Diese Website wird Google Analytics zur Analyse der Website-Nutzung einsetzen. Google Analytics kann Informationen zu Seitenaufrufen, Geräten, Browsern, Interaktionen und ungefährer Herkunft verarbeiten. Die Aktivierung sollte erst nach Einwilligung erfolgen. TODO: Mess-ID, Consent Mode, Aufbewahrungsdauer und konkrete Konfiguration ergänzen.
+            </p>
+          ),
+        },
+        {
+          id: "cookies",
+          title: "Cookies und Einwilligung",
+          children: (
+            <p>
+              Für Analysezwecke können Cookies oder vergleichbare Technologien eingesetzt werden. Nicht erforderliche Dienste werden erst nach Einwilligung aktiviert. TODO: Cookie-Banner und Link zum erneuten Öffnen der Einstellungen ergänzen.
             </p>
           ),
         },
         {
           id: "fonts",
           title: "Schriften und Gestaltung",
-          children: (
-            <p>
-              Die Website verwendet die im Projekt eingebundenen Schriften und Styles. Soweit Schriften lokal oder über die Next.js-Font-Optimierung bereitgestellt werden, erfolgt beim Laden der Website keine separate Anfrage an externe Schriftanbieter. TODO: Finale Font-Einbindung im Projekt prüfen.
-            </p>
-          ),
-        },
-        {
-          id: "rechtsgrundlagen",
-          title: "Rechtsgrundlagen",
-          children: (
-            <p>
-              Die Verarbeitung technischer Daten erfolgt auf Grundlage berechtigter Interessen an einem sicheren und funktionsfähigen Betrieb der Website. Die Verarbeitung von Daten im Rahmen einer Kontaktaufnahme erfolgt zur Bearbeitung Ihrer Anfrage und gegebenenfalls zur Vorbereitung oder Durchführung einer geschäftlichen Beziehung.
-            </p>
-          ),
+          children: <p>TODO: Finale Font-Einbindung prüfen und ergänzen.</p>,
         },
         {
           id: "rechte",
           title: "Ihre Rechte",
           children: (
             <p>
-              Sie haben im Rahmen der gesetzlichen Voraussetzungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem können Sie sich bei einer zuständigen Datenschutzaufsichtsbehörde beschweren.
-            </p>
-          ),
-        },
-        {
-          id: "speicherung",
-          title: "Speicherdauer",
-          children: (
-            <p>
-              Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Kontaktanfragen werden gelöscht, wenn sie abschließend bearbeitet wurden und keine gesetzlichen oder geschäftlichen Gründe für eine weitere Speicherung bestehen.
+              Sie können im Rahmen der gesetzlichen Voraussetzungen Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit oder Widerspruch verlangen. Außerdem können Sie sich bei einer Datenschutzaufsichtsbehörde beschweren.
             </p>
           ),
         },
         {
           id: "sicherheit",
           title: "Sicherheit",
-          children: (
-            <p>
-              Diese Website wird über eine verschlüsselte Verbindung bereitgestellt. Eine verschlüsselte Übertragung erkennen Sie in der Regel an „https://“ in der Adresszeile Ihres Browsers.
-            </p>
-          ),
+          children: <p>Diese Website wird über eine verschlüsselte Verbindung bereitgestellt.</p>,
         },
         {
           id: "hinweis",
           title: "Hinweis zur Finalisierung",
           children: (
             <p className="rounded-3xl border border-border bg-card p-6">
-              Diese Datenschutzerklärung wurde für den aktuellen Stand der Website erstellt. Bitte vor Veröffentlichung Unternehmensdaten, Hostingdetails, Schrift-Einbindung, WhatsApp-Nummer, Instagram-Link und gegebenenfalls weitere eingesetzte Dienste final prüfen.
+              Bitte vor Veröffentlichung Unternehmensdaten, Hetzner-Details, Google Tag Manager, Google Analytics, Cookie-Banner, Social-Links und tatsächlich eingesetzte Dienste final prüfen.
             </p>
           ),
         },
