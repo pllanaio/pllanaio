@@ -11,17 +11,20 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
         <Image
           src={partner.logo}
           alt={partner.name}
-          width={170}
-          height={44}
-          className="max-h-9 w-auto object-contain opacity-75 grayscale transition group-hover:opacity-100 group-hover:grayscale-0"
+          width={280}
+          height={96}
+          className="max-h-16 w-auto object-contain opacity-70 grayscale transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert"
+          priority={false}
         />
       ) : (
-        <span>{partner.name}</span>
+        <span className="text-xl font-semibold tracking-[-0.04em] text-foreground/70 transition group-hover:text-foreground">
+          {partner.name}
+        </span>
       )}
     </>
   );
 
-  const className = "group flex h-20 min-w-56 items-center justify-center rounded-2xl border border-border bg-background px-8 text-sm font-semibold tracking-[-0.02em] text-muted-foreground transition hover:text-foreground";
+  const className = "group flex h-28 min-w-80 items-center justify-center px-10 transition";
 
   if (partner.url) {
     return (
@@ -35,16 +38,19 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
 }
 
 export function PartnerLogoMarquee() {
-  const partners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
+  const partners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card py-5 shadow-premium">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-card to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-card to-transparent" />
+    <div className="relative overflow-hidden border-y border-border/70 bg-background py-10">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-background via-background/90 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-background via-background/90 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
       <motion.div
-        className="flex w-max gap-4"
-        animate={{ x: [0, -240 * partnerCompanies.length] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        className="flex w-max gap-14"
+        animate={{ x: [0, -384 * partnerCompanies.length] }}
+        transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
       >
         {partners.map((partner, index) => (
           <PartnerItem key={`${partner.name}-${index}`} partner={partner} />
