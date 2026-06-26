@@ -9,14 +9,9 @@ export const socialLinks = {
 };
 
 export const partnerCompanies = [
-  "Partner 01",
-  "Partner 02",
-  "Partner 03",
-  "Partner 04",
-  "Partner 05",
-  "Partner 06",
-  "Partner 07",
-  "Partner 08",
+  "Segnitz Bau",
+  "HVAC Chicago LLC",
+  "LeCom Sh.p.k",
 ];
 
 export const siteNav = [
