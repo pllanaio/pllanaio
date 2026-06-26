@@ -16,8 +16,10 @@
 
   --shadow-premium: 0 24px 80px rgba(15, 23, 42, 0.08);
   --shadow-glow: 0 0 80px rgba(99, 102, 241, 0.18);
+  --shadow-hairline: inset 0 0 0 1px hsl(var(--border));
 
   --animate-float: float 8s ease-in-out infinite;
+  --animate-drift: drift 24s ease-in-out infinite alternate;
 }
 
 :root {
@@ -43,12 +45,13 @@
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes drift {
+  0% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  100% { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
 }
 
 * {
@@ -88,4 +91,37 @@ body {
     linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(circle at center, black, transparent 72%);
+}
+
+.architecture-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--border) / 0.72) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border) / 0.72) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+.radial-fade {
+  mask-image: radial-gradient(circle at center, black 0%, black 48%, transparent 78%);
+}
+
+.premium-frame {
+  position: relative;
+}
+
+.premium-frame:before,
+.premium-frame:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, hsl(var(--border)), transparent);
+}
+
+.premium-frame:before { top: 0; }
+.premium-frame:after { bottom: 0; }
+
+.text-balance {
+  text-wrap: balance;
 }
