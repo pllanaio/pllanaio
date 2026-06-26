@@ -1,19 +1,10 @@
-import type { SVGProps } from "react";
+import type { ReactElement, SVGProps } from "react";
 
-export type LucideIcon = (props: SVGProps<SVGSVGElement>) => JSX.Element;
+export type LucideIcon = (props: SVGProps<SVGSVGElement>) => ReactElement;
 
 function Icon({ children, ...props }: SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       {children}
     </svg>
   );
@@ -24,13 +15,13 @@ export function ArrowRight(props: SVGProps<SVGSVGElement>) {
 }
 
 export function AtSign(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><circle cx="12" cy="12" r="4" /><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" /></Icon>;
+  return <Icon {...props}><circle cx="12" cy="12" r="4" /><path d="M16 8v5" /><path d="M20 12a8 8 0 1 1-2-5" /></Icon>;
 }
 
 export const Instagram = AtSign;
 
 export function Linkedin(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></Icon>;
+  return <Icon {...props}><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /><path d="M10 21V9" /><path d="M14 21v-7a3 3 0 0 1 6 0v7" /></Icon>;
 }
 
 export function Check(props: SVGProps<SVGSVGElement>) {
@@ -38,7 +29,7 @@ export function Check(props: SVGProps<SVGSVGElement>) {
 }
 
 export function MessageCircle(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z" /></Icon>;
+  return <Icon {...props}><path d="M21 12a8 8 0 0 1-11.5 7L3 21l2-6.5A8 8 0 1 1 21 12z" /></Icon>;
 }
 
 export function Moon(props: SVGProps<SVGSVGElement>) {
@@ -46,7 +37,7 @@ export function Moon(props: SVGProps<SVGSVGElement>) {
 }
 
 export function Sun(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></Icon>;
+  return <Icon {...props}><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="M2 12h2" /><path d="M20 12h2" /></Icon>;
 }
 
 export function Code2(props: SVGProps<SVGSVGElement>) {
@@ -58,7 +49,7 @@ export function Layers3(props: SVGProps<SVGSVGElement>) {
 }
 
 export function Network(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3" /><path d="M12 8v8" /></Icon>;
+  return <Icon {...props}><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3h14v3" /><path d="M12 8v8" /></Icon>;
 }
 
 export function ShieldCheck(props: SVGProps<SVGSVGElement>) {
@@ -66,7 +57,7 @@ export function ShieldCheck(props: SVGProps<SVGSVGElement>) {
 }
 
 export function Sparkles(props: SVGProps<SVGSVGElement>) {
-  return <Icon {...props}><path d="M12 3l1.5 5L19 9.5 14 12l-1.5 5L11 12 6 9.5 11.5 8 12 3z" /><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z" /></Icon>;
+  return <Icon {...props}><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" /><path d="M19 15l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" /></Icon>;
 }
 
 export function Workflow(props: SVGProps<SVGSVGElement>) {
