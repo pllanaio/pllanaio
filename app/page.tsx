@@ -348,27 +348,34 @@ function ContactSection() {
           <SectionEyebrow>Kontakt</SectionEyebrow>
           <h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">Lassen Sie uns herausfinden, welcher Schritt Ihr Unternehmen besser macht.</h2>
           <p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">Ein erstes Gespräch muss nichts verkaufen. Es muss Verständnis schaffen, wo heute Potenzial verborgen ist.</p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+
+          <div className="mt-12 flex justify-center">
             <Button asChild size="lg">
-              <a href={`mailto:${contactEmail}`}>
+              <a href={`mailto:${contactEmail}`} className="min-w-64 justify-center">
                 Gespräch anfragen <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
-                <Instagram className="mr-2 h-4 w-4" /> Instagram
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
-                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer">
-                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
-              </a>
-            </Button>
+          </div>
+
+          <div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8">
+            <p className="text-sm text-muted-foreground">Sie finden mich außerdem hier:</p>
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+              <Button asChild size="lg" variant="outline">
+                <a href={socialLinks.linkedin} target="_blank" rel="noreferrer">
+                  <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer">
+                  <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
+                  <Instagram className="mr-2 h-4 w-4" /> Instagram
+                </a>
+              </Button>
+            </div>
           </div>
         </FadeIn>
       </div>
