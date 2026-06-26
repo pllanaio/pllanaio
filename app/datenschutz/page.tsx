@@ -11,7 +11,7 @@ export default function DatenschutzPage() {
   return (
     <LegalPage
       title="Datenschutzerklärung"
-      description="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website und bei der Kontaktaufnahme verarbeitet werden. Die Website basiert auf Next.js und wird ohne WordPress betrieben."
+      description="Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Website, bei der Kontaktaufnahme und bei der Nutzung von Analyse- und Tag-Management-Diensten verarbeitet werden."
       sections={[
         {
           id: "verantwortlicher",
@@ -20,18 +20,21 @@ export default function DatenschutzPage() {
             <p>
               Leon Pllana IT-Solutions<br />
               Leon Pllana<br />
-              TODO: Straße und Hausnummer<br />
-              TODO: PLZ und Ort<br />
-              E-Mail: <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+              Rothschwaiger Straße 4<br />
+              82256 Fürstenfeldbruck<br />
+              Deutschland<br />
+              Telefon: <a className="text-foreground underline underline-offset-4" href="tel:+491727255810">+49 172 7255810</a><br />
+              E-Mail: <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a><br />
+              USt-IdNr.: DE347734739
             </p>
           ),
         },
         {
           id: "grundsatz",
-          title: "Grundsatz",
+          title: "Grundsatz der Datenverarbeitung",
           children: (
             <p>
-              Diese Website nutzt keine WordPress-Installation und keine WordPress-Plugins. Daten werden verarbeitet, soweit dies für Betrieb, Sicherheit, Kontaktaufnahme oder Webanalyse erforderlich ist.
+              Eine Nutzung dieser Website ist grundsätzlich ohne aktive Angabe personenbezogener Daten möglich. Personenbezogene Daten werden verarbeitet, wenn dies für den technischen Betrieb, die Sicherheit der Website, die Bearbeitung von Kontaktanfragen, die Durchführung vorvertraglicher oder vertraglicher Maßnahmen oder die Analyse der Website-Nutzung erforderlich ist. Diese Website wird ohne WordPress, ohne Benutzerregistrierung, ohne Kommentarfunktion und ohne Blog-Kommentare betrieben.
             </p>
           ),
         },
@@ -41,22 +44,71 @@ export default function DatenschutzPage() {
           children: (
             <>
               <p>
-                Diese Website wird bei Hetzner in Deutschland betrieben. Beim Aufruf der Website können technische Zugriffsdaten verarbeitet werden, damit die Website sicher und zuverlässig ausgeliefert werden kann.
+                Diese Website wird auf Infrastruktur von Hetzner in Deutschland betrieben. Beim Aufruf der Website werden technische Zugriffsdaten verarbeitet, damit die Inhalte sicher, zuverlässig und performant ausgeliefert werden können.
               </p>
               <p>
-                Dazu können IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten, Browserinformationen, Betriebssystem, Referrer und technische Statusinformationen gehören.
+                Zu diesen Zugriffsdaten können insbesondere IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seiten und Dateien, Referrer-URL, Browsertyp, Browserversion, Betriebssystem, übertragene Datenmenge und technische Statusinformationen gehören. Die Verarbeitung erfolgt zur Bereitstellung der Website, zur Systemsicherheit, zur Fehleranalyse und zur Abwehr von Angriffen.
               </p>
-              <p>TODO: genaue Hetzner-Produktangaben, Log-Aufbewahrungsfristen und Vertragsdetails ergänzen.</p>
+              <p>
+                Soweit Server-Logfiles gespeichert werden, erfolgt dies getrennt von anderen personenbezogenen Daten und nur so lange, wie es für Betrieb, Sicherheit und Nachvollziehbarkeit erforderlich ist. Die konkrete Speicherdauer richtet sich nach der technischen Konfiguration des Hostings.
+              </p>
             </>
           ),
         },
         {
           id: "kontakt",
-          title: "Kontaktaufnahme per E-Mail",
+          title: "Kontaktaufnahme",
           children: (
             <p>
-              Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung Ihrer Anfrage verwendet. Dazu können Name, E-Mail-Adresse, Inhalt der Nachricht und freiwillige Zusatzangaben gehören.
+              Wenn Sie per E-Mail Kontakt aufnehmen, werden die von Ihnen übermittelten Angaben zur Bearbeitung Ihrer Anfrage verarbeitet. Dazu gehören insbesondere Name, E-Mail-Adresse, Telefonnummer, Inhalt der Nachricht sowie weitere freiwillig übermittelte Informationen. Die Verarbeitung erfolgt zur Bearbeitung der Anfrage, zur Kommunikation mit Ihnen und gegebenenfalls zur Vorbereitung oder Durchführung einer geschäftlichen Beziehung.
             </p>
+          ),
+        },
+        {
+          id: "cookies",
+          title: "Cookies, LocalStorage und Einwilligung",
+          children: (
+            <>
+              <p>
+                Diese Website kann Cookies, LocalStorage oder vergleichbare Technologien einsetzen. Technisch erforderliche Speicherungen dienen dem sicheren und funktionsfähigen Betrieb der Website. Analyse- und Marketingtechnologien werden nur eingesetzt, soweit hierfür eine wirksame Einwilligung vorliegt.
+              </p>
+              <p>
+                Sie können Cookies und lokale Speicherungen über die Einstellungen Ihres Browsers löschen oder blockieren. Wenn nicht erforderliche Dienste über ein Consent-Banner aktiviert werden, können Sie Ihre Entscheidung mit Wirkung für die Zukunft ändern oder widerrufen. TODO: Link oder Mechanismus zum erneuten Öffnen der Cookie-Einstellungen ergänzen.
+              </p>
+            </>
+          ),
+        },
+        {
+          id: "gtm",
+          title: "Google Tag Manager",
+          children: (
+            <>
+              <p>
+                Diese Website nutzt Google Tag Manager. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Der Google Tag Manager dient dazu, Website-Tags zentral zu verwalten und kontrolliert auszuspielen.
+              </p>
+              <p>
+                Der Google Tag Manager selbst erstellt nach unserer Zweckbestimmung keine Nutzerprofile und speichert keine Analyse-Cookies. Er kann jedoch andere Dienste auslösen, insbesondere Google Analytics. Diese Dienste werden nur entsprechend der jeweiligen Einwilligungs- und Konfigurationseinstellungen aktiviert.
+              </p>
+              <p>TODO: Google Tag Manager Container-ID und Consent-Konfiguration ergänzen.</p>
+            </>
+          ),
+        },
+        {
+          id: "analytics",
+          title: "Google Analytics 4",
+          children: (
+            <>
+              <p>
+                Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited. Google Analytics hilft dabei zu verstehen, wie Besucher die Website nutzen, welche Inhalte relevant sind und wie die Website verbessert werden kann.
+              </p>
+              <p>
+                Dabei können insbesondere Seitenaufrufe, Interaktionen, technische Geräte- und Browserinformationen, ungefähre Standortinformationen, Referrer, Nutzungsdauer und Ereignisse auf der Website verarbeitet werden. Die Verarbeitung erfolgt nur auf Grundlage Ihrer Einwilligung.
+              </p>
+              <p>
+                Google Analytics wird datenschutzbewusst konfiguriert. Dazu gehören insbesondere Consent Mode, IP-bezogene Schutzmaßnahmen und eine begrenzte Speicherdauer. Daten können an Google-Unternehmen und Server außerhalb der Europäischen Union übermittelt werden. Google stützt solche Übermittlungen nach eigener Angabe auf geeignete Garantien.
+              </p>
+              <p>TODO: Google Analytics Mess-ID, Aufbewahrungsdauer, Datenfreigabeeinstellungen und konkrete Consent-Konfiguration ergänzen.</p>
+            </>
           ),
         },
         {
@@ -65,7 +117,7 @@ export default function DatenschutzPage() {
           children: (
             <>
               <p>
-                Auf dieser Website befinden sich Links zu Instagram und WhatsApp. Beim bloßen Besuch dieser Website werden keine Inhalte dieser Anbieter eingebettet. Erst beim Anklicken verlassen Sie diese Website.
+                Auf dieser Website befinden sich Links zu Instagram und WhatsApp. Beim bloßen Besuch dieser Website werden keine Inhalte dieser Anbieter eingebettet und keine Daten an diese Anbieter übertragen. Erst wenn Sie einen solchen Link aktiv anklicken, verlassen Sie diese Website. Dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
               </p>
               <p>
                 Instagram: <a className="text-foreground underline underline-offset-4" href={socialLinks.instagram} target="_blank" rel="noreferrer">{socialLinks.instagram}</a><br />
@@ -75,57 +127,65 @@ export default function DatenschutzPage() {
           ),
         },
         {
-          id: "gtm",
-          title: "Google Tag Manager",
+          id: "rechtsgrundlagen",
+          title: "Rechtsgrundlagen",
           children: (
             <p>
-              Diese Website wird Google Tag Manager nutzen, um Tags zentral zu verwalten. Über den Google Tag Manager können weitere Dienste wie Google Analytics eingebunden werden. TODO: Container-ID und Consent-Konfiguration ergänzen.
+              Die Verarbeitung technischer Zugriffsdaten erfolgt auf Grundlage berechtigter Interessen an einem sicheren, stabilen und funktionsfähigen Betrieb der Website. Die Verarbeitung im Rahmen der Kontaktaufnahme erfolgt zur Bearbeitung Ihrer Anfrage und gegebenenfalls zur Durchführung vorvertraglicher oder vertraglicher Maßnahmen. Analyse- und Trackingdienste wie Google Analytics werden nur auf Grundlage einer vorherigen Einwilligung eingesetzt.
             </p>
           ),
         },
         {
-          id: "analytics",
-          title: "Google Analytics",
+          id: "speicherdauer",
+          title: "Speicherdauer",
           children: (
             <p>
-              Diese Website wird Google Analytics zur Analyse der Website-Nutzung einsetzen. Google Analytics kann Informationen zu Seitenaufrufen, Geräten, Browsern, Interaktionen und ungefährer Herkunft verarbeiten. Die Aktivierung sollte erst nach Einwilligung erfolgen. TODO: Mess-ID, Consent Mode, Aufbewahrungsdauer und konkrete Konfiguration ergänzen.
+              Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Kontaktanfragen werden gelöscht, wenn sie abschließend bearbeitet wurden und keine gesetzlichen oder geschäftlichen Gründe für eine weitere Speicherung bestehen. Analyse- und Cookie-Daten werden entsprechend der jeweiligen Konfiguration und Ihrer Einwilligung gespeichert.
             </p>
           ),
-        },
-        {
-          id: "cookies",
-          title: "Cookies und Einwilligung",
-          children: (
-            <p>
-              Für Analysezwecke können Cookies oder vergleichbare Technologien eingesetzt werden. Nicht erforderliche Dienste werden erst nach Einwilligung aktiviert. TODO: Cookie-Banner und Link zum erneuten Öffnen der Einstellungen ergänzen.
-            </p>
-          ),
-        },
-        {
-          id: "fonts",
-          title: "Schriften und Gestaltung",
-          children: <p>TODO: Finale Font-Einbindung prüfen und ergänzen.</p>,
         },
         {
           id: "rechte",
-          title: "Ihre Rechte",
+          title: "Rechte betroffener Personen",
           children: (
             <p>
-              Sie können im Rahmen der gesetzlichen Voraussetzungen Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit oder Widerspruch verlangen. Außerdem können Sie sich bei einer Datenschutzaufsichtsbehörde beschweren.
+              Sie haben im Rahmen der gesetzlichen Voraussetzungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruch gegen bestimmte Verarbeitungen sowie Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft. Außerdem haben Sie das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.
+            </p>
+          ),
+        },
+        {
+          id: "automatisierung",
+          title: "Automatisierte Entscheidungen",
+          children: (
+            <p>
+              Eine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO findet auf dieser Website nicht statt. Es werden keine Entscheidungen getroffen, die ausschließlich auf automatisierter Verarbeitung beruhen und Ihnen gegenüber rechtliche Wirkung entfalten oder Sie in ähnlicher Weise erheblich beeinträchtigen.
             </p>
           ),
         },
         {
           id: "sicherheit",
           title: "Sicherheit",
-          children: <p>Diese Website wird über eine verschlüsselte Verbindung bereitgestellt.</p>,
+          children: (
+            <p>
+              Diese Website wird über eine verschlüsselte Verbindung bereitgestellt. Eine verschlüsselte Übertragung erkennen Sie in der Regel an „https://“ in der Adresszeile Ihres Browsers. Zusätzlich werden angemessene technische und organisatorische Maßnahmen getroffen, um die Website und verarbeitete Daten zu schützen.
+            </p>
+          ),
+        },
+        {
+          id: "aktualisierung",
+          title: "Aktualisierung dieser Datenschutzerklärung",
+          children: (
+            <p>
+              Diese Datenschutzerklärung kann angepasst werden, wenn sich technische, rechtliche oder organisatorische Rahmenbedingungen ändern. Maßgeblich ist die jeweils auf dieser Website veröffentlichte Fassung.
+            </p>
+          ),
         },
         {
           id: "hinweis",
           title: "Hinweis zur Finalisierung",
           children: (
             <p className="rounded-3xl border border-border bg-card p-6">
-              Bitte vor Veröffentlichung Unternehmensdaten, Hetzner-Details, Google Tag Manager, Google Analytics, Cookie-Banner, Social-Links und tatsächlich eingesetzte Dienste final prüfen.
+              Diese Datenschutzerklärung wurde auf Basis der neuen Website erstellt und bewusst von alten WordPress-, Gravatar-, Kommentar- und Plugin-Inhalten bereinigt. Bitte vor Veröffentlichung insbesondere Google Tag Manager, Google Analytics, Consent-Banner, Cookie-Laufzeiten, Font-Einbindung und WhatsApp-Link final prüfen.
             </p>
           ),
         },
