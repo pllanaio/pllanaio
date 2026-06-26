@@ -20,8 +20,8 @@ export default function ImpressumPage() {
             <p>
               Leon Pllana IT-Solutions<br />
               Leon Pllana<br />
-              TODO: Straße und Hausnummer<br />
-              TODO: PLZ und Ort<br />
+              Rothschwaiger Straße 4<br />
+              82256 Fürstenfeldbruck<br />
               Deutschland
             </p>
           ),
@@ -32,28 +32,19 @@ export default function ImpressumPage() {
           children: (
             <p>
               E-Mail: <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a><br />
-              Telefon: TODO: Telefonnummer
+              Telefon: +49 172 7255810
             </p>
           ),
         },
         {
           id: "steuer",
           title: "Steuerliche Angaben",
-          children: <p>Umsatzsteuer-ID: TODO</p>,
+          children: <p>Umsatzsteuer-ID: DE347734739</p>,
         },
         {
           id: "inhalt",
           title: "Verantwortlich für Inhalte",
           children: <p>Leon Pllana, Anschrift wie oben.</p>,
-        },
-        {
-          id: "hinweis",
-          title: "Hinweis zur Finalisierung",
-          children: (
-            <p className="rounded-3xl border border-border bg-card p-6">
-              Diese Seite enthält Platzhalter. Bitte vor Veröffentlichung die korrekten Unternehmensdaten ergänzen und rechtlich prüfen lassen.
-            </p>
-          ),
         },
       ]}
     />
