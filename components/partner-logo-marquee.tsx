@@ -13,7 +13,7 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
           alt={partner.name}
           width={280}
           height={96}
-          className="max-h-16 w-auto object-contain opacity-70 grayscale transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert"
+          className="max-h-16 w-auto object-contain opacity-85 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
           priority={false}
         />
       ) : (
