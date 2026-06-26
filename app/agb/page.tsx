@@ -1,17 +1,53 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { LegalPage } from "@/components/legal-page";
+import { contactEmail } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "AGB | Leon Pllana IT-Solutions",
+  description: "Allgemeine Geschäftsbedingungen von Leon Pllana IT-Solutions.",
+};
 
 export default function AGBPage() {
   return (
-    <main className="min-h-screen bg-background px-6 py-24 text-foreground">
-      <div className="mx-auto max-w-3xl">
-        <Link href="/" className="text-sm text-muted-foreground transition hover:text-foreground">← Zurück zur Startseite</Link>
-        <p className="mt-12 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">Rechtliches</p>
-        <h1 className="mt-5 text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">AGB</h1>
-        <div className="mt-12 space-y-8 leading-8 text-muted-foreground">
-          <p>TODO: Inhalte ergänzen.</p>
-          <p className="rounded-3xl border border-border bg-card p-6">Diese Seite ist ein Platzhalter und muss vor Veröffentlichung finalisiert werden.</p>
-        </div>
-      </div>
-    </main>
+    <LegalPage
+      title="Allgemeine Geschäftsbedingungen"
+      description="Rahmeninformationen für die Zusammenarbeit. Der finale Text muss an konkrete Angebote, Verträge und Leistungsmodelle angepasst werden."
+      sections={[
+        {
+          id: "geltungsbereich",
+          title: "Geltungsbereich",
+          children: <p>TODO: Geltungsbereich, Kundengruppen und Einbeziehung der Bedingungen definieren.</p>,
+        },
+        {
+          id: "leistungen",
+          title: "Leistungen und Zusammenarbeit",
+          children: <p>TODO: Leistungsarten, Projektablauf, Mitwirkungspflichten und Abnahmeprozesse beschreiben.</p>,
+        },
+        {
+          id: "verguetung",
+          title: "Vergütung und Zahlungsbedingungen",
+          children: <p>TODO: Vergütungsmodelle, Zahlungsfristen, Auslagen, Reisekosten und Abrechnung regeln.</p>,
+        },
+        {
+          id: "rechte",
+          title: "Nutzungsrechte und Arbeitsergebnisse",
+          children: <p>TODO: Rechte an Konzepten, Dokumentationen, Quellcode, Schnittstellen und sonstigen Arbeitsergebnissen regeln.</p>,
+        },
+        {
+          id: "kontakt",
+          title: "Kontakt",
+          children: <p>Rückfragen können an <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a> gerichtet werden.</p>,
+        },
+        {
+          id: "hinweis",
+          title: "Hinweis zur Finalisierung",
+          children: (
+            <p className="rounded-3xl border border-border bg-card p-6">
+              Diese Seite ist ein strukturierter Platzhalter. Bitte vor Veröffentlichung durch eine qualifizierte Rechtsberatung finalisieren lassen.
+            </p>
+          ),
+        },
+      ]}
+    />
   );
 }
