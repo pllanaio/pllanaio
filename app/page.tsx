@@ -36,7 +36,7 @@ function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="#" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em]">
-          <Image src="/logo.svg" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority />
+          <Image src="/logo.png" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority />
           <span>Leon Pllana IT-Solutions</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Hauptnavigation">
