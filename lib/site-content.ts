@@ -1,6 +1,24 @@
 import type { LucideIcon } from "lucide-react";
 import { Code2, Layers3, Network, ShieldCheck, Sparkles, Workflow } from "lucide-react";
 
+export const contactEmail = "info@pllana.io";
+
+export const socialLinks = {
+  instagram: "https://www.instagram.com/pllana.io/",
+  whatsapp: "https://wa.me/49XXXXXXXXXXX",
+};
+
+export const partnerCompanies = [
+  "Partner 01",
+  "Partner 02",
+  "Partner 03",
+  "Partner 04",
+  "Partner 05",
+  "Partner 06",
+  "Partner 07",
+  "Partner 08",
+];
+
 export const siteNav = [
   { label: "Denkweise", href: "#denkweise" },
   { label: "Vorgehen", href: "#vorgehen" },
