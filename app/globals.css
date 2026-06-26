@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans), Inter, ui-sans-serif, system-ui;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --shadow-premium: 0 24px 80px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 80px rgba(99, 102, 241, 0.18);
+
+  --animate-float: float 8s ease-in-out infinite;
+}
 
 :root {
   --background: 0 0% 100%;
@@ -24,8 +42,23 @@
   --accent-foreground: 222 47% 6%;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: hsl(var(--background));
@@ -33,7 +66,12 @@ body {
   font-feature-settings: "ss01", "ss02", "cv01", "cv03";
   text-rendering: optimizeLegibility;
 }
-::selection { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+
+::selection {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
 .noise:before {
   content: "";
   position: fixed;
@@ -43,6 +81,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   z-index: 50;
 }
+
 .gradient-grid {
   background-image:
     linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
