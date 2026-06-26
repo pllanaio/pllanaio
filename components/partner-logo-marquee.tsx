@@ -5,15 +5,23 @@ import { motion } from "framer-motion";
 import { partnerCompanies, type PartnerCompany } from "@/lib/site-content";
 
 function PartnerItem({ partner }: { partner: PartnerCompany }) {
+  const logoWidth = partner.width ?? 280;
+  const logoHeight = partner.height ?? 80;
+  const offsetY = partner.offsetY ?? 0;
+
   const content = (
     <>
       {partner.logo ? (
         <Image
           src={partner.logo}
           alt={partner.name}
-          width={280}
-          height={96}
-          className="max-h-16 w-auto object-contain opacity-85 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+          width={logoWidth}
+          height={logoHeight}
+          className="w-auto object-contain opacity-85 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
+          style={{
+            maxHeight: logoHeight,
+            transform: `translateY(${offsetY}px)`,
+          }}
           priority={false}
         />
       ) : (
@@ -24,7 +32,7 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
     </>
   );
 
-  const className = "group flex h-28 min-w-80 items-center justify-center px-10 transition";
+  const className = "group flex h-32 min-w-80 items-center justify-center px-10 transition";
 
   if (partner.url) {
     return (
