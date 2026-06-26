@@ -6,6 +6,7 @@ export const contactEmail = "info@pllana.io";
 export const socialLinks = {
   instagram: "https://instagram.com/pllanaio",
   whatsapp: "https://api.whatsapp.com/send?phone=491727255810",
+  linkedin: "https://www.linkedin.com/in/leon-pllana/",
 };
 
 export type PartnerCompany = {
