@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/button";
 import { FadeIn } from "@/components/motion";
+import { PartnerLogoMarquee } from "@/components/partner-logo-marquee";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Section, SectionEyebrow, SectionTitle } from "@/components/ui/section";
-import { capabilities, caseStudies, faqs, methodologySteps, siteNav } from "@/lib/site-content";
+import { capabilities, caseStudies, contactEmail, faqs, methodologySteps, siteNav, socialLinks } from "@/lib/site-content";
 
 const thinkingSteps = [
   {
@@ -162,6 +163,19 @@ function Hero() {
         </FadeIn>
         <FadeIn delay={0.15}>
           <HeroGraphic />
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+function PartnerSection() {
+  return (
+    <section className="px-6 pb-24">
+      <div className="mx-auto max-w-7xl">
+        <FadeIn>
+          <p className="mb-6 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">Unternehmen, die bereits auf Zusammenarbeit vertrauen</p>
+          <PartnerLogoMarquee />
         </FadeIn>
       </div>
     </section>
@@ -332,10 +346,20 @@ function ContactSection() {
           <SectionEyebrow>Kontakt</SectionEyebrow>
           <h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">Lassen Sie uns herausfinden, welcher Schritt Ihr Unternehmen besser macht.</h2>
           <p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">Ein erstes Gespräch muss nichts verkaufen. Es muss verstehen, wo heute Potenzial verborgen ist.</p>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg">
-              <a href="mailto:hello@pllana.io">
+              <a href={`mailto:${contactEmail}`}>
                 Gespräch anfragen <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={socialLinks.instagram} target="_blank" rel="noreferrer">
+                <Instagram className="mr-2 h-4 w-4" /> Instagram
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer">
+                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
               </a>
             </Button>
           </div>
@@ -348,9 +372,16 @@ function ContactSection() {
 function Footer() {
   return (
     <footer className="border-t border-border px-6 py-10">
-      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-muted-foreground md:flex-row">
-        <p>© {new Date().getFullYear()} Leon Pllana IT-Solutions</p>
-        <p>Innovation in every Step.</p>
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+        <div>
+          <p>© {new Date().getFullYear()} Leon Pllana IT-Solutions</p>
+          <p className="mt-1">Innovation in every Step.</p>
+        </div>
+        <nav className="flex flex-wrap gap-4" aria-label="Rechtliche Links">
+          <Link href="/impressum" className="transition hover:text-foreground">Impressum</Link>
+          <Link href="/datenschutz" className="transition hover:text-foreground">Datenschutz</Link>
+          <Link href="/agb" className="transition hover:text-foreground">AGB</Link>
+        </nav>
       </div>
     </footer>
   );
@@ -361,6 +392,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <Header />
       <Hero />
+      <PartnerSection />
       <ThinkingSection />
       <MethodologySection />
       <CapabilitiesSection />
