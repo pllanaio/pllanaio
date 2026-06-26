@@ -145,21 +145,44 @@ function Hero() {
 
 function ThinkingSection() {
   return (
-    <section id="denkweise" className="border-y border-border bg-muted/35 px-6 py-28">
-      <div className="mx-auto max-w-7xl">
-        <FadeIn>
-          <SectionEyebrow>Denkweise</SectionEyebrow>
-          <SectionTitle>IT ist nicht der Anfang. Verstehen ist der Anfang.</SectionTitle>
-        </FadeIn>
-        <div className="mt-14 grid gap-5 md:grid-cols-4">
-          {painPoints.map((pain, index) => (
-            <FadeIn key={pain} delay={index * 0.05}>
-              <div className="h-full rounded-3xl border border-border bg-card p-7 shadow-premium">
-                <p className="text-sm text-muted-foreground">Problem {String(index + 1).padStart(2, "0")}</p>
-                <p className="mt-8 text-lg font-medium leading-7">{pain}</p>
-              </div>
-            </FadeIn>
-          ))}
+    <section id="denkweise" className="premium-frame relative overflow-hidden bg-background px-6 py-32">
+      <div className="architecture-grid absolute inset-0 opacity-60" />
+      <div className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl animate-drift" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+          <FadeIn>
+            <div className="sticky top-28">
+              <SectionEyebrow>Denkweise</SectionEyebrow>
+              <h2 className="max-w-3xl text-5xl font-semibold tracking-[-0.065em] text-balance sm:text-7xl">
+                IT ist nicht der Anfang. Verstehen ist der Anfang.
+              </h2>
+              <p className="mt-8 max-w-xl text-xl leading-8 text-muted-foreground">
+                Digitalisierung scheitert selten an Technologie. Sie scheitert, wenn Prozesse, Menschen und Entscheidungen nicht zuerst verstanden werden.
+              </p>
+            </div>
+          </FadeIn>
+
+          <div className="relative">
+            <div className="absolute left-5 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-border to-transparent md:block" />
+            <div className="space-y-2">
+              {painPoints.map((pain, index) => (
+                <FadeIn key={pain} delay={index * 0.06}>
+                  <div className="group relative grid gap-5 border-b border-border/80 py-9 pl-0 md:grid-cols-[96px_1fr] md:pl-14">
+                    <div className="hidden md:block">
+                      <div className="absolute left-3 top-11 h-4 w-4 rounded-full border border-border bg-background transition group-hover:border-accent group-hover:shadow-glow" />
+                      <p className="text-sm text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-semibold tracking-[-0.04em] text-balance sm:text-3xl">{pain}</p>
+                      <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">
+                        Der erste Schritt ist nicht ein neues Tool. Der erste Schritt ist Klarheit darüber, warum der aktuelle Ablauf genau so entstanden ist.
+                      </p>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
