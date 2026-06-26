@@ -1,22 +1,61 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { LegalPage } from "@/components/legal-page";
 import { contactEmail } from "@/lib/site-content";
+
+export const metadata: Metadata = {
+  title: "Impressum | Leon Pllana IT-Solutions",
+  description: "Impressum von Leon Pllana IT-Solutions.",
+};
 
 export default function ImpressumPage() {
   return (
-    <main className="min-h-screen bg-background px-6 py-24 text-foreground">
-      <div className="mx-auto max-w-3xl">
-        <Link href="/" className="text-sm text-muted-foreground transition hover:text-foreground">← Zurück zur Startseite</Link>
-        <p className="mt-12 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">Rechtliches</p>
-        <h1 className="mt-5 text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">Impressum</h1>
-        <div className="mt-12 space-y-8 leading-8 text-muted-foreground">
-          <p>Leon Pllana IT-Solutions</p>
-          <p>Leon Pllana<br />TODO: Straße und Hausnummer<br />TODO: PLZ und Ort<br />Deutschland</p>
-          <p>E-Mail: <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
-          <p>Telefon: TODO: Telefonnummer</p>
-          <p>Umsatzsteuer-ID: TODO</p>
-          <p className="rounded-3xl border border-border bg-card p-6">Bitte diese Platzhalter vor Veröffentlichung mit den korrekten Unternehmensdaten ersetzen und rechtlich prüfen lassen.</p>
-        </div>
-      </div>
-    </main>
+    <LegalPage
+      title="Impressum"
+      description="Angaben zum Anbieter dieser Website und zentrale Kontaktinformationen."
+      sections={[
+        {
+          id: "anbieter",
+          title: "Anbieter",
+          children: (
+            <p>
+              Leon Pllana IT-Solutions<br />
+              Leon Pllana<br />
+              TODO: Straße und Hausnummer<br />
+              TODO: PLZ und Ort<br />
+              Deutschland
+            </p>
+          ),
+        },
+        {
+          id: "kontakt",
+          title: "Kontakt",
+          children: (
+            <p>
+              E-Mail: <a className="text-foreground underline underline-offset-4" href={`mailto:${contactEmail}`}>{contactEmail}</a><br />
+              Telefon: TODO: Telefonnummer
+            </p>
+          ),
+        },
+        {
+          id: "steuer",
+          title: "Steuerliche Angaben",
+          children: <p>Umsatzsteuer-ID: TODO</p>,
+        },
+        {
+          id: "inhalt",
+          title: "Verantwortlich für Inhalte",
+          children: <p>Leon Pllana, Anschrift wie oben.</p>,
+        },
+        {
+          id: "hinweis",
+          title: "Hinweis zur Finalisierung",
+          children: (
+            <p className="rounded-3xl border border-border bg-card p-6">
+              Diese Seite enthält Platzhalter. Bitte vor Veröffentlichung die korrekten Unternehmensdaten ergänzen und rechtlich prüfen lassen.
+            </p>
+          ),
+        },
+      ]}
+    />
   );
 }
