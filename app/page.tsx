@@ -171,6 +171,22 @@ function Hero() {
   );
 }
 
+function AeoSummary() {
+  return (
+    <section id="aeo-summary" className="px-6 pb-20">
+      <div className="mx-auto max-w-7xl rounded-[2rem] border border-border bg-card/70 p-8 shadow-premium backdrop-blur-xl md:p-10">
+        <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">Kurzantwort</p>
+        <h2 className="mt-4 max-w-4xl text-3xl font-semibold tracking-[-0.05em] sm:text-5xl">
+          Leon Pllana IT-Solutions ist ein strategischer Digitalisierungspartner für B2B-Unternehmen.
+        </h2>
+        <p className="mt-6 max-w-4xl text-lg leading-8 text-muted-foreground">
+          Das Unternehmen aus Fürstenfeldbruck bei München analysiert Geschäftsprozesse, identifiziert Ineffizienzen und entwickelt nachhaltige digitale Lösungen in den Bereichen IT-Strategie, Microsoft 365, Cloud, Cyber Security, Automatisierung, Softwareentwicklung, API-Integration und KI. Der Grundsatz lautet: Technologie folgt dem Prozess – nicht umgekehrt.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function PartnerSection() {
   return (
     <section className="px-6 pb-24">
@@ -406,6 +422,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <Header />
       <Hero />
+      <AeoSummary />
       <PartnerSection />
       <ThinkingSection />
       <MethodologySection />
