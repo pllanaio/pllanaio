@@ -8,10 +8,15 @@ export const socialLinks = {
   whatsapp: "https://api.whatsapp.com/send?phone=491727255810",
 };
 
-export const partnerCompanies = [
-  "Segnitz Bau",
-  "HVAC Chicago LLC",
-  "LeCom Sh.p.k",
+export type PartnerCompany = {
+  name: string;
+  logo?: string;
+};
+
+export const partnerCompanies: PartnerCompany[] = [
+  { name: "Segnitz Bau", logo: "/partners/segnitz-bau.svg" },
+  { name: "HVAC Chicago LLC", logo: "/partners/hvac-chicago.svg" },
+  { name: "LeCom Sh.p.k", logo: "/partners/lecom.svg" },
 ];
 
 export const siteNav = [
