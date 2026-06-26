@@ -14,9 +14,9 @@ export type PartnerCompany = {
 };
 
 export const partnerCompanies: PartnerCompany[] = [
-  { name: "Segnitz Bau", logo: "/partners/segnitz-bau.svg" },
-  { name: "HVAC Chicago LLC", logo: "/partners/hvac-chicago.svg" },
-  { name: "LeCom Sh.p.k", logo: "/partners/lecom.svg" },
+  { name: "Segnitz Bau", logo: "/partners/segnitz-bau.png" },
+  { name: "HVAC Chicago LLC", logo: "/partners/hvac-chicago.jpeg" },
+  { name: "LeCom Sh.p.k", logo: "/partners/lecom.png" },
 ];
 
 export const siteNav = [
