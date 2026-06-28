@@ -1,7 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { hasAnalyticsConsent } from "@/components/cookie-banner";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
@@ -30,13 +31,27 @@ function getClickEventName(anchor: HTMLAnchorElement) {
 }
 
 export function trackEvent(event: string, params?: Record<string, string | number | boolean>) {
-  if (!GA_MEASUREMENT_ID || typeof window === "undefined" || !window.gtag) return;
+  if (!GA_MEASUREMENT_ID || typeof window === "undefined" || !window.gtag || !hasAnalyticsConsent()) return;
   window.gtag("event", event, params ?? {});
 }
 
 export function Analytics() {
+  const [enabled, setEnabled] = useState(false);
+
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID) return;
+    setEnabled(hasAnalyticsConsent());
+
+    function handleConsent(event: Event) {
+      const consent = (event as CustomEvent).detail;
+      setEnabled(consent === "accepted");
+    }
+
+    window.addEventListener("pllana-cookie-consent", handleConsent);
+    return () => window.removeEventListener("pllana-cookie-consent", handleConsent);
+  }, []);
+
+  useEffect(() => {
+    if (!GA_MEASUREMENT_ID || !enabled) return;
 
     function handleClick(event: MouseEvent) {
       const target = event.target as HTMLElement | null;
@@ -55,9 +70,9 @@ export function Analytics() {
 
     document.addEventListener("click", handleClick, { capture: true });
     return () => document.removeEventListener("click", handleClick, { capture: true });
-  }, []);
+  }, [enabled]);
 
-  if (!GA_MEASUREMENT_ID) return null;
+  if (!GA_MEASUREMENT_ID || !enabled) return null;
 
   return (
     <>
