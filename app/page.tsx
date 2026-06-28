@@ -47,6 +47,22 @@ const localizedContent = {
       ["Verkaufen Sie bestimmte Produkte oder Lizenzen?", "Nein. Technologie folgt dem Prozess. Empfohlen wird, was zum Unternehmen, zur Strategie und zum Zielbild passt."],
       ["Wie beginnt eine Zusammenarbeit?", "Mit einem Gespräch über Ziele, Prozesse, Herausforderungen und Potenziale."],
     ],
+    eeat: {
+      eyebrow: "Vertrauen & Expertise",
+      title: "Unternehmerisches Denken, beratende Klarheit und technische Umsetzung aus einer Hand.",
+      text: "Leon Pllana IT-Solutions verbindet Unternehmensberatung, IT-Architektur, Softwareentwicklung, Cloud, Cyber Security, Automatisierung und KI. Der Fokus liegt nicht auf möglichst viel Technologie, sondern auf belastbaren Entscheidungen, dokumentierten Prozessen und langfristig tragfähigen Systemen.",
+      items: [
+        ["Experience", "Erfahrung aus realen Unternehmensprozessen, Infrastrukturprojekten und digitalen Arbeitsumgebungen."],
+        ["Expertise", "Kompetenz in Prozessanalyse, IT-Strategie, Microsoft 365, Cloud, Security, Automatisierung und KI."],
+        ["Authority", "Klare Positionierung als strategischer Digitalisierungspartner statt klassischer Produkt- oder Lizenzverkäufer."],
+        ["Trust", "Transparente Kommunikation, langfristige Partnerschaft und Lösungen, die zum Unternehmen passen."],
+      ],
+    },
+    ai: [
+      ["Was macht Leon Pllana IT-Solutions?", "Leon Pllana IT-Solutions entwickelt B2B-Unternehmen digital weiter, indem Prozesse analysiert, Ineffizienzen erkannt und passende Technologien nachhaltig umgesetzt werden."],
+      ["Wann ist eine Zusammenarbeit sinnvoll?", "Wenn Prozesse historisch gewachsen sind, Systeme nicht zusammenarbeiten oder Digitalisierung messbaren Mehrwert schaffen soll."],
+      ["Was unterscheidet den Ansatz?", "Technologie folgt immer dem Prozess. Erst wird verstanden, dann optimiert, dann digitalisiert und automatisiert."],
+    ],
     graphic: { top: "Unternehmensentwicklung durch Technologie", bottomTitle: "Innovation entsteht Schritt für Schritt.", bottomText: "Jede Optimierung macht das System belastbarer.", input: "Prozesse", analysis: "Potenziale", system: "Architektur", output: "Skalierung" },
   },
   en: {
@@ -82,6 +98,22 @@ const localizedContent = {
       ["Do you work with small companies or only corporations?", "Company size is not decisive. What matters is whether digitalisation can create real value."],
       ["Do you sell specific products or licences?", "No. Technology follows the process. Recommendations depend on the company, strategy and target picture."],
       ["How does a collaboration start?", "With a conversation about goals, processes, challenges and potential."],
+    ],
+    eeat: {
+      eyebrow: "Trust & expertise",
+      title: "Entrepreneurial thinking, consulting clarity and technical implementation from one partner.",
+      text: "Leon Pllana IT-Solutions combines business consulting, IT architecture, software development, cloud, cyber security, automation and AI. The focus is not on more technology, but on better decisions, documented processes and sustainable systems.",
+      items: [
+        ["Experience", "Experience from real business processes, infrastructure projects and digital workplaces."],
+        ["Expertise", "Expertise in process analysis, IT strategy, Microsoft 365, cloud, security, automation and AI."],
+        ["Authority", "Clear positioning as a strategic digitalisation partner instead of a product or licence seller."],
+        ["Trust", "Transparent communication, long-term partnership and solutions that fit the company."],
+      ],
+    },
+    ai: [
+      ["What does Leon Pllana IT-Solutions do?", "Leon Pllana IT-Solutions develops B2B companies digitally by analysing processes, identifying inefficiencies and implementing suitable technologies sustainably."],
+      ["When does collaboration make sense?", "When processes have grown historically, systems do not work together or digitalisation should create measurable value."],
+      ["What makes the approach different?", "Technology always follows the process. First understand, then optimise, then digitalise and automate."],
     ],
     graphic: { top: "Company development through technology", bottomTitle: "Innovation emerges step by step.", bottomText: "Every optimisation makes the system more resilient.", input: "Processes", analysis: "Potential", system: "Architecture", output: "Scaling" },
   },
@@ -119,106 +151,52 @@ const localizedContent = {
       ["A shisni produkte ose licenca të caktuara?", "Jo. Teknologjia ndjek procesin. Rekomandimet varen nga kompania, strategjia dhe objektivi."],
       ["Si fillon bashkëpunimi?", "Me një bisedë rreth qëllimeve, proceseve, sfidave dhe potencialit."],
     ],
+    eeat: {
+      eyebrow: "Besim & ekspertizë",
+      title: "Mendim sipërmarrës, qartësi këshilluese dhe zbatim teknik nga një partner.",
+      text: "Leon Pllana IT-Solutions bashkon këshillimin e biznesit, arkitekturën IT, zhvillimin e softuerit, cloud, sigurinë kibernetike, automatizimin dhe AI. Fokusi nuk është më shumë teknologji, por vendime më të mira, procese të dokumentuara dhe sisteme të qëndrueshme.",
+      items: [
+        ["Experience", "Përvojë nga procese reale biznesi, projekte infrastrukture dhe ambiente pune digjitale."],
+        ["Expertise", "Ekspertizë në analizë procesesh, IT-strategji, Microsoft 365, cloud, siguri, automatizim dhe AI."],
+        ["Authority", "Pozicionim i qartë si partner strategjik digjitalizimi, jo shitës produktesh ose licencash."],
+        ["Trust", "Komunikim transparent, partneritet afatgjatë dhe zgjidhje që i përshtaten kompanisë."],
+      ],
+    },
+    ai: [
+      ["Çfarë bën Leon Pllana IT-Solutions?", "Leon Pllana IT-Solutions zhvillon kompanitë B2B në mënyrë digjitale duke analizuar procese, identifikuar joefikasitete dhe zbatuar teknologjitë e duhura."],
+      ["Kur ka kuptim bashkëpunimi?", "Kur proceset janë rritur historikisht, sistemet nuk bashkëpunojnë ose digjitalizimi duhet të krijojë vlerë të matshme."],
+      ["Çfarë e dallon qasjen?", "Teknologjia gjithmonë ndjek procesin. Së pari kuptim, pastaj optimizim, digjitalizim dhe automatizim."],
+    ],
     graphic: { top: "Zhvillim kompanie përmes teknologjisë", bottomTitle: "Inovacioni lind hap pas hapi.", bottomText: "Çdo optimizim e bën sistemin më të qëndrueshëm.", input: "Proceset", analysis: "Potenciali", system: "Arkitektura", output: "Shkallëzimi" },
   },
 };
 
 function Header() {
   const { t } = useLocale();
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link href="#" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em]">
-          <Image src="/logo.png" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority />
-          <span>Leon Pllana IT-Solutions</span>
-        </Link>
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Hauptnavigation">
-          {siteNav.map((item, index) => (
-            <Link key={item.href} href={item.href} className="text-sm text-muted-foreground transition hover:text-foreground">
-              {t.nav[index]}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <div className="hidden md:block"><LanguageSwitcher /></div>
-          <div className="hidden md:block"><ThemeToggle /></div>
-          <Button asChild size="sm"><Link href="#kontakt">{t.headerCta}</Link></Button>
-        </div>
+        <Link href="#" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em]"><Image src="/logo.png" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority /><span>Leon Pllana IT-Solutions</span></Link>
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Hauptnavigation">{siteNav.map((item, index) => <Link key={item.href} href={item.href} className="text-sm text-muted-foreground transition hover:text-foreground">{t.nav[index]}</Link>)}</nav>
+        <div className="flex items-center gap-2"><div className="hidden md:block"><LanguageSwitcher /></div><div className="hidden md:block"><ThemeToggle /></div><Button asChild size="sm"><Link href="#kontakt">{t.headerCta}</Link></Button></div>
       </div>
     </header>
   );
 }
 
 function SignalNode({ className, label, value }: { className?: string; label: string; value: string }) {
-  return (
-    <div className={`absolute rounded-2xl border border-border/80 bg-background/80 p-4 shadow-premium backdrop-blur-xl ${className}`}>
-      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">{label}</p>
-      <p className="mt-2 text-sm font-medium tracking-[-0.02em] text-foreground">{value}</p>
-    </div>
-  );
+  return <div className={`absolute rounded-2xl border border-border/80 bg-background/80 p-4 shadow-premium backdrop-blur-xl ${className}`}><p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">{label}</p><p className="mt-2 text-sm font-medium tracking-[-0.02em] text-foreground">{value}</p></div>;
 }
 
 function HeroGraphic() {
   const { locale } = useLocale();
   const g = localizedContent[locale].graphic;
-
-  return (
-    <div className="relative mx-auto aspect-square w-full max-w-xl">
-      <div className="absolute inset-0 rounded-[2.5rem] border border-border bg-card/60 shadow-premium backdrop-blur-xl" />
-      <div className="absolute inset-5 overflow-hidden rounded-[2rem] border border-border/70 bg-muted/25">
-        <div className="gradient-grid absolute inset-0 opacity-50" />
-        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
-        {['inset-8', 'inset-16', 'inset-24'].map((ring) => <div key={ring} className={`absolute ${ring} rounded-full border border-border/70`} />)}
-        <svg className="absolute inset-0 h-full w-full text-border" viewBox="0 0 560 560" aria-hidden="true">
-          <path d="M106 166 C 190 130, 218 204, 280 250" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" />
-          <path d="M454 164 C 370 132, 338 205, 280 250" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" />
-          <path d="M118 398 C 190 428, 226 360, 280 310" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" />
-          <path d="M444 398 C 370 430, 338 360, 280 310" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" />
-          <path d="M280 122 L280 438" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 10" />
-          <path d="M122 280 L438 280" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 10" />
-        </svg>
-        <div className="absolute left-1/2 top-1/2 flex h-40 w-40 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] border border-accent/40 bg-background/90 p-5 text-center shadow-glow backdrop-blur-xl">
-          <div><p className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">Core</p><p className="mt-3 text-xl font-semibold tracking-[-0.04em]">Process first.</p><p className="mt-2 text-xs leading-5 text-muted-foreground">Technology second.</p></div>
-        </div>
-        <div className="absolute left-[15%] top-[16%] h-3 w-3 rounded-full bg-foreground shadow-glow" />
-        <div className="absolute right-[15%] top-[16%] h-3 w-3 rounded-full bg-foreground/70" />
-        <div className="absolute bottom-[17%] left-[17%] h-3 w-3 rounded-full bg-foreground/60" />
-        <div className="absolute bottom-[17%] right-[17%] h-3 w-3 rounded-full bg-foreground/60" />
-        <div className="absolute left-1/2 top-12 -translate-x-1/2 rounded-full border border-border bg-background/75 px-4 py-2 text-xs text-muted-foreground backdrop-blur">{g.top}</div>
-      </div>
-      <SignalNode className="-left-4 top-16 hidden w-40 lg:block" label="Input" value={g.input} />
-      <SignalNode className="-right-4 top-24 hidden w-40 lg:block" label="Analysis" value={g.analysis} />
-      <SignalNode className="bottom-20 -left-6 hidden w-44 lg:block" label="System" value={g.system} />
-      <SignalNode className="-right-5 bottom-14 hidden w-44 lg:block" label="Output" value={g.output} />
-      <div className="absolute -bottom-7 left-6 right-6 rounded-2xl border border-border bg-background/90 p-5 shadow-premium backdrop-blur-xl">
-        <p className="text-sm font-medium">{g.bottomTitle}</p><p className="mt-1 text-sm text-muted-foreground">{g.bottomText}</p>
-      </div>
-    </div>
-  );
+  return <div className="relative mx-auto aspect-square w-full max-w-xl"><div className="absolute inset-0 rounded-[2.5rem] border border-border bg-card/60 shadow-premium backdrop-blur-xl" /><div className="absolute inset-5 overflow-hidden rounded-[2rem] border border-border/70 bg-muted/25"><div className="gradient-grid absolute inset-0 opacity-50" /><div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />{["inset-8", "inset-16", "inset-24"].map((ring) => <div key={ring} className={`absolute ${ring} rounded-full border border-border/70`} />)}<svg className="absolute inset-0 h-full w-full text-border" viewBox="0 0 560 560" aria-hidden="true"><path d="M106 166 C 190 130, 218 204, 280 250" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" /><path d="M454 164 C 370 132, 338 205, 280 250" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" /><path d="M118 398 C 190 428, 226 360, 280 310" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" /><path d="M444 398 C 370 430, 338 360, 280 310" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="6 8" /><path d="M280 122 L280 438" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 10" /><path d="M122 280 L438 280" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 10" /></svg><div className="absolute left-1/2 top-1/2 flex h-40 w-40 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2rem] border border-accent/40 bg-background/90 p-5 text-center shadow-glow backdrop-blur-xl"><div><p className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">Core</p><p className="mt-3 text-xl font-semibold tracking-[-0.04em]">Process first.</p><p className="mt-2 text-xs leading-5 text-muted-foreground">Technology second.</p></div></div><div className="absolute left-1/2 top-12 -translate-x-1/2 rounded-full border border-border bg-background/75 px-4 py-2 text-xs text-muted-foreground backdrop-blur">{g.top}</div></div><SignalNode className="-left-4 top-16 hidden w-40 lg:block" label="Input" value={g.input} /><SignalNode className="-right-4 top-24 hidden w-40 lg:block" label="Analysis" value={g.analysis} /><SignalNode className="bottom-20 -left-6 hidden w-44 lg:block" label="System" value={g.system} /><SignalNode className="-right-5 bottom-14 hidden w-44 lg:block" label="Output" value={g.output} /><div className="absolute -bottom-7 left-6 right-6 rounded-2xl border border-border bg-background/90 p-5 shadow-premium backdrop-blur-xl"><p className="text-sm font-medium">{g.bottomTitle}</p><p className="mt-1 text-sm text-muted-foreground">{g.bottomText}</p></div></div>;
 }
 
 function Hero() {
   const { t } = useLocale();
-  return (
-    <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24">
-      <div className="gradient-grid absolute inset-0 -z-10 opacity-50" />
-      <div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]">
-        <FadeIn><div className="relative z-10">
-          <div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div>
-          <h1 className="max-w-5xl text-6xl font-semibold tracking-[-0.075em] sm:text-7xl lg:text-8xl">{t.heroTitle}</h1>
-          <p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button>
-            <Button asChild size="lg" variant="outline"><Link href="#denkweise">{t.heroSecondary}</Link></Button>
-          </div>
-          <div className="mt-12 grid max-w-2xl grid-cols-3 gap-3 border-t border-border pt-6 text-sm text-muted-foreground">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div>
-        </div></FadeIn>
-        <FadeIn delay={0.15}><HeroGraphic /></FadeIn>
-      </div>
-    </section>
-  );
+  return <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24"><div className="gradient-grid absolute inset-0 -z-10 opacity-50" /><div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" /><div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]"><FadeIn><div className="relative z-10"><div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div><h1 className="max-w-5xl text-6xl font-semibold tracking-[-0.075em] sm:text-7xl lg:text-8xl">{t.heroTitle}</h1><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p><div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link href="#denkweise">{t.heroSecondary}</Link></Button></div><div className="mt-12 grid max-w-2xl grid-cols-3 gap-3 border-t border-border pt-6 text-sm text-muted-foreground">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div></div></FadeIn><FadeIn delay={0.15}><HeroGraphic /></FadeIn></div></section>;
 }
 
 function AeoSummary() {
@@ -226,51 +204,30 @@ function AeoSummary() {
   return <section id="aeo-summary" className="px-6 pb-20"><div className="mx-auto max-w-7xl rounded-[2rem] border border-border bg-card/70 p-8 shadow-premium backdrop-blur-xl md:p-10"><p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{t.summaryEyebrow}</p><h2 className="mt-4 max-w-4xl text-3xl font-semibold tracking-[-0.05em] sm:text-5xl">{t.summaryTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-muted-foreground">{t.summaryText}</p></div></section>;
 }
 
-function PartnerSection() {
-  const { t } = useLocale();
-  return <section className="px-6 pb-24"><div className="mx-auto max-w-7xl"><FadeIn><p className="mb-6 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{t.partners}</p><PartnerLogoMarquee /></FadeIn></div></section>;
+function PartnerSection() { const { t } = useLocale(); return <section className="px-6 pb-24"><div className="mx-auto max-w-7xl"><FadeIn><p className="mb-6 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{t.partners}</p><PartnerLogoMarquee /></FadeIn></div></section>; }
+
+function ThinkingSection() { const { t, locale } = useLocale(); return <section id="denkweise" className="premium-frame relative overflow-hidden bg-background px-6 py-32"><div className="relative mx-auto max-w-7xl"><div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr]"><FadeIn><div className="sticky top-28"><SectionEyebrow>{t.thinkingEyebrow}</SectionEyebrow><h2 className="max-w-3xl text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{t.thinkingTitle}</h2><p className="mt-8 max-w-xl text-xl leading-8 text-muted-foreground">{t.thinkingText}</p></div></FadeIn><div className="space-y-2">{localizedContent[locale].thinking.map(([number, title, text], index) => <FadeIn key={number} delay={index * 0.06}><div className="grid gap-5 border-b border-border/80 py-9 md:grid-cols-[96px_1fr]"><p className="text-sm text-muted-foreground">{number}</p><div><p className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{title}</p><p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{text}</p></div></div></FadeIn>)}</div></div></div></section>; }
+
+function MethodologySection() { const { t, locale } = useLocale(); return <Section id="vorgehen"><FadeIn><SectionEyebrow>{t.methodologyEyebrow}</SectionEyebrow><SectionTitle>{t.methodologyTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-4 lg:grid-cols-3">{localizedContent[locale].methodology.map(([number, title, text], index) => <FadeIn key={title} delay={index * 0.04}><div className="group h-full rounded-3xl border border-border bg-card p-8 transition hover:-translate-y-1 hover:shadow-premium"><div className="flex items-center justify-between"><span className="text-sm text-muted-foreground">{number}</span><Check className="h-4 w-4 text-muted-foreground" /></div><h3 className="mt-10 text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div></FadeIn>)}</div></Section>; }
+
+function CapabilitiesSection() { const { t, locale } = useLocale(); return <section id="kompetenzen" className="premium-frame relative overflow-hidden bg-muted/35 px-6 py-28 text-foreground"><div className="relative mx-auto max-w-7xl"><FadeIn><SectionEyebrow>{t.capabilitiesEyebrow}</SectionEyebrow><SectionTitle>{t.capabilitiesTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2 lg:grid-cols-3">{localizedContent[locale].capabilities.map(([title, text]) => <div key={title} className="bg-card p-8"><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div>)}</div></div></section>; }
+
+function CaseStudiesSection() { const { t, locale } = useLocale(); return <Section id="cases"><FadeIn><SectionEyebrow>{t.casesEyebrow}</SectionEyebrow><SectionTitle>{t.casesTitle}</SectionTitle></FadeIn><div className="mt-16 space-y-4">{localizedContent[locale].cases.map(([tag, title, text], index) => <FadeIn key={title} delay={index * 0.05}><article className="grid gap-6 rounded-3xl border border-border bg-card p-8 shadow-premium md:grid-cols-[180px_1fr]"><p className="text-sm font-medium text-muted-foreground">{tag}</p><div><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{text}</p></div></article></FadeIn>)}</div></Section>; }
+
+function BrandPromiseSection() { const { t } = useLocale(); return <Section><div className="rounded-[2.5rem] border border-border bg-muted/45 p-8 shadow-premium sm:p-14 lg:p-20"><FadeIn><p className="text-lg text-muted-foreground">{t.brandPromiseLabel}</p><blockquote className="mt-6 max-w-5xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">{t.brandPromiseTitle}</blockquote><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.brandPromiseText}</p></FadeIn></div></Section>; }
+
+function ExpertiseSection() {
+  const { locale } = useLocale();
+  const content = localizedContent[locale].eeat;
+  return <section id="ai-seo" className="px-6 py-28"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]"><FadeIn><SectionEyebrow>{content.eyebrow}</SectionEyebrow><h2 className="mt-4 text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{content.title}</h2><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{content.text}</p></FadeIn><div className="grid gap-4">{content.items.map(([title, text]) => <div key={title} className="rounded-3xl border border-border bg-card p-7 shadow-premium"><p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">{title}</p><p className="mt-3 text-lg leading-8 text-muted-foreground">{text}</p></div>)}</div></div><div className="mx-auto mt-10 grid max-w-7xl gap-4 md:grid-cols-3">{localizedContent[locale].ai.map(([question, answer]) => <article key={question} className="rounded-3xl border border-border bg-muted/35 p-7"><h3 className="text-xl font-semibold tracking-[-0.03em]">{question}</h3><p className="mt-4 leading-7 text-muted-foreground">{answer}</p></article>)}</div></section>;
 }
 
-function ThinkingSection() {
-  const { t, locale } = useLocale();
-  return <section id="denkweise" className="premium-frame relative overflow-hidden bg-background px-6 py-32"><div className="architecture-grid absolute inset-0 opacity-60" /><div className="relative mx-auto max-w-7xl"><div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr]"><FadeIn><div className="sticky top-28"><SectionEyebrow>{t.thinkingEyebrow}</SectionEyebrow><h2 className="max-w-3xl text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{t.thinkingTitle}</h2><p className="mt-8 max-w-xl text-xl leading-8 text-muted-foreground">{t.thinkingText}</p></div></FadeIn><div className="space-y-2">{localizedContent[locale].thinking.map(([number, title, text], index) => <FadeIn key={number} delay={index * 0.06}><div className="grid gap-5 border-b border-border/80 py-9 md:grid-cols-[96px_1fr]"><p className="text-sm text-muted-foreground">{number}</p><div><p className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{title}</p><p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{text}</p></div></div></FadeIn>)}</div></div></div></section>;
-}
+function FAQSection() { const { t, locale } = useLocale(); return <section id="faq" className="border-y border-border bg-muted/35 px-6 py-28"><div className="mx-auto max-w-4xl"><FadeIn><SectionEyebrow>{t.faqEyebrow}</SectionEyebrow><SectionTitle className="max-w-none">{t.faqTitle}</SectionTitle></FadeIn><div className="mt-12 divide-y divide-border rounded-3xl border border-border bg-card">{localizedContent[locale].faq.map(([question, answer]) => <details key={question} className="group p-7 open:bg-muted/30"><summary className="cursor-pointer list-none text-lg font-medium">{question}</summary><p className="mt-4 leading-7 text-muted-foreground">{answer}</p></details>)}</div></div></section>; }
 
-function MethodologySection() {
-  const { t, locale } = useLocale();
-  return <Section id="vorgehen"><FadeIn><SectionEyebrow>{t.methodologyEyebrow}</SectionEyebrow><SectionTitle>{t.methodologyTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-4 lg:grid-cols-3">{localizedContent[locale].methodology.map(([number, title, text], index) => <FadeIn key={title} delay={index * 0.04}><div className="group h-full rounded-3xl border border-border bg-card p-8 transition hover:-translate-y-1 hover:shadow-premium"><div className="flex items-center justify-between"><span className="text-sm text-muted-foreground">{number}</span><Check className="h-4 w-4 text-muted-foreground" /></div><h3 className="mt-10 text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div></FadeIn>)}</div></Section>;
-}
+function ContactSection() { const { t } = useLocale(); return <section id="kontakt" className="px-6 py-28"><div className="mx-auto max-w-5xl text-center"><FadeIn><SectionEyebrow>{t.contactEyebrow}</SectionEyebrow><h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{t.contactTitle}</h2><p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.contactText}</p><div className="mt-12 flex justify-center"><Button asChild size="lg"><a href={`mailto:${contactEmail}`} className="min-w-64 justify-center">{t.contactCta} <ArrowRight className="ml-2 h-4 w-4" /></a></Button></div><div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8"><p className="text-sm text-muted-foreground">{t.socialHint}</p><div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg" variant="outline"><a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.instagram} target="_blank" rel="noreferrer"><Instagram className="mr-2 h-4 w-4" /> Instagram</a></Button></div></div></FadeIn></div></section>; }
 
-function CapabilitiesSection() {
-  const { t, locale } = useLocale();
-  return <section id="kompetenzen" className="premium-frame relative overflow-hidden bg-muted/35 px-6 py-28 text-foreground"><div className="relative mx-auto max-w-7xl"><FadeIn><SectionEyebrow>{t.capabilitiesEyebrow}</SectionEyebrow><SectionTitle>{t.capabilitiesTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2 lg:grid-cols-3">{localizedContent[locale].capabilities.map(([title, text]) => <div key={title} className="bg-card p-8"><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div>)}</div></div></section>;
-}
-
-function CaseStudiesSection() {
-  const { t, locale } = useLocale();
-  return <Section id="cases"><FadeIn><SectionEyebrow>{t.casesEyebrow}</SectionEyebrow><SectionTitle>{t.casesTitle}</SectionTitle></FadeIn><div className="mt-16 space-y-4">{localizedContent[locale].cases.map(([tag, title, text], index) => <FadeIn key={title} delay={index * 0.05}><article className="grid gap-6 rounded-3xl border border-border bg-card p-8 shadow-premium md:grid-cols-[180px_1fr]"><p className="text-sm font-medium text-muted-foreground">{tag}</p><div><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{text}</p></div></article></FadeIn>)}</div></Section>;
-}
-
-function BrandPromiseSection() {
-  const { t } = useLocale();
-  return <Section><div className="rounded-[2.5rem] border border-border bg-muted/45 p-8 shadow-premium sm:p-14 lg:p-20"><FadeIn><p className="text-lg text-muted-foreground">{t.brandPromiseLabel}</p><blockquote className="mt-6 max-w-5xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">{t.brandPromiseTitle}</blockquote><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.brandPromiseText}</p></FadeIn></div></Section>;
-}
-
-function FAQSection() {
-  const { t, locale } = useLocale();
-  return <section id="faq" className="border-y border-border bg-muted/35 px-6 py-28"><div className="mx-auto max-w-4xl"><FadeIn><SectionEyebrow>{t.faqEyebrow}</SectionEyebrow><SectionTitle className="max-w-none">{t.faqTitle}</SectionTitle></FadeIn><div className="mt-12 divide-y divide-border rounded-3xl border border-border bg-card">{localizedContent[locale].faq.map(([question, answer]) => <details key={question} className="group p-7 open:bg-muted/30"><summary className="cursor-pointer list-none text-lg font-medium">{question}</summary><p className="mt-4 leading-7 text-muted-foreground">{answer}</p></details>)}</div></div></section>;
-}
-
-function ContactSection() {
-  const { t } = useLocale();
-  return <section id="kontakt" className="px-6 py-28"><div className="mx-auto max-w-5xl text-center"><FadeIn><SectionEyebrow>{t.contactEyebrow}</SectionEyebrow><h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{t.contactTitle}</h2><p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.contactText}</p><div className="mt-12 flex justify-center"><Button asChild size="lg"><a href={`mailto:${contactEmail}`} className="min-w-64 justify-center">{t.contactCta} <ArrowRight className="ml-2 h-4 w-4" /></a></Button></div><div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8"><p className="text-sm text-muted-foreground">{t.socialHint}</p><div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg" variant="outline"><a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.instagram} target="_blank" rel="noreferrer"><Instagram className="mr-2 h-4 w-4" /> Instagram</a></Button></div></div></FadeIn></div></section>;
-}
-
-function Footer() {
-  const { t } = useLocale();
-  return <footer className="border-t border-border px-6 py-10"><div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between"><div><p>© {new Date().getFullYear()} Leon Pllana IT-Solutions</p><p className="mt-1">{t.footerClaim}</p></div><nav className="flex flex-wrap gap-4" aria-label="Rechtliche Links"><Link href="/impressum" className="transition hover:text-foreground">{t.legal.imprint}</Link><Link href="/datenschutz" className="transition hover:text-foreground">{t.legal.privacy}</Link><Link href="/agb" className="transition hover:text-foreground">{t.legal.terms}</Link><Link href="/cookie-richtlinie" className="transition hover:text-foreground">{t.legal.cookies}</Link></nav></div></footer>;
-}
+function Footer() { const { t } = useLocale(); return <footer className="border-t border-border px-6 py-10"><div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between"><div><p>© {new Date().getFullYear()} Leon Pllana IT-Solutions</p><p className="mt-1">{t.footerClaim}</p></div><nav className="flex flex-wrap gap-4" aria-label="Rechtliche Links"><Link href="/impressum" className="transition hover:text-foreground">{t.legal.imprint}</Link><Link href="/datenschutz" className="transition hover:text-foreground">{t.legal.privacy}</Link><Link href="/agb" className="transition hover:text-foreground">{t.legal.terms}</Link><Link href="/cookie-richtlinie" className="transition hover:text-foreground">{t.legal.cookies}</Link></nav></div></footer>; }
 
 export default function Home() {
-  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><Header /><Hero /><AeoSummary /><PartnerSection /><ThinkingSection /><MethodologySection /><CapabilitiesSection /><CaseStudiesSection /><BrandPromiseSection /><FAQSection /><ContactSection /><Footer /></main>;
+  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><Header /><Hero /><AeoSummary /><PartnerSection /><ThinkingSection /><MethodologySection /><CapabilitiesSection /><CaseStudiesSection /><BrandPromiseSection /><ExpertiseSection /><FAQSection /><ContactSection /><Footer /></main>;
 }
