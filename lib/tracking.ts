@@ -1,4 +1,4 @@
-export const GTM_ID = "GTM-MGQ2P9VM";
+export const GTM_ID = "GTM-KVZZWNP3";
 export const GA_MEASUREMENT_ID = "G-FNWF7LJK3B";
 
 type TrackingParams = Record<string, string | number | boolean | undefined>;
