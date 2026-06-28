@@ -7,7 +7,7 @@ export function Container({ className, children }: React.ComponentPropsWithoutRe
 
 export function Section({ className, children, ...props }: React.ComponentPropsWithoutRef<"section">) {
   return (
-    <section className={cn("px-6 py-28", className)} {...props}>
+    <section className={cn("content-auto px-6 py-28", className)} {...props}>
       <div className="mx-auto w-full max-w-7xl">{children}</div>
     </section>
   );
