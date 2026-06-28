@@ -27,7 +27,7 @@ export function LocalizedLegalPage({ content }: { content: Record<Locale, Locali
       sections={page.sections.map((section) => ({
         id: section.id,
         title: section.title,
-        children: section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>),
+        children: section.paragraphs.map((paragraph) => <p key={paragraph} className="whitespace-pre-line">{paragraph}</p>),
       }))}
     />
   );
