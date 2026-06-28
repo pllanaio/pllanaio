@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@/components/analytics";
+import { CookieBanner } from "@/components/cookie-banner";
+import { LocaleProvider } from "@/components/locale-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -46,6 +48,12 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: siteUrl,
+    languages: {
+      de: siteUrl,
+      en: `${siteUrl}/?lang=en`,
+      sq: `${siteUrl}/?lang=sq`,
+      "x-default": siteUrl,
+    },
   },
   openGraph: {
     title: "Leon Pllana IT-Solutions | Innovation in every Step.",
@@ -104,86 +112,17 @@ const organizationSchema = {
     addressRegion: "Bayern",
     addressCountry: "DE",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    addressCountry: "DE",
-    addressRegion: "Bayern",
-    addressLocality: "Fürstenfeldbruck",
-  },
-  areaServed: [
-    { "@type": "Country", name: "Deutschland" },
-    { "@type": "AdministrativeArea", name: "Bayern" },
-    { "@type": "City", name: "München" },
-    { "@type": "City", name: "Fürstenfeldbruck" },
-    { "@type": "Country", name: "Österreich" },
-    { "@type": "Country", name: "Schweiz" },
-    { "@type": "Place", name: "Europa" },
-  ],
   sameAs: ["https://instagram.com/pllanaio", "https://www.linkedin.com/in/leon-pllana/"],
-  knowsAbout: [
-    "Digitalisierungsberatung",
-    "IT-Beratung",
-    "IT-Strategie",
-    "Prozessoptimierung",
-    "Microsoft 365",
-    "Cloud-Infrastruktur",
-    "Cyber Security",
-    "Backup und Monitoring",
-    "Automatisierung",
-    "Softwareentwicklung",
-    "API-Integration",
-    "Künstliche Intelligenz im Unternehmen",
-    "Digital Workplace",
-    "IT-Projektleitung",
-    "IT-Outsourcing",
-  ],
-  makesOffer: [
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digitalisierungsberatung" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Prozessanalyse und Prozessoptimierung" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "IT-Strategie und technische Unternehmensberatung" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Microsoft 365 und Digital Workplace" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cloud, IT-Infrastruktur und Cyber Security" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Softwareentwicklung, API-Integration und KI-Automatisierung" } },
-  ],
 };
 
 const serviceSchema = {
   "@type": "Service",
   "@id": `${siteUrl}/#service`,
   name: "Strategische Digitalisierung und IT-Beratung für B2B-Unternehmen",
-  serviceType: "Digitalisierungsberatung, IT-Strategie, Prozessoptimierung, Automatisierung und technische Unternehmensberatung",
   provider: { "@id": `${siteUrl}/#organization` },
   areaServed: ["Deutschland", "Bayern", "München", "Fürstenfeldbruck", "Österreich", "Schweiz", "Europa"],
-  audience: {
-    "@type": "BusinessAudience",
-    audienceType: "B2B-Unternehmen, Mittelstand, Startups, Familienunternehmen, Dienstleister, Produktion, Kanzleien, Agenturen und Unternehmensgruppen",
-  },
   description:
     "Leon Pllana IT-Solutions analysiert Unternehmen, versteht Prozesse, identifiziert Ineffizienzen und entwickelt darauf aufbauend passende technologische Lösungen. Die Leistung richtet sich ausschließlich an B2B-Kunden.",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Leistungen von Leon Pllana IT-Solutions",
-    itemListElement: [
-      "Digitalisierungsberatung",
-      "IT-Infrastruktur",
-      "Microsoft 365",
-      "Cloud",
-      "Cyber Security",
-      "Backup",
-      "Monitoring",
-      "Softwareentwicklung",
-      "API-Integration",
-      "KI",
-      "Automatisierung",
-      "Prozessanalyse",
-      "Dokumentation",
-      "IT-Strategie",
-      "Digital Workplace",
-      "IT-Projektleitung",
-      "IT-Outsourcing",
-      "Technische Unternehmensberatung",
-    ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-  },
 };
 
 const faqSchema = {
@@ -206,30 +145,6 @@ const faqSchema = {
         text: "Nein. IT ist das Werkzeug, nicht der Ausgangspunkt. Zuerst werden Unternehmen, Prozesse und Ziele verstanden. Erst danach wird entschieden, welche Technologie eingesetzt wird.",
       },
     },
-    {
-      "@type": "Question",
-      name: "Für wen arbeitet Leon Pllana IT-Solutions?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Leon Pllana IT-Solutions arbeitet ausschließlich im B2B-Bereich – branchenunabhängig für Startups, Mittelstand, Familienunternehmen, Dienstleister, Produktion, Kanzleien, Agenturen und internationale Unternehmensgruppen.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "In welcher Region ist Leon Pllana IT-Solutions tätig?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Der Unternehmenssitz befindet sich in Fürstenfeldbruck bei München. Die Leistungen werden für Unternehmen in Deutschland, Bayern, München, Fürstenfeldbruck, Österreich, der Schweiz und europaweit erbracht.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Was bedeutet Innovation in every Step?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Innovation bedeutet bei Leon Pllana IT-Solutions kontinuierliche Verbesserung: jeder Prozess, jede Entscheidung, jeder Arbeitsplatz, jede Infrastruktur und jeder einzelne Schritt wird schrittweise optimiert.",
-      },
-    },
   ],
 };
 
@@ -240,14 +155,9 @@ const webPageSchema = {
   name: "Leon Pllana IT-Solutions | Strategischer Digitalisierungspartner",
   headline: "Innovation in every Step.",
   description: businessDescription,
-  inLanguage: "de-DE",
+  inLanguage: ["de-DE", "en", "sq"],
   about: { "@id": `${siteUrl}/#organization` },
   mainEntity: { "@id": `${siteUrl}/#service` },
-  primaryImageOfPage: `${siteUrl}/og-image.png`,
-  speakable: {
-    "@type": "SpeakableSpecification",
-    cssSelector: ["h1", "#aeo-summary"],
-  },
 };
 
 const structuredData = {
@@ -260,9 +170,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de" suppressHydrationWarning>
       <body className={`${inter.variable} noise font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <LocaleProvider>
+            {children}
+            <CookieBanner />
+            <Analytics />
+          </LocaleProvider>
         </ThemeProvider>
-        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
