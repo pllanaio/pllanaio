@@ -4,6 +4,11 @@ const siteUrl = "https://pllana.io";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  const languages = {
+    de: siteUrl,
+    en: `${siteUrl}/?lang=en`,
+    sq: `${siteUrl}/?lang=sq`,
+  };
 
   return [
     {
@@ -11,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly",
       priority: 1,
+      alternates: { languages },
     },
     {
       url: `${siteUrl}/impressum`,
@@ -26,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/agb`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/cookie-richtlinie`,
       lastModified,
       changeFrequency: "yearly",
       priority: 0.3,
