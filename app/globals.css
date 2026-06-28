@@ -54,6 +54,11 @@
   100% { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
 }
 
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
 * { box-sizing: border-box; }
 
 html {
@@ -103,6 +108,11 @@ img, svg, video, canvas {
     linear-gradient(to bottom, hsl(var(--border) / 0.72) 1px, transparent 1px);
   background-size: 96px 96px;
   mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+.marquee-track {
+  animation: marquee 44s linear infinite;
+  will-change: transform;
 }
 
 .radial-fade {
