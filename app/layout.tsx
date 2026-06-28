@@ -11,8 +11,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swa
 
 const siteUrl = "https://pllana.io";
 const businessName = "Leon Pllana IT-Solutions";
+const founderId = `${siteUrl}/#leon-pllana`;
 const businessDescription =
-  "Leon Pllana IT-Solutions ist ein strategischer Digitalisierungspartner aus Fürstenfeldbruck bei München. Das Unternehmen unterstützt B2B-Kunden bei Digitalisierungsberatung, Prozessoptimierung, IT-Strategie, Microsoft 365, Cloud, Cyber Security, Automatisierung, Softwareentwicklung und KI. Technologie folgt dabei immer dem Prozess.";
+  "Leon Pllana IT-Solutions ist ein strategischer Digitalisierungspartner aus Fürstenfeldbruck bei München. Das Unternehmen unterstützt B2B-Kunden bei Digitalisierungsberatung, Prozessoptimierung, IT-Strategie, Microsoft 365, Cloud, Cyber Security, Automatisierung, Softwareentwicklung, API-Integration und KI. Technologie folgt dabei immer dem Prozess.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
   description:
     "Strategischer Digitalisierungspartner aus Fürstenfeldbruck bei München: Digitalisierungsberatung, Prozessoptimierung, IT-Strategie, Microsoft 365, Cloud, Cyber Security, Automatisierung und KI für B2B-Unternehmen.",
   applicationName: businessName,
+  manifest: "/manifest.webmanifest",
   authors: [{ name: "Leon Pllana", url: siteUrl }],
   creator: businessName,
   publisher: businessName,
@@ -55,6 +57,11 @@ export const metadata: Metadata = {
       sq: `${siteUrl}/?lang=sq`,
       "x-default": siteUrl,
     },
+  },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Leon Pllana IT-Solutions | Innovation in every Step.",
@@ -93,11 +100,34 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  "@type": "Person",
+  "@id": founderId,
+  name: "Leon Pllana",
+  jobTitle: "Founder, Digitalisierungspartner und IT-Architekt",
+  url: siteUrl,
+  email: "info@pllana.io",
+  worksFor: { "@id": `${siteUrl}/#organization` },
+  sameAs: ["https://www.linkedin.com/in/leon-pllana/", "https://instagram.com/pllanaio"],
+  knowsAbout: [
+    "Unternehmensberatung",
+    "Digitalisierungsstrategie",
+    "Prozessoptimierung",
+    "IT-Architektur",
+    "Cloud",
+    "Cyber Security",
+    "Automatisierung",
+    "Softwareentwicklung",
+    "Künstliche Intelligenz",
+  ],
+};
+
 const organizationSchema = {
   "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
   "@id": `${siteUrl}/#organization`,
   name: businessName,
   legalName: businessName,
+  founder: { "@id": founderId },
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
   image: `${siteUrl}/og-image.png`,
@@ -113,15 +143,49 @@ const organizationSchema = {
     addressRegion: "Bayern",
     addressCountry: "DE",
   },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales and consulting",
+      email: "info@pllana.io",
+      telephone: "+491727255810",
+      availableLanguage: ["de", "en", "sq"],
+      areaServed: ["DE", "AT", "CH", "EU"],
+    },
+  ],
+  areaServed: ["Deutschland", "Bayern", "München", "Fürstenfeldbruck", "Österreich", "Schweiz", "Europa"],
   sameAs: ["https://instagram.com/pllanaio", "https://www.linkedin.com/in/leon-pllana/"],
+};
+
+const offerCatalogSchema = {
+  "@type": "OfferCatalog",
+  "@id": `${siteUrl}/#offers`,
+  name: "Leistungen von Leon Pllana IT-Solutions",
+  itemListElement: [
+    "Digitalisierungsberatung",
+    "Prozessanalyse und Prozessoptimierung",
+    "IT-Strategie und technische Unternehmensberatung",
+    "Microsoft 365 und Digital Workplace",
+    "Cloud, IT-Infrastruktur und Cyber Security",
+    "Backup und Monitoring",
+    "Softwareentwicklung und API-Integration",
+    "KI und Automatisierung im Unternehmen",
+    "IT-Projektleitung und IT-Outsourcing",
+  ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
 };
 
 const serviceSchema = {
   "@type": "Service",
   "@id": `${siteUrl}/#service`,
   name: "Strategische Digitalisierung und IT-Beratung für B2B-Unternehmen",
+  serviceType: "Digitalisierungsberatung, IT-Strategie, Prozessoptimierung, Automatisierung und technische Unternehmensberatung",
   provider: { "@id": `${siteUrl}/#organization` },
+  hasOfferCatalog: { "@id": `${siteUrl}/#offers` },
   areaServed: ["Deutschland", "Bayern", "München", "Fürstenfeldbruck", "Österreich", "Schweiz", "Europa"],
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType: "B2B-Unternehmen, Mittelstand, Startups, Familienunternehmen, Dienstleister, Produktion, Kanzleien, Agenturen und Unternehmensgruppen",
+  },
   description:
     "Leon Pllana IT-Solutions analysiert Unternehmen, versteht Prozesse, identifiziert Ineffizienzen und entwickelt darauf aufbauend passende technologische Lösungen. Die Leistung richtet sich ausschließlich an B2B-Kunden.",
 };
@@ -146,6 +210,14 @@ const faqSchema = {
         text: "Nein. IT ist das Werkzeug, nicht der Ausgangspunkt. Zuerst werden Unternehmen, Prozesse und Ziele verstanden. Erst danach wird entschieden, welche Technologie eingesetzt wird.",
       },
     },
+    {
+      "@type": "Question",
+      name: "Warum folgt Technologie dem Prozess?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Weil neue Software einen schlechten Prozess nicht automatisch verbessert. Erst wenn Abläufe, Entscheidungen und Verantwortlichkeiten verstanden sind, kann Technologie nachhaltigen Mehrwert schaffen.",
+      },
+    },
   ],
 };
 
@@ -159,11 +231,17 @@ const webPageSchema = {
   inLanguage: ["de-DE", "en", "sq"],
   about: { "@id": `${siteUrl}/#organization` },
   mainEntity: { "@id": `${siteUrl}/#service` },
+  primaryImageOfPage: `${siteUrl}/og-image.png`,
+  reviewedBy: { "@id": founderId },
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", "#aeo-summary", "#ai-seo"],
+  },
 };
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@graph": [organizationSchema, serviceSchema, faqSchema, webPageSchema],
+  "@graph": [personSchema, organizationSchema, offerCatalogSchema, serviceSchema, faqSchema, webPageSchema],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
