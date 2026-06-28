@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/button";
+import { NotFoundTracker } from "@/components/not-found-tracker";
 
 export default function NotFound() {
   return (
     <main className="relative flex min-h-screen items-center overflow-hidden bg-background px-6 py-24 text-foreground">
+      <NotFoundTracker />
       <div className="gradient-grid absolute inset-0 opacity-50" />
       <div className="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-3xl" />
       <div className="relative mx-auto max-w-4xl text-center">
