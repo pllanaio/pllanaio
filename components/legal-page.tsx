@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { useLocale } from "@/components/locale-provider";
 
 type LegalSection = {
   id: string;
@@ -7,11 +10,32 @@ type LegalSection = {
   children: ReactNode;
 };
 
+const legalChrome = {
+  de: {
+    eyebrow: "Rechtliches",
+    back: "← Zurück zur Startseite",
+    contents: "Inhalt",
+    updatedAt: "Stand: Juni 2026",
+  },
+  en: {
+    eyebrow: "Legal",
+    back: "← Back to homepage",
+    contents: "Contents",
+    updatedAt: "Last updated: June 2026",
+  },
+  sq: {
+    eyebrow: "Ligjore",
+    back: "← Kthehu në faqen kryesore",
+    contents: "Përmbajtja",
+    updatedAt: "Përditësuar: Qershor 2026",
+  },
+};
+
 export function LegalPage({
-  eyebrow = "Rechtliches",
+  eyebrow,
   title,
   description,
-  updatedAt = "Stand: Juni 2026",
+  updatedAt,
   sections,
 }: {
   eyebrow?: string;
@@ -20,23 +44,26 @@ export function LegalPage({
   updatedAt?: string;
   sections: LegalSection[];
 }) {
+  const { locale } = useLocale();
+  const chrome = legalChrome[locale];
+
   return (
     <main className="min-h-screen bg-background px-6 py-24 text-foreground">
       <div className="mx-auto max-w-5xl">
         <Link href="/" className="text-sm text-muted-foreground transition hover:text-foreground">
-          ← Zurück zur Startseite
+          {chrome.back}
         </Link>
 
         <header className="mt-16 border-b border-border pb-16">
-          <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{eyebrow}</p>
+          <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{eyebrow ?? chrome.eyebrow}</p>
           <h1 className="mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{title}</h1>
           <p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{description}</p>
-          <p className="mt-8 text-sm text-muted-foreground">{updatedAt}</p>
+          <p className="mt-8 text-sm text-muted-foreground">{updatedAt ?? chrome.updatedAt}</p>
         </header>
 
         <div className="grid gap-16 py-16 lg:grid-cols-[280px_1fr]">
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-sm font-medium text-foreground">Inhalt</p>
+            <p className="text-sm font-medium text-foreground">{chrome.contents}</p>
             <nav className="mt-5 space-y-3" aria-label={`${title} Inhaltsverzeichnis`}>
               {sections.map((section, index) => (
                 <a key={section.id} href={`#${section.id}`} className="block text-sm text-muted-foreground transition hover:text-foreground">
