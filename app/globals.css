@@ -54,12 +54,11 @@
   100% { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -68,6 +67,11 @@ body {
   color: hsl(var(--foreground));
   font-feature-settings: "ss01", "ss02", "cv01", "cv03";
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
 }
 
 ::selection {
@@ -80,8 +84,8 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: .035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: .026;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 50;
 }
 
@@ -105,9 +109,7 @@ body {
   mask-image: radial-gradient(circle at center, black 0%, black 48%, transparent 78%);
 }
 
-.premium-frame {
-  position: relative;
-}
+.premium-frame { position: relative; }
 
 .premium-frame:before,
 .premium-frame:after {
@@ -122,6 +124,19 @@ body {
 .premium-frame:before { top: 0; }
 .premium-frame:after { bottom: 0; }
 
-.text-balance {
-  text-wrap: balance;
+.text-balance { text-wrap: balance; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .noise:before { opacity: .018; }
+  .shadow-glow { box-shadow: none; }
+  .backdrop-blur-xl { backdrop-filter: blur(12px); }
 }
