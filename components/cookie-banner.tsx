@@ -23,7 +23,7 @@ export function CookieBanner() {
 
   useEffect(() => {
     const current = window.localStorage.getItem(CONSENT_KEY);
-    let timer: ReturnType<typeof window.setTimeout> | undefined;
+    let timer: number | undefined;
 
     if (current !== "accepted" && current !== "declined") {
       timer = window.setTimeout(() => setVisible(true), 2200);
