@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/button";
 import { useLocale } from "@/components/locale-provider";
+import { pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
 
 type Consent = "accepted" | "declined";
 
@@ -44,7 +45,10 @@ export function CookieBanner() {
   }, []);
 
   function saveConsent(value: Consent) {
+    const granted = value === "accepted";
     window.localStorage.setItem(CONSENT_KEY, value);
+    updateGoogleConsent(granted);
+    pushDataLayer(granted ? "cookie_accept" : "cookie_decline", { analytics_consent: granted });
     window.dispatchEvent(new CustomEvent("pllana-cookie-consent", { detail: value }));
     setVisible(false);
   }
