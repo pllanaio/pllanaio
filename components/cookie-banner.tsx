@@ -23,16 +23,24 @@ export function CookieBanner() {
 
   useEffect(() => {
     const current = window.localStorage.getItem(CONSENT_KEY);
-    setVisible(current !== "accepted" && current !== "declined");
+    let timer: ReturnType<typeof window.setTimeout> | undefined;
+
+    if (current !== "accepted" && current !== "declined") {
+      timer = window.setTimeout(() => setVisible(true), 2200);
+    }
 
     const openSettings = () => {
+      if (timer) window.clearTimeout(timer);
       setVisible(true);
       setSettingsOpen(true);
       setAnalytics(hasAnalyticsConsent());
     };
 
     window.addEventListener("pllana-open-cookie-settings", openSettings);
-    return () => window.removeEventListener("pllana-open-cookie-settings", openSettings);
+    return () => {
+      if (timer) window.clearTimeout(timer);
+      window.removeEventListener("pllana-open-cookie-settings", openSettings);
+    };
   }, []);
 
   function saveConsent(value: Consent) {
@@ -44,12 +52,12 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[80] px-4 pb-4 sm:px-6 sm:pb-6">
-      <div className="mx-auto max-w-5xl rounded-[2rem] border border-border bg-background/95 p-5 shadow-premium backdrop-blur-xl sm:p-6">
-        <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
+    <div className="fixed inset-x-0 bottom-0 z-[80] px-3 pb-3 sm:px-6 sm:pb-6">
+      <div className="mx-auto max-w-4xl rounded-[1.5rem] border border-border bg-background/95 p-4 shadow-premium sm:rounded-[2rem] sm:p-6 sm:backdrop-blur-xl">
+        <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="text-lg font-semibold tracking-[-0.03em]">{cookie.title}</p>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">{cookie.text}</p>
+            <p className="text-base font-semibold tracking-[-0.03em] sm:text-lg">{cookie.title}</p>
+            <p className="mt-2 max-w-3xl text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">{cookie.text}</p>
             <div className="mt-3 flex flex-wrap gap-3 text-xs text-muted-foreground">
               <Link href="/cookie-richtlinie" className="underline-offset-4 hover:text-foreground hover:underline">
                 {t.legal.cookies}
@@ -59,7 +67,7 @@ export function CookieBanner() {
               </Link>
             </div>
             {settingsOpen ? (
-              <div className="mt-5 grid gap-3 rounded-2xl border border-border bg-muted/30 p-4 text-left">
+              <div className="mt-4 grid gap-3 rounded-2xl border border-border bg-muted/30 p-3 text-left sm:p-4">
                 <label className="flex items-start justify-between gap-4 text-sm">
                   <span>
                     <span className="font-medium">{cookie.necessary}</span>
@@ -77,7 +85,7 @@ export function CookieBanner() {
               </div>
             ) : null}
           </div>
-          <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
+          <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-row lg:flex-col">
             <Button onClick={() => saveConsent("accepted")}>{cookie.accept}</Button>
             {settingsOpen ? (
               <Button variant="outline" onClick={() => saveConsent(analytics ? "accepted" : "declined")}>{cookie.save}</Button>
