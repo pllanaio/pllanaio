@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { partnerCompanies, type PartnerCompany } from "@/lib/site-content";
 
 function PartnerItem({ partner }: { partner: PartnerCompany }) {
@@ -22,7 +19,8 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
             maxHeight: logoHeight,
             transform: `translateY(${offsetY}px)`,
           }}
-          priority={false}
+          loading="lazy"
+          sizes="(max-width: 768px) 240px, 280px"
         />
       ) : (
         <span className="text-xl font-semibold tracking-[-0.04em] text-foreground/70 transition group-hover:text-foreground">
@@ -61,15 +59,11 @@ export function PartnerLogoMarquee() {
         ))}
       </div>
 
-      <motion.div
-        className="hidden w-max gap-14 md:flex"
-        animate={{ x: [0, -384 * partnerCompanies.length] }}
-        transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
-      >
+      <div className="marquee-track hidden w-max gap-14 md:flex" aria-hidden="true">
         {desktopPartners.map((partner, index) => (
           <PartnerItem key={`${partner.name}-${index}`} partner={partner} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
