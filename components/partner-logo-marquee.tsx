@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MobilePartnerScroll } from "@/components/mobile-partner-scroll";
 import { partnerCompanies, type PartnerCompany } from "@/lib/site-content";
 
 function PartnerItem({ partner }: { partner: PartnerCompany }) {
@@ -54,11 +55,11 @@ export function PartnerLogoMarquee() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="marquee-track-mobile flex w-max gap-8 md:hidden">
+      <MobilePartnerScroll>
         {mobilePartners.map((partner, index) => (
           <PartnerItem key={`${partner.name}-mobile-${index}`} partner={partner} />
         ))}
-      </div>
+      </MobilePartnerScroll>
 
       <div className="marquee-track hidden w-max gap-14 md:flex" aria-hidden="true">
         {desktopPartners.map((partner, index) => (
