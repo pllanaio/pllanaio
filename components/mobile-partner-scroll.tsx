@@ -1,51 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import type { ReactNode } from "react";
 
 export function MobilePartnerScroll({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const pauseUntil = useRef(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    let frame = 0;
-    let last = performance.now();
-
-    const step = (now: number) => {
-      const delta = now - last;
-      last = now;
-
-      if (now > pauseUntil.current && el.scrollWidth > el.clientWidth) {
-        el.scrollLeft += delta * 0.025;
-        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 2) {
-          el.scrollLeft = 0;
-        }
-      }
-
-      frame = window.requestAnimationFrame(step);
-    };
-
-    frame = window.requestAnimationFrame(step);
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  const pause = () => {
-    pauseUntil.current = performance.now() + 1400;
-  };
+  const markInteracted = () => setHasInteracted(true);
 
   return (
-    <div
-      ref={ref}
-      onPointerDown={pause}
-      onTouchStart={pause}
-      onWheel={pause}
-      className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto px-8 md:hidden"
-      aria-label="Kundenlogos horizontal scrollen"
-    >
-      {children}
+    <div className="md:hidden">
+      <div className="relative">
+        {!hasInteracted ? (
+          <>
+            <div className="pointer-events-none absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 text-lg text-muted-foreground shadow-premium backdrop-blur-xl animate-pulse">
+              ←
+            </div>
+            <div className="pointer-events-none absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/90 text-lg text-muted-foreground shadow-premium backdrop-blur-xl animate-pulse">
+              →
+            </div>
+          </>
+        ) : null}
+
+        <div
+          onPointerDown={markInteracted}
+          onTouchStart={markInteracted}
+          onScroll={markInteracted}
+          className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto px-8"
+          aria-label="Kundenlogos horizontal scrollen"
+        >
+          {children}
+        </div>
+      </div>
+
+      {!hasInteracted ? (
+        <p className="mt-4 text-center text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          Wischen, um weitere Referenzen anzusehen
+        </p>
+      ) : null}
     </div>
   );
 }
