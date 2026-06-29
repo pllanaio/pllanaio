@@ -115,16 +115,6 @@ img, svg, video, canvas {
   will-change: transform;
 }
 
-.marquee-track-mobile {
-  animation: marquee 30s linear infinite;
-  will-change: transform;
-}
-
-.marquee-track:hover,
-.marquee-track-mobile:hover {
-  animation-play-state: paused;
-}
-
 .radial-fade {
   mask-image: radial-gradient(circle at center, black 0%, black 48%, transparent 78%);
 }
