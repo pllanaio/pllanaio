@@ -45,6 +45,7 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
 
 export function PartnerLogoMarquee() {
   const desktopPartners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
+  const mobilePartners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
 
   return (
     <div className="relative overflow-hidden border-y border-border/70 bg-background py-10">
@@ -53,9 +54,9 @@ export function PartnerLogoMarquee() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto px-8 md:hidden" aria-label="Kundenlogos horizontal scrollen">
-        {partnerCompanies.map((partner) => (
-          <PartnerItem key={partner.name} partner={partner} />
+      <div className="marquee-track-mobile flex w-max gap-8 md:hidden">
+        {mobilePartners.map((partner, index) => (
+          <PartnerItem key={`${partner.name}-mobile-${index}`} partner={partner} />
         ))}
       </div>
 
