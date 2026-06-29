@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PartnerSwipeHint } from "@/components/partner-swipe-hint";
 import { partnerCompanies, type PartnerCompany } from "@/lib/site-content";
 
 function PartnerItem({ partner }: { partner: PartnerCompany }) {
@@ -75,11 +76,7 @@ export function PartnerLogoMarquee() {
           ))}
         </div>
 
-        <p className="mx-auto mt-5 max-w-xs px-6 text-center text-sm leading-6 text-muted-foreground/80 md:hidden">
-          Nach links oder rechts wischen,
-          <br />
-          um unsere Referenzen zu entdecken.
-        </p>
+        <PartnerSwipeHint />
       </div>
 
       <div className="marquee-track hidden w-max gap-14 md:flex" aria-hidden="true">
