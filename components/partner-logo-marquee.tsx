@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MobilePartnerScroll } from "@/components/mobile-partner-scroll";
 import { partnerCompanies, type PartnerCompany } from "@/lib/site-content";
 
 function PartnerItem({ partner }: { partner: PartnerCompany }) {
@@ -46,7 +45,6 @@ function PartnerItem({ partner }: { partner: PartnerCompany }) {
 
 export function PartnerLogoMarquee() {
   const desktopPartners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
-  const mobilePartners = [...partnerCompanies, ...partnerCompanies, ...partnerCompanies, ...partnerCompanies];
 
   return (
     <div className="relative overflow-hidden border-y border-border/70 bg-background py-10">
@@ -55,11 +53,11 @@ export function PartnerLogoMarquee() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <MobilePartnerScroll>
-        {mobilePartners.map((partner, index) => (
-          <PartnerItem key={`${partner.name}-mobile-${index}`} partner={partner} />
+      <div className="no-scrollbar flex snap-x snap-mandatory gap-8 overflow-x-auto px-8 md:hidden" aria-label="Kundenlogos horizontal scrollen">
+        {partnerCompanies.map((partner) => (
+          <PartnerItem key={partner.name} partner={partner} />
         ))}
-      </MobilePartnerScroll>
+      </div>
 
       <div className="marquee-track hidden w-max gap-14 md:flex" aria-hidden="true">
         {desktopPartners.map((partner, index) => (
