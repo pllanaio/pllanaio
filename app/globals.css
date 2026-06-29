@@ -59,6 +59,34 @@
   to { transform: translate3d(-50%, 0, 0); }
 }
 
+@keyframes hero-orbit-a {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(18px, -12px, 0); }
+  50% { transform: translate3d(34px, 14px, 0); }
+  75% { transform: translate3d(8px, 28px, 0); }
+}
+
+@keyframes hero-orbit-b {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-12px, 18px, 0); }
+  50% { transform: translate3d(-32px, -8px, 0); }
+  75% { transform: translate3d(-6px, -24px, 0); }
+}
+
+@keyframes hero-orbit-c {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(14px, 16px, 0); }
+  50% { transform: translate3d(30px, -10px, 0); }
+  75% { transform: translate3d(-8px, -22px, 0); }
+}
+
+@keyframes hero-orbit-d {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-16px, -14px, 0); }
+  50% { transform: translate3d(-30px, 12px, 0); }
+  75% { transform: translate3d(10px, 24px, 0); }
+}
+
 * { box-sizing: border-box; }
 
 html {
@@ -115,6 +143,26 @@ img, svg, video, canvas {
   will-change: transform;
 }
 
+[class*="aspect-square"] > div:nth-child(3) {
+  animation: hero-orbit-a 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+[class*="aspect-square"] > div:nth-child(4) {
+  animation: hero-orbit-b 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+[class*="aspect-square"] > div:nth-child(5) {
+  animation: hero-orbit-c 19s ease-in-out infinite;
+  will-change: transform;
+}
+
+[class*="aspect-square"] > div:nth-child(6) {
+  animation: hero-orbit-d 21s ease-in-out infinite;
+  will-change: transform;
+}
+
 .radial-fade {
   mask-image: radial-gradient(circle at center, black 0%, black 48%, transparent 78%);
 }
@@ -149,4 +197,11 @@ img, svg, video, canvas {
   .noise:before { opacity: .018; }
   .shadow-glow { box-shadow: none; }
   .backdrop-blur-xl { backdrop-filter: blur(12px); }
+
+  [class*="aspect-square"] > div:nth-child(3),
+  [class*="aspect-square"] > div:nth-child(4),
+  [class*="aspect-square"] > div:nth-child(5),
+  [class*="aspect-square"] > div:nth-child(6) {
+    animation: none;
+  }
 }
