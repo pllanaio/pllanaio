@@ -61,30 +61,30 @@
 
 @keyframes hero-orbit-a {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(18px, -12px, 0); }
-  50% { transform: translate3d(34px, 14px, 0); }
-  75% { transform: translate3d(8px, 28px, 0); }
+  25% { transform: translate3d(14px, -9px, 0); }
+  50% { transform: translate3d(24px, 8px, 0); }
+  75% { transform: translate3d(5px, 20px, 0); }
 }
 
 @keyframes hero-orbit-b {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(-12px, 18px, 0); }
-  50% { transform: translate3d(-32px, -8px, 0); }
-  75% { transform: translate3d(-6px, -24px, 0); }
+  25% { transform: translate3d(-10px, 13px, 0); }
+  50% { transform: translate3d(-22px, -5px, 0); }
+  75% { transform: translate3d(-4px, -18px, 0); }
 }
 
 @keyframes hero-orbit-c {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(14px, 16px, 0); }
-  50% { transform: translate3d(30px, -10px, 0); }
-  75% { transform: translate3d(-8px, -22px, 0); }
+  25% { transform: translate3d(11px, 12px, 0); }
+  50% { transform: translate3d(20px, -7px, 0); }
+  75% { transform: translate3d(-6px, -17px, 0); }
 }
 
 @keyframes hero-orbit-d {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(-16px, -14px, 0); }
-  50% { transform: translate3d(-30px, 12px, 0); }
-  75% { transform: translate3d(10px, 24px, 0); }
+  25% { transform: translate3d(-12px, -10px, 0); }
+  50% { transform: translate3d(-20px, 8px, 0); }
+  75% { transform: translate3d(7px, 16px, 0); }
 }
 
 * { box-sizing: border-box; }
@@ -143,24 +143,38 @@ img, svg, video, canvas {
   will-change: transform;
 }
 
-[class*="aspect-square"] > div:nth-child(3) {
+[class*="aspect-square"] > div:nth-child(3),
+[class*="aspect-square"] > div:nth-child(2) svg path:nth-child(1) {
   animation: hero-orbit-a 18s ease-in-out infinite;
   will-change: transform;
 }
 
-[class*="aspect-square"] > div:nth-child(4) {
+[class*="aspect-square"] > div:nth-child(4),
+[class*="aspect-square"] > div:nth-child(2) svg path:nth-child(2) {
   animation: hero-orbit-b 20s ease-in-out infinite;
   will-change: transform;
 }
 
-[class*="aspect-square"] > div:nth-child(5) {
+[class*="aspect-square"] > div:nth-child(5),
+[class*="aspect-square"] > div:nth-child(2) svg path:nth-child(3) {
   animation: hero-orbit-c 19s ease-in-out infinite;
   will-change: transform;
 }
 
-[class*="aspect-square"] > div:nth-child(6) {
+[class*="aspect-square"] > div:nth-child(6),
+[class*="aspect-square"] > div:nth-child(2) svg path:nth-child(4) {
   animation: hero-orbit-d 21s ease-in-out infinite;
   will-change: transform;
+}
+
+[class*="aspect-square"] > div:nth-child(6) {
+  bottom: 8.75rem !important;
+  right: 0.25rem !important;
+  z-index: 3;
+}
+
+[class*="aspect-square"] > div:nth-child(7) {
+  z-index: 4;
 }
 
 .radial-fade {
@@ -201,7 +215,11 @@ img, svg, video, canvas {
   [class*="aspect-square"] > div:nth-child(3),
   [class*="aspect-square"] > div:nth-child(4),
   [class*="aspect-square"] > div:nth-child(5),
-  [class*="aspect-square"] > div:nth-child(6) {
+  [class*="aspect-square"] > div:nth-child(6),
+  [class*="aspect-square"] > div:nth-child(2) svg path:nth-child(1),
+  [class*="aspect-square"] > div:nth-child(2) svg path:nth-child(2),
+  [class*="aspect-square"] > div:nth-child(2) svg path:nth-child(3),
+  [class*="aspect-square"] > div:nth-child(2) svg path:nth-child(4) {
     animation: none;
   }
 }
