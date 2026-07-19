@@ -5,6 +5,7 @@ export const contactEmail = "info@pllana.io";
 
 export const socialLinks = {
   instagram: "https://instagram.com/pllanaio",
+  tiktok: "https://www.tiktok.com/@pllanaio",
   whatsapp: "https://api.whatsapp.com/send?phone=491727255810",
   linkedin: "https://de.linkedin.com/company/leon-pllana-it-solutions",
 };
