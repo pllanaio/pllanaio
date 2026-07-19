@@ -1,7 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+import { Music2 } from "lucide-react";
+import { Button } from "@/components/button";
 import { defaultLocale, dictionary, getLocale, type Locale } from "@/lib/i18n";
+import { socialLinks } from "@/lib/site-content";
 import { pushDataLayer } from "@/lib/tracking";
 
 type LocaleContextValue = {
@@ -14,6 +18,7 @@ const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+  const [socialContainer, setSocialContainer] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const saved = getLocale(window.localStorage.getItem("pllana-locale"));
@@ -37,6 +42,11 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    const instagramLink = document.querySelector<HTMLAnchorElement>(`a[href="${socialLinks.instagram}"]`);
+    setSocialContainer(instagramLink?.parentElement ?? null);
+  }, []);
+
   const setLocale = (nextLocale: Locale) => {
     setLocaleState(nextLocale);
     window.localStorage.setItem("pllana-locale", nextLocale);
@@ -49,7 +59,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     [locale],
   );
 
-  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
+  return (
+    <LocaleContext.Provider value={value}>
+      {children}
+      {socialContainer && createPortal(
+        <Button asChild size="lg" variant="outline">
+          <a href={socialLinks.tiktok} target="_blank" rel="noreferrer">
+            <Music2 className="mr-2 h-4 w-4" /> TikTok
+          </a>
+        </Button>,
+        socialContainer,
+      )}
+    </LocaleContext.Provider>
+  );
 }
 
 export function useLocale() {
