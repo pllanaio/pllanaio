@@ -16,6 +16,7 @@
     "lucide-react": "latest",
     "next": "latest",
     "next-themes": "latest",
+    "nodemailer": "latest",
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "latest"
@@ -25,6 +26,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/nodemailer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
