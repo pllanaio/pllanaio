@@ -33,7 +33,7 @@ const initialValues: FormValues = {
 
 const copy = {
   de: {
-    title: "Erzählen Sie uns, worum es geht.",
+    title: "Lassen Sie uns über Ihr Vorhaben sprechen.",
     intro: "Ein paar Angaben genügen. Wir melden uns persönlich und unverbindlich bei Ihnen.",
     firstName: "Vorname",
     lastName: "Nachname",
@@ -53,7 +53,7 @@ const copy = {
     messageInvalid: "Bitte schreiben Sie mindestens 10 und höchstens 2.000 Zeichen.",
   },
   en: {
-    title: "Tell us what you need.",
+    title: "Let’s talk about your project.",
     intro: "A few details are enough. We will get back to you personally and without obligation.",
     firstName: "First name",
     lastName: "Last name",
@@ -73,7 +73,7 @@ const copy = {
     messageInvalid: "Write between 10 and 2,000 characters.",
   },
   sq: {
-    title: "Na tregoni për çfarë bëhet fjalë.",
+    title: "Le të flasim për projektin tuaj.",
     intro: "Mjaftojnë disa të dhëna. Do t’ju kontaktojmë personalisht dhe pa detyrim.",
     firstName: "Emri",
     lastName: "Mbiemri",
