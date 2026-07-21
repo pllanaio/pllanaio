@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+export const runtime = "nodejs";
 
 const namePattern = /^[\p{L}][\p{L}\p{M}'’\- ]{1,79}$/u;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -42,14 +45,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.CONTACT_FROM_EMAIL;
+    const host = process.env.SMTP_HOST;
+    const port = Number(process.env.SMTP_PORT ?? "587");
+    const secure = process.env.SMTP_SECURE === "true" || port === 465;
+    const user = process.env.SMTP_USER;
+    const password = process.env.SMTP_PASSWORD;
+    const from = process.env.SMTP_FROM ?? user;
     const to = process.env.CONTACT_TO_EMAIL ?? "info@pllana.io";
 
-    if (!apiKey || !from) {
-      console.error("Missing RESEND_API_KEY or CONTACT_FROM_EMAIL");
+    if (!host || !Number.isInteger(port) || port <= 0 || !user || !password || !from) {
+      console.error("Missing or invalid SMTP configuration");
       return NextResponse.json({ error: "Mail service is not configured" }, { status: 500 });
     }
+
+    const transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure,
+      auth: {
+        user,
+        pass: password,
+      },
+    });
 
     const fullName = `${firstName} ${lastName}`;
     const html = `
@@ -62,25 +79,23 @@ export async function POST(request: Request) {
       <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
     `;
 
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: email,
-        subject: `Neue Anfrage von ${fullName} – ${company}`,
-        html,
-      }),
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: email,
+      subject: `Neue Anfrage von ${fullName} – ${company}`,
+      text: [
+        "Neue Website-Anfrage",
+        `Name: ${fullName}`,
+        `E-Mail: ${email}`,
+        `Telefon: ${phone}`,
+        `Firma: ${company}`,
+        "",
+        "Nachricht:",
+        message,
+      ].join("\n"),
+      html,
     });
-
-    if (!response.ok) {
-      console.error("Resend error", await response.text());
-      return NextResponse.json({ error: "Mail delivery failed" }, { status: 502 });
-    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
