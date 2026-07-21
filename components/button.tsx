@@ -33,17 +33,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
   const childHref = React.isValidElement<{ href?: string }>(children) ? children.props.href : undefined;
   const isContactEmailCta = asChild && typeof childHref === "string" && childHref.startsWith("mailto:");
 
-  const button = <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>{children}</Comp>;
-
   if (isContactEmailCta) {
     return (
       <div className="w-full">
         <ContactForm />
-        <div className="mt-10 flex justify-center">{button}</div>
       </div>
     );
   }
 
-  return button;
+  return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>{children}</Comp>;
 });
 Button.displayName = "Button";
