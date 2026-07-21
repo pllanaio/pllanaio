@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import { ContactForm } from "@/components/contact-form";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -27,8 +28,22 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, asChild = false, ...props }, ref) => {
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, asChild = false, children, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
-  return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  const childHref = React.isValidElement<{ href?: string }>(children) ? children.props.href : undefined;
+  const isContactEmailCta = asChild && typeof childHref === "string" && childHref.startsWith("mailto:");
+
+  const button = <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>{children}</Comp>;
+
+  if (isContactEmailCta) {
+    return (
+      <div className="w-full">
+        <ContactForm />
+        <div className="mt-10 flex justify-center">{button}</div>
+      </div>
+    );
+  }
+
+  return button;
 });
 Button.displayName = "Button";
