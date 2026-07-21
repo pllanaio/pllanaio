@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/button";
 import { useLocale } from "@/components/locale-provider";
 
 type FormValues = {
@@ -144,7 +143,7 @@ export function ContactForm() {
   const fieldClass = "mt-2 w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-foreground focus:ring-2 focus:ring-foreground/10";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="mx-auto mt-12 max-w-3xl rounded-[2rem] border border-border bg-card p-6 text-left shadow-premium sm:p-10">
+    <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-3xl rounded-[2rem] border border-border bg-card p-6 text-left shadow-premium sm:p-10">
       <div className="text-center">
         <h3 className="text-3xl font-semibold tracking-[-0.04em]">{t.title}</h3>
         <p className="mx-auto mt-3 max-w-xl leading-7 text-muted-foreground">{t.intro}</p>
@@ -198,9 +197,9 @@ export function ContactForm() {
       </label>
 
       <div className="mt-8 flex flex-col items-center gap-4">
-        <Button type="submit" size="lg" disabled={status === "sending"} className="min-w-64">
+        <button type="submit" disabled={status === "sending"} className="inline-flex h-14 min-w-64 items-center justify-center rounded-full bg-foreground px-8 text-base font-medium tracking-[-0.01em] text-background shadow-premium transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50">
           {status === "sending" ? t.sending : t.submit} {status !== "sending" && <ArrowRight className="ml-2 h-4 w-4" />}
-        </Button>
+        </button>
         <div aria-live="polite" className="min-h-6 text-center text-sm">
           {status === "success" && <p className="text-green-700">{t.success}</p>}
           {status === "error" && <p className="text-red-600">{t.failure}</p>}
