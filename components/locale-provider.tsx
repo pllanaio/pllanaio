@@ -43,8 +43,27 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const instagramLink = document.querySelector<HTMLAnchorElement>(`a[href="${socialLinks.instagram}"]`);
-    setSocialContainer(instagramLink?.parentElement ?? null);
+    const findSocialContainer = () => {
+      const instagramLink = document.querySelector<HTMLAnchorElement>(
+        `a[href="${socialLinks.instagram}"]`,
+      );
+
+      if (instagramLink?.parentElement) {
+        setSocialContainer(instagramLink.parentElement);
+        return true;
+      }
+
+      return false;
+    };
+
+    if (findSocialContainer()) return;
+
+    const observer = new MutationObserver(() => {
+      if (findSocialContainer()) observer.disconnect();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
   }, []);
 
   const setLocale = (nextLocale: Locale) => {
