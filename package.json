@@ -17,6 +17,7 @@
     "next": "latest",
     "next-themes": "latest",
     "nodemailer": "latest",
+    "ogl": "latest",
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "latest"
