@@ -1,0 +1,48 @@
+name: Website Check CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SITE_URL: https://pllana.io
+      PAGESPEED_API_KEY: ci-placeholder-key
+      WEBSITE_CHECK_TOKEN_SECRET: ci-only-placeholder-secret-with-at-least-32-characters
+      SMTP_HOST: smtp.example.invalid
+      SMTP_PORT: "587"
+      SMTP_SECURE: "false"
+      SMTP_USER: ci@example.invalid
+      SMTP_PASSWORD: ci-placeholder-password
+      SMTP_FROM: ci@example.invalid
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run tests
+        run: npm test
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
