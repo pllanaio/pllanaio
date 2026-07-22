@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { analyzeWebsite } from "@/lib/website-check/pagespeed";
 import { enforceRateLimit, getClientIp } from "@/lib/website-check/rate-limit";
-import { createSignedToken } from "@/lib/website-check/tokens";
+import { createEncryptedToken } from "@/lib/website-check/tokens";
 import { normalizeAndValidateWebsiteUrl } from "@/lib/website-check/url-security";
 import { assertJsonRequest, assertSameOrigin, readJsonObject } from "@/lib/website-check/request-guards";
 import { toPublicError, WebsiteCheckError } from "@/lib/website-check/errors";
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
     const { result, cacheHit } = await analyzeWebsite(validated.normalizedUrl, strategy);
     const payload: AnalysisTokenPayload = { purpose: "website-check-analysis", analysis: result };
-    const analysisToken = createSignedToken(payload, 30 * 24 * 60 * 60);
+    const analysisToken = createEncryptedToken(payload, 30 * 24 * 60 * 60);
 
     return NextResponse.json(
       { ok: true, result, analysisToken, cacheHit },

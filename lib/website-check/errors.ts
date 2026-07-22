@@ -17,7 +17,7 @@ export function toPublicError(error: unknown) {
     };
   }
 
-  console.error("Website check request failed", error instanceof Error ? error.message : "Unknown error");
+  console.error("Website check request failed", error instanceof WebsiteCheckError ? error.code : "UNEXPECTED_ERROR");
   return {
     status: 500,
     body: {

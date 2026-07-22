@@ -19,6 +19,7 @@
     "lib/website-check/pagespeed.ts",
     "lib/website-check/lead.ts",
     "lib/website-check/rate-limit.ts",
+    "lib/website-check/idempotency.ts",
     "lib/website-check/request-guards.ts",
     "lib/website-check/tokens.ts",
     "tests/**/*.test.ts"

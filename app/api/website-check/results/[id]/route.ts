@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getStoredWebsiteCheckResult } from "@/lib/website-check/pagespeed";
-import { verifySignedToken } from "@/lib/website-check/tokens";
+import { verifyEncryptedToken } from "@/lib/website-check/tokens";
 import { toPublicError, WebsiteCheckError } from "@/lib/website-check/errors";
 import type { AnalysisTokenPayload } from "@/lib/website-check/types";
 
@@ -14,7 +14,7 @@ export async function GET(request: Request, context: { params: Promise<{ id: str
     let result = getStoredWebsiteCheckResult(id);
 
     if (!result && token) {
-      const payload = verifySignedToken<AnalysisTokenPayload>(token, "website-check-analysis");
+      const payload = verifyEncryptedToken<AnalysisTokenPayload>(token, "website-check-analysis");
       if (payload.analysis.id !== id) {
         throw new WebsiteCheckError("RESULT_NOT_FOUND", "Das Analyseergebnis ist nicht mehr verfügbar.", 404);
       }

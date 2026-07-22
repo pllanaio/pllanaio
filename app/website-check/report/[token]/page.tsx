@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
-import { verifySignedToken } from "@/lib/website-check/tokens";
+import { verifyEncryptedToken } from "@/lib/website-check/tokens";
 import type { AnalysisTokenPayload, WebsiteScore } from "@/lib/website-check/types";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default async function WebsiteCheckReportPage({ params }: { params: Promi
   const { token } = await params;
   let payload: AnalysisTokenPayload;
   try {
-    payload = verifySignedToken<AnalysisTokenPayload>(token, "website-check-analysis");
+    payload = verifyEncryptedToken<AnalysisTokenPayload>(token, "website-check-analysis");
   } catch {
     notFound();
   }

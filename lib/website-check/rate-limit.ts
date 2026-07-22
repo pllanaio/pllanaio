@@ -1,15 +1,20 @@
-import { createHash } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { WebsiteCheckError } from "./errors";
 
 type Bucket = { count: number; resetAt: number };
-type RateLimitGlobal = typeof globalThis & { __websiteCheckRateLimits?: Map<string, Bucket> };
+type RateLimitGlobal = typeof globalThis & {
+  __websiteCheckRateLimits?: Map<string, Bucket>;
+  __websiteCheckRateLimitSalt?: string;
+};
 
 const globalState = globalThis as RateLimitGlobal;
 const buckets = globalState.__websiteCheckRateLimits ?? new Map<string, Bucket>();
 globalState.__websiteCheckRateLimits = buckets;
+const processSalt = globalState.__websiteCheckRateLimitSalt ?? randomBytes(32).toString("hex");
+globalState.__websiteCheckRateLimitSalt = processSalt;
 
 function anonymizedKey(key: string) {
-  const salt = process.env.WEBSITE_CHECK_TOKEN_SECRET || process.env.PAGESPEED_API_KEY || "website-check";
+  const salt = process.env.WEBSITE_CHECK_TOKEN_SECRET || processSalt;
   return `website-check:${createHash("sha256").update(`${salt}:${key}`).digest("hex")}`;
 }
 

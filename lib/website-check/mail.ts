@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { randomUUID } from "node:crypto";
-import { createSignedToken } from "./tokens";
+import { createEncryptedToken } from "./tokens";
 import { WebsiteCheckError } from "./errors";
 import type { MarketingConfirmationPayload, ReportLeadInput, WebsiteCheckResult, WebsiteLeadRecord } from "./types";
 
@@ -74,7 +74,7 @@ async function postWebhook(url: string | undefined, payload: unknown) {
     });
     if (!response.ok) console.error("Website check webhook failed", response.status);
   } catch (error) {
-    console.error("Website check webhook failed", error instanceof Error ? error.message : "Unknown error");
+    console.error("Website check webhook request failed");
   } finally {
     clearTimeout(timeout);
   }
@@ -172,8 +172,8 @@ export async function sendReportEmails(lead: ReportLeadInput, result: WebsiteChe
       consentTextVersion: lead.consentTextVersion,
       source: lead.source,
     };
-    const token = createSignedToken(payload, 7 * 24 * 60 * 60);
-    const confirmationUrl = `${siteUrl}/api/website-check/confirm-marketing?token=${encodeURIComponent(token)}`;
+    const token = createEncryptedToken(payload, 7 * 24 * 60 * 60);
+    const confirmationUrl = `${siteUrl}/api/website-check/prepare-marketing?token=${encodeURIComponent(token)}`;
     await transporter.sendMail({
       from,
       to: lead.email,

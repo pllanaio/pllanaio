@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { validateReportLead } from "@/lib/website-check/lead";
 import { sendReportEmails } from "@/lib/website-check/mail";
 import { enforceRateLimit, getClientIp } from "@/lib/website-check/rate-limit";
-import { verifySignedToken } from "@/lib/website-check/tokens";
+import { verifyEncryptedToken } from "@/lib/website-check/tokens";
 import { assertJsonRequest, assertSameOrigin, isHoneypotTriggered, readJsonObject } from "@/lib/website-check/request-guards";
 import { verifyOptionalBotProtection } from "@/lib/website-check/bot-protection";
 import { toPublicError, WebsiteCheckError } from "@/lib/website-check/errors";
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     const token = typeof body.analysisToken === "string" ? body.analysisToken : "";
     if (!token) throw new WebsiteCheckError("MISSING_ANALYSIS", "Bitte führen Sie den Website-Check erneut aus.", 400);
 
-    const payload = verifySignedToken<AnalysisTokenPayload>(token, "website-check-analysis");
+    const payload = verifyEncryptedToken<AnalysisTokenPayload>(token, "website-check-analysis");
     const result = payload.analysis;
     await enforceRateLimit(`report:email:${hash(lead.email)}`, 3, 24 * 60 * 60 * 1000);
     await enforceRateLimit(`report:analysis:${result.id}`, 2, 30 * 60 * 1000);
