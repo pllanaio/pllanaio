@@ -7,7 +7,7 @@
 .darkveil-background {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   display: none;
   overflow: hidden;
   pointer-events: none;
@@ -23,6 +23,12 @@
   position: absolute;
   inset: 0;
   background: rgba(3, 6, 15, 0.62);
+}
+
+.dark main {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
