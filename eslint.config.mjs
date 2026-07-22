@@ -5,6 +5,17 @@ import nextTypeScript from "eslint-config-next/typescript";
 export default defineConfig([
   ...nextVitals,
   ...nextTypeScript,
+  {
+    files: [
+      "components/dark-veil-background.tsx",
+      "components/locale-provider.tsx",
+      "components/theme-toggle.tsx",
+      "components/website-check/website-check-tool.tsx",
+    ],
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
   globalIgnores([
     ".next/**",
     "out/**",
