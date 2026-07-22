@@ -19,7 +19,7 @@ export function DarkVeilBackground() {
         noiseIntensity={0.035}
         speed={0.35}
         warpAmount={0.12}
-        resolutionScale={0.8}
+        resolutionScale={1}
       />
     </div>
   );
