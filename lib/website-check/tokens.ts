@@ -10,8 +10,8 @@ interface TokenEnvelope<T> {
 }
 
 function getSecret() {
-  const secret = process.env.WEBSITE_CHECK_TOKEN_SECRET || process.env.PAGESPEED_API_KEY;
-  if (!secret || secret.length < 24) {
+  const secret = process.env.WEBSITE_CHECK_TOKEN_SECRET;
+  if (!secret || secret.length < 32) {
     throw new WebsiteCheckError("SERVICE_NOT_CONFIGURED", "Der Website-Check ist momentan nicht vollständig konfiguriert.", 503);
   }
   return secret;
