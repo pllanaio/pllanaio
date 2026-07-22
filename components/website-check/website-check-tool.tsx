@@ -136,14 +136,21 @@ export function WebsiteCheckTool() {
         </div>
       </form>
 
-      <div className="mt-10 min-h-[22rem]">
-        {state === "idle" && (
-          <div className="grid min-h-[22rem] place-items-center rounded-[2rem] border border-dashed border-border bg-background/35 p-8 text-center">
-            <div className="max-w-2xl"><Workflow className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" /><h2 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Vier technische Perspektiven, eine verständliche Auswertung</h2><p className="mt-3 leading-7 text-muted-foreground">Starten Sie den Check, um Performance, Barrierefreiheit, technische Qualität und SEO-Grundlagen zu prüfen. Kontaktdaten sind für den Basis-Report nicht erforderlich.</p></div>
-          </div>
-        )}
-        {state === "analyzing" && <AnalysisProgress activeStep={activeStep} />}
-      </div>
+      {state !== "success" && (
+        <div className="mt-10 min-h-[22rem]">
+          {state === "idle" && (
+            <div className="grid min-h-[22rem] place-items-center rounded-[2rem] border border-dashed border-border bg-background/35 p-8 text-center">
+              <div className="max-w-2xl"><Workflow className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" /><h2 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Vier technische Perspektiven, eine verständliche Auswertung</h2><p className="mt-3 leading-7 text-muted-foreground">Starten Sie den Check, um Performance, Barrierefreiheit, technische Qualität und SEO-Grundlagen zu prüfen. Kontaktdaten sind für den Basis-Report nicht erforderlich.</p></div>
+            </div>
+          )}
+          {state === "analyzing" && <AnalysisProgress activeStep={activeStep} />}
+          {state === "error" && (
+            <div className="grid min-h-[22rem] place-items-center rounded-[2rem] border border-red-500/30 bg-red-500/7 p-8 text-center">
+              <div className="max-w-2xl"><h2 className="text-2xl font-semibold tracking-[-0.04em]">Die Analyse konnte nicht abgeschlossen werden</h2><p className="mt-3 leading-7 text-muted-foreground">{error}</p><p className="mt-3 text-sm text-muted-foreground">Prüfen Sie die Adresse und starten Sie den Check erneut.</p></div>
+            </div>
+          )}
+        </div>
+      )}
       {state === "success" && result && analysisToken && <WebsiteCheckResults result={result} analysisToken={analysisToken} />}
     </div>
   );
