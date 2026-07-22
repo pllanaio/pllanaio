@@ -60,7 +60,7 @@ export function WebsiteCheckTool() {
   const [result, setResult] = useState<WebsiteCheckResult | null>(null);
   const [analysisToken, setAnalysisToken] = useState("");
   const [error, setError] = useState("");
-  const errorRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLParagraphElement>(null);
   const inputId = useId();
 
   useEffect(() => {
