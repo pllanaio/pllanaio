@@ -7,6 +7,7 @@ import type { WebsiteCheckResult, WebsiteCheckStrategy } from "@/lib/website-che
 import { AnalysisProgress, progressSteps } from "@/components/website-check/analysis-progress";
 import { CoreWebVitals, KeyFindings, ScoreCard } from "@/components/website-check/result-components";
 import { ReportLeadForm, WebsiteCheckSuccess } from "@/components/website-check/report-lead-form";
+import { SiteIntelligenceResults } from "@/components/website-check/site-intelligence-results";
 
 interface AnalyzeResponse {
   ok: true;
@@ -34,7 +35,7 @@ function WebsiteCheckResults({ result, analysisToken }: { result: WebsiteCheckRe
       <section className="rounded-[2.5rem] border border-border bg-background/80 p-6 shadow-premium backdrop-blur-xl sm:p-10 lg:p-14" aria-labelledby="website-check-result-title">
         <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Kostenloser Basis-Report</p>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Kostenloser Website-Report</p>
             <h2 ref={titleRef} tabIndex={-1} id="website-check-result-title" className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.055em] outline-none sm:text-6xl">Ihr Ergebnis für {result.domain}</h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{result.summary}</p>
           </div>
@@ -47,6 +48,7 @@ function WebsiteCheckResults({ result, analysisToken }: { result: WebsiteCheckRe
         <CoreWebVitals metrics={result.metrics} fieldDataAvailable={result.fieldDataAvailable} />
         <KeyFindings findings={result.findings} />
       </section>
+      {result.intelligence && <SiteIntelligenceResults intelligence={result.intelligence} />}
       {success === null ? <ReportLeadForm result={result} analysisToken={analysisToken} onSuccess={setSuccess} /> : <WebsiteCheckSuccess marketingConfirmationSent={success} />}
     </div>
   );
@@ -118,10 +120,10 @@ export function WebsiteCheckTool() {
         <label htmlFor={inputId} className="text-sm font-medium">Website-URL</label>
         <div className="mt-2 grid gap-3 lg:grid-cols-[1fr_auto]">
           <input id={inputId} name="url" type="text" inputMode="url" autoComplete="url" placeholder="beispiel.de" value={url} onChange={(event: ChangeEvent<HTMLInputElement>) => setUrl(event.target.value)} maxLength={2048} disabled={state === "analyzing"} aria-invalid={state === "error"} className="min-h-16 w-full rounded-2xl border border-border bg-background/90 px-5 text-lg text-foreground outline-none transition placeholder:text-muted-foreground focus:border-foreground focus:ring-2 focus:ring-accent/35 disabled:opacity-60" />
-          <button type="submit" disabled={state === "analyzing"} className="inline-flex min-h-16 items-center justify-center rounded-2xl bg-foreground px-7 text-base font-medium text-background shadow-premium transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-60">{state === "analyzing" ? "Analyse läuft …" : "Website kostenlos analysieren"}<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></button>
+          <button type="submit" disabled={state === "analyzing"} className="inline-flex min-h-16 items-center justify-center rounded-2xl bg-foreground px-7 text-base font-medium text-background shadow-premium transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-60">{state === "analyzing" ? "Analyse läuft …" : "Website vollständig analysieren"}<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></button>
         </div>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p id={`${inputId}-help`} className="text-sm text-muted-foreground">Mit oder ohne https:// – es werden ausschließlich öffentlich erreichbare Seiten geprüft.</p>
+          <p id={`${inputId}-help`} className="text-sm text-muted-foreground">Mit oder ohne https:// – geprüft werden ausschließlich öffentlich erreichbare Informationen.</p>
           <fieldset className="flex items-center gap-2" disabled={state === "analyzing"}>
             <legend className="sr-only">Testgerät auswählen</legend>
             {(["mobile", "desktop"] as const).map((option) => (
@@ -140,7 +142,7 @@ export function WebsiteCheckTool() {
         <div className="mt-10 min-h-[22rem]">
           {state === "idle" && (
             <div className="grid min-h-[22rem] place-items-center rounded-[2rem] border border-dashed border-border bg-background/35 p-8 text-center">
-              <div className="max-w-2xl"><Workflow className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" /><h2 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">Vier technische Perspektiven, eine verständliche Auswertung</h2><p className="mt-3 leading-7 text-muted-foreground">Starten Sie den Check, um Performance, Barrierefreiheit, technische Qualität und SEO-Grundlagen zu prüfen. Kontaktdaten sind für den Basis-Report nicht erforderlich.</p></div>
+              <div className="max-w-2xl"><Workflow className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" /><h2 className="mt-5 text-2xl font-semibold tracking-[-0.04em]">19 Analysebereiche, ein vollständiger Überblick</h2><p className="mt-3 leading-7 text-muted-foreground">Prüfen Sie Performance, CMS, Hosting-Indikatoren, DNS, SSL, Tracking, Sicherheit, SEO, AEO, GEO, Barrierefreiheit, Rechtliches und weitere öffentlich sichtbare Signale.</p></div>
             </div>
           )}
           {state === "analyzing" && <AnalysisProgress activeStep={activeStep} />}
