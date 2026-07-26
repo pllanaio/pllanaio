@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/button";
 import { CookieSettingsButton } from "@/components/cookie-banner";
 import { DarkVeilBackground } from "@/components/dark-veil-background";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -42,13 +43,11 @@ export function GlobalPreferences() {
 
       {heroActions &&
         createPortal(
-          <Link
-            href="/website-check"
-            className="group inline-flex min-h-11 items-center justify-center gap-1.5 px-2 text-sm font-medium text-muted-foreground transition hover:text-foreground sm:ml-1"
-          >
-            {websiteCheck.hero}
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </Link>,
+          <Button asChild size="lg">
+            <Link href="/website-check">
+              {websiteCheck.hero} <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>,
           heroActions,
         )}
 
