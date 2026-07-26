@@ -40,8 +40,8 @@ function loadGoogleTagManager() {
   document.head.appendChild(script);
 }
 
-function scheduleGoogleTagManager() {
-  if (document.getElementById("google-tag-manager-script")) return () => undefined;
+function scheduleGoogleTagManager(): () => void {
+  if (document.getElementById("google-tag-manager-script")) return () => {};
 
   const idleWindow = window as IdleWindow;
   if (typeof idleWindow.requestIdleCallback === "function") {
@@ -66,7 +66,7 @@ export function Analytics() {
   const scrollDepths = useRef(new Set<number>());
 
   useEffect(() => {
-    let cancelScheduledLoad = () => undefined;
+    let cancelScheduledLoad: () => void = () => {};
 
     const consentGranted = hasAnalyticsConsent();
     updateGoogleConsent(consentGranted);
