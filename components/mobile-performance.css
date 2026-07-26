@@ -1,0 +1,28 @@
+@media (max-width: 767px) {
+  :root {
+    --muted-foreground: 220 12% 34%;
+  }
+
+  .dark {
+    --muted-foreground: 220 14% 76%;
+  }
+
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  /* Only the decorative homepage hero graphic uses this aspect-square structure. */
+  main > section:first-of-type [class~="aspect-square"] {
+    display: none !important;
+  }
+
+  .backdrop-blur-xl,
+  .backdrop-blur {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .noise::before {
+    display: none;
+  }
+}
