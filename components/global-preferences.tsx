@@ -11,31 +11,6 @@ export function GlobalPreferences() {
 
   return (
     <>
-      <style jsx global>{`
-        @media (max-width: 767px) {
-          :root {
-            --muted-foreground: 220 12% 34%;
-          }
-
-          .dark {
-            --muted-foreground: 220 14% 76%;
-          }
-
-          body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-          }
-
-          .backdrop-blur-xl,
-          .backdrop-blur {
-            -webkit-backdrop-filter: none !important;
-            backdrop-filter: none !important;
-          }
-
-          .noise::before {
-            display: none;
-          }
-        }
-      `}</style>
       <DarkVeilBackground />
       <div className="fixed bottom-4 right-4 z-[70] flex max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full border border-border bg-background/90 p-2 text-xs text-muted-foreground shadow-premium backdrop-blur-xl">
         <LanguageSwitcher />
