@@ -5,7 +5,6 @@ import { CookieSettingsButton } from "@/components/cookie-banner";
 import { DarkVeilBackground } from "@/components/dark-veil-background";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLocale } from "@/components/locale-provider";
-import "@/components/mobile-performance.css";
 
 export function GlobalPreferences() {
   const { t } = useLocale();
