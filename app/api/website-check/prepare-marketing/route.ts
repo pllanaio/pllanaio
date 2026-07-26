@@ -7,9 +7,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const cookieName = "website_check_doi";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pllana.io";
 
 export async function GET(request: Request) {
-  const destination = new URL("/website-check/confirm-marketing", request.url);
+  const destination = new URL("/website-check/confirm-marketing", siteUrl);
   try {
     await enforceRateLimit(`doi-prepare:ip:${getClientIp(request)}`, 20, 60 * 60 * 1000);
     const token = new URL(request.url).searchParams.get("token");
