@@ -2,10 +2,12 @@ import { Check, Sparkles } from "lucide-react";
 
 export const progressSteps = [
   "Website wird auf Erreichbarkeit geprüft",
-  "Performance wird analysiert",
-  "SEO-Grundlagen werden ausgewertet",
-  "Barrierefreiheit wird geprüft",
-  "Ergebnisse werden verständlich aufbereitet",
+  "Performance und technische Auslieferung werden analysiert",
+  "CMS, Frameworks und Hosting-Indikatoren werden erkannt",
+  "DNS, SSL und Sicherheits-Header werden geprüft",
+  "SEO, AEO und GEO werden ausgewertet",
+  "Tracking, Cookies, Formulare und Rechtliches werden untersucht",
+  "Alle 19 Analysebereiche werden aufbereitet",
 ];
 
 export function AnalysisProgress({ activeStep }: { activeStep: number }) {
@@ -16,8 +18,8 @@ export function AnalysisProgress({ activeStep }: { activeStep: number }) {
           <Sparkles className="h-5 w-5 motion-safe:animate-pulse" aria-hidden="true" />
         </span>
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.04em]">Ihre Website wird analysiert</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Je nach Website und Auslastung kann die Prüfung etwas dauern.</p>
+          <h2 className="text-2xl font-semibold tracking-[-0.04em]">Ihre Website wird vollständig analysiert</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Die erweiterte Prüfung kann je nach Website und DNS-Antwort einige Sekunden dauern.</p>
         </div>
       </div>
       <ol className="mt-8 space-y-3">
