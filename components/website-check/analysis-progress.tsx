@@ -1,16 +1,15 @@
-import { Check, Sparkles } from "lucide-react";
+"use client";
 
-export const progressSteps = [
-  "Website wird auf Erreichbarkeit geprüft",
-  "Performance und technische Auslieferung werden analysiert",
-  "CMS, Frameworks und Hosting-Indikatoren werden erkannt",
-  "DNS, SSL und Sicherheits-Header werden geprüft",
-  "SEO, AEO und GEO werden ausgewertet",
-  "Tracking, Cookies, Formulare und Rechtliches werden untersucht",
-  "Alle 19 Analysebereiche werden aufbereitet",
-];
+import { Check, Sparkles } from "lucide-react";
+import { useLocale } from "@/components/locale-provider";
+import { getWebsiteCheckTranslation } from "@/lib/website-check/i18n";
+
+export const progressSteps = Array.from({ length: 7 }, (_, index) => index);
 
 export function AnalysisProgress({ activeStep }: { activeStep: number }) {
+  const { locale } = useLocale();
+  const t = getWebsiteCheckTranslation(locale).tool;
+
   return (
     <div className="min-h-[22rem] rounded-[2rem] border border-border bg-card/80 p-6 shadow-premium backdrop-blur-xl sm:p-10" role="status" aria-live="polite" aria-atomic="true">
       <div className="flex items-center gap-4">
@@ -18,12 +17,12 @@ export function AnalysisProgress({ activeStep }: { activeStep: number }) {
           <Sparkles className="h-5 w-5 motion-safe:animate-pulse" aria-hidden="true" />
         </span>
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.04em]">Ihre Website wird vollständig analysiert</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Die erweiterte Prüfung kann je nach Website und DNS-Antwort einige Sekunden dauern.</p>
+          <h2 className="text-2xl font-semibold tracking-[-0.04em]">{t.progressTitle}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{t.progressText}</p>
         </div>
       </div>
       <ol className="mt-8 space-y-3">
-        {progressSteps.map((step, index) => {
+        {t.progress.map((step, index) => {
           const done = index < activeStep;
           const active = index === activeStep;
           return (
