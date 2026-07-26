@@ -131,7 +131,7 @@ export default async function WebsiteCheckPage({ searchParams }: { searchParams:
           {marketing === "confirmed" && <div className="mx-auto mb-8 max-w-3xl rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4 text-sm text-emerald-800 dark:text-emerald-200" role="status">Ihre E-Mail-Adresse wurde bestätigt. Vielen Dank.</div>}
           {marketing === "invalid" && <div className="mx-auto mb-8 max-w-3xl rounded-2xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 text-sm text-amber-900 dark:text-amber-200" role="status">Der Bestätigungslink ist ungültig oder abgelaufen. Eine Aufnahme in den Verteiler ist nicht erfolgt.</div>}
           <h1 className="text-balance mx-auto max-w-5xl text-5xl font-semibold tracking-[-0.07em] sm:text-7xl lg:text-8xl">Wie gut arbeitet Ihre Website wirklich?</h1>
-          <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-muted-foreground sm:text-2xl sm:leading-9">Analysieren Sie kostenlos die Performance, Suchmaschinen-Basis, Barrierefreiheit und technische Qualität Ihrer Website – verständlich ausgewertet und ohne Fachchinesisch.</p>
+          <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-muted-foreground sm:text-2xl sm:leading-9">Analysieren Sie kostenlos die Performance, Suchmaschinen-Basis, Barrierefreiheit und technische Qualität Ihrer Website – verständlich ausgewertet und klar erklärt.</p>
           <ul className="mx-auto mt-9 flex max-w-4xl flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground" aria-label="Vorteile des Website-Checks">
             {trustItems.map((item) => <li key={item} className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600 dark:text-emerald-300" aria-hidden="true" />{item}</li>)}
           </ul>
