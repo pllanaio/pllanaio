@@ -4,7 +4,6 @@ import { enforceRateLimit, getClientIp } from "@/lib/website-check/rate-limit";
 import { claimIdempotencyKey } from "@/lib/website-check/idempotency";
 import { WebsiteCheckError } from "@/lib/website-check/errors";
 import { verifyEncryptedToken } from "@/lib/website-check/tokens";
-import { assertSameOrigin } from "@/lib/website-check/request-guards";
 import type { MarketingConfirmationPayload } from "@/lib/website-check/types";
 
 export const runtime = "nodejs";
@@ -17,7 +16,6 @@ export async function POST(request: NextRequest) {
   const destination = new URL("/website-check", siteUrl);
 
   try {
-    assertSameOrigin(request);
     await enforceRateLimit(`doi:ip:${getClientIp(request)}`, 10, 60 * 60 * 1000);
 
     const token = request.cookies.get(cookieName)?.value;
@@ -46,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     if (code === "ALREADY_PROCESSED") {
       destination.searchParams.set("marketing", "confirmed");
-    } else if (["INVALID_TOKEN", "TOKEN_EXPIRED", "INVALID_ORIGIN"].includes(code)) {
+    } else if (["INVALID_TOKEN", "TOKEN_EXPIRED"].includes(code)) {
       destination.searchParams.set("marketing", "invalid");
     } else {
       destination.searchParams.set("marketing", "error");
