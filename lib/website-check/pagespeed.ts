@@ -1,6 +1,7 @@
 import { normalizeAndValidateWebsiteUrl } from "./url-security";
 import { fetchPageSpeed } from "./pagespeed-client";
 import { parsePageSpeedResponse } from "./pagespeed-parser";
+import { scanSiteIntelligence } from "./site-intelligence";
 import type { WebsiteCheckResult, WebsiteCheckStrategy } from "./types";
 
 const CACHE_TTL_MS = 15 * 60 * 1000;
@@ -24,10 +25,28 @@ globalState.__websiteCheckResults = results;
 async function runAnalysis(input: unknown, strategy: WebsiteCheckStrategy) {
   const initial = await normalizeAndValidateWebsiteUrl(input);
   await normalizeAndValidateWebsiteUrl(initial.normalizedUrl);
-  const response = await fetchPageSpeed(initial.normalizedUrl, strategy);
+
+  const [pageSpeedResponse, intelligenceResult] = await Promise.allSettled([
+    fetchPageSpeed(initial.normalizedUrl, strategy),
+    scanSiteIntelligence(initial.normalizedUrl),
+  ]);
+
+  if (pageSpeedResponse.status === "rejected") throw pageSpeedResponse.reason;
+
+  const response = pageSpeedResponse.value;
   const finalUrl = response.lighthouseResult?.finalUrl || response.id;
   if (finalUrl) await normalizeAndValidateWebsiteUrl(finalUrl);
-  return parsePageSpeedResponse(response, initial.normalizedUrl, initial.domain, strategy);
+
+  const result = parsePageSpeedResponse(response, initial.normalizedUrl, initial.domain, strategy);
+  if (intelligenceResult.status === "fulfilled") {
+    result.intelligence = intelligenceResult.value;
+  } else {
+    console.error("Website intelligence scan failed", {
+      domain: initial.domain,
+      error: intelligenceResult.reason instanceof Error ? intelligenceResult.reason.message : "UNKNOWN",
+    });
+  }
+  return result;
 }
 
 function cleanExpiredEntries() {
