@@ -1,11 +1,17 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect, useRef } from "react";
 import { hasAnalyticsConsent } from "@/components/cookie-banner";
 import { GTM_ID, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
 
 type ClickEvent = { event: string; label: string };
+
+declare global {
+  interface Window {
+    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+    cancelIdleCallback?: (handle: number) => void;
+  }
+}
 
 function getClickEventName(anchor: HTMLAnchorElement): ClickEvent | null {
   const href = anchor.getAttribute("href") ?? "";
@@ -24,7 +30,34 @@ function getClickEventName(anchor: HTMLAnchorElement): ClickEvent | null {
   return null;
 }
 
+function loadGoogleTagManager() {
+  if (document.getElementById("google-tag-manager-script")) return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+
+  const script = document.createElement("script");
+  script.id = "google-tag-manager-script";
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+  document.head.appendChild(script);
+}
+
+function scheduleGoogleTagManager() {
+  if (document.getElementById("google-tag-manager-script")) return () => undefined;
+
+  if (window.requestIdleCallback) {
+    const handle = window.requestIdleCallback(loadGoogleTagManager, { timeout: 4000 });
+    return () => window.cancelIdleCallback?.(handle);
+  }
+
+  const handle = window.setTimeout(loadGoogleTagManager, 2500);
+  return () => window.clearTimeout(handle);
+}
+
 export function trackEvent(event: string, params?: Record<string, string | number | boolean>) {
+  if (!hasAnalyticsConsent()) return;
+
   pushDataLayer(event, {
     ...params,
     page_path: typeof window !== "undefined" ? window.location.pathname : undefined,
@@ -35,23 +68,40 @@ export function Analytics() {
   const scrollDepths = useRef(new Set<number>());
 
   useEffect(() => {
-    updateGoogleConsent(hasAnalyticsConsent());
-    pushDataLayer("page_view", {
-      page_path: window.location.pathname,
-      page_title: document.title,
-      analytics_consent: hasAnalyticsConsent(),
-    });
+    let cancelScheduledLoad = () => undefined;
+
+    const consentGranted = hasAnalyticsConsent();
+    updateGoogleConsent(consentGranted);
+
+    if (consentGranted) {
+      cancelScheduledLoad = scheduleGoogleTagManager();
+      pushDataLayer("page_view", {
+        page_path: window.location.pathname,
+        page_title: document.title,
+        analytics_consent: true,
+      });
+    }
 
     function handleConsent(event: Event) {
       const consent = (event as CustomEvent).detail;
       const granted = consent === "accepted";
       updateGoogleConsent(granted);
-      pushDataLayer(granted ? "cookie_accept" : "cookie_decline", {
-        analytics_consent: granted,
-      });
+
+      if (granted) {
+        cancelScheduledLoad();
+        cancelScheduledLoad = scheduleGoogleTagManager();
+        pushDataLayer("cookie_accept", { analytics_consent: true });
+        pushDataLayer("page_view", {
+          page_path: window.location.pathname,
+          page_title: document.title,
+          analytics_consent: true,
+        });
+      }
     }
 
     function handleClick(event: MouseEvent) {
+      if (!hasAnalyticsConsent()) return;
+
       const target = event.target as HTMLElement | null;
       const anchor = target?.closest("a");
       if (!anchor) return;
@@ -67,9 +117,12 @@ export function Analytics() {
     }
 
     function handleScroll() {
+      if (!hasAnalyticsConsent()) return;
+
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollable <= 0) return;
       const percent = Math.round((window.scrollY / scrollable) * 100);
+
       [25, 50, 75, 100].forEach((depth) => {
         if (percent >= depth && !scrollDepths.current.has(depth)) {
           scrollDepths.current.add(depth);
@@ -83,35 +136,12 @@ export function Analytics() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
+      cancelScheduledLoad();
       window.removeEventListener("pllana-cookie-consent", handleConsent);
       document.removeEventListener("click", handleClick, { capture: true });
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  return (
-    <>
-      <Script id="gtm-consent-default" strategy="beforeInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'default_consent',
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
-          });
-        `}
-      </Script>
-      <Script id="google-tag-manager" strategy="afterInteractive">
-        {`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','${GTM_ID}');
-        `}
-      </Script>
-    </>
-  );
+  return null;
 }
