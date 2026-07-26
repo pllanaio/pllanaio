@@ -32,6 +32,38 @@ export interface WebsiteFinding {
   priority: number;
 }
 
+export type IntelligenceStatus = "good" | "warning" | "critical" | "info" | "unknown";
+
+export interface IntelligenceItem {
+  label: string;
+  value: string;
+  status: IntelligenceStatus;
+  evidence?: string;
+}
+
+export interface IntelligenceSection {
+  key: string;
+  title: string;
+  description: string;
+  score: number | null;
+  confidence: "high" | "medium" | "low";
+  items: IntelligenceItem[];
+}
+
+export interface SiteIntelligenceResult {
+  scannedAt: string;
+  sections: IntelligenceSection[];
+  technologies: string[];
+  structuredDataTypes: string[];
+  socialProfiles: string[];
+  detectedContacts: {
+    emails: string[];
+    phones: string[];
+    addresses: string[];
+  };
+  notes: string[];
+}
+
 export interface WebsiteCheckResult {
   id: string;
   status: "completed";
@@ -46,6 +78,7 @@ export interface WebsiteCheckResult {
   findings: WebsiteFinding[];
   summary: string;
   fieldDataAvailable: boolean;
+  intelligence?: SiteIntelligenceResult;
 }
 
 export interface AnalysisTokenPayload {
