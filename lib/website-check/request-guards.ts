@@ -1,14 +1,29 @@
 import { WebsiteCheckError } from "./errors";
 
+function firstForwardedValue(value: string | null) {
+  return value?.split(",")[0]?.trim() || "";
+}
+
 export function assertSameOrigin(request: Request) {
   const origin = request.headers.get("origin");
   if (!origin) return;
 
   const configured = process.env.NEXT_PUBLIC_SITE_URL || "https://pllana.io";
+  const configuredHost = new URL(configured).host;
+  const forwardedHost = firstForwardedValue(request.headers.get("x-forwarded-host"));
+  const requestHost = request.headers.get("host") || "";
+  const canonicalHostname = configuredHost.split(":")[0];
+  const alternateHostname = canonicalHostname.startsWith("www.")
+    ? canonicalHostname.slice(4)
+    : `www.${canonicalHostname}`;
+
   const allowedHosts = new Set([
-    new URL(configured).host,
-    request.headers.get("host") || "",
-  ]);
+    configuredHost,
+    canonicalHostname,
+    alternateHostname,
+    forwardedHost,
+    requestHost,
+  ].filter(Boolean));
 
   let originHost = "";
   try {
