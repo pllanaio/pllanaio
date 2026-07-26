@@ -6,13 +6,6 @@ import { GTM_ID, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
 
 type ClickEvent = { event: string; label: string };
 
-declare global {
-  interface Window {
-    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-    cancelIdleCallback?: (handle: number) => void;
-  }
-}
-
 function getClickEventName(anchor: HTMLAnchorElement): ClickEvent | null {
   const href = anchor.getAttribute("href") ?? "";
   const label = anchor.textContent?.trim().replace(/\s+/g, " ") ?? "";
@@ -46,9 +39,9 @@ function loadGoogleTagManager() {
 function scheduleGoogleTagManager() {
   if (document.getElementById("google-tag-manager-script")) return () => undefined;
 
-  if (window.requestIdleCallback) {
+  if ("requestIdleCallback" in window) {
     const handle = window.requestIdleCallback(loadGoogleTagManager, { timeout: 4000 });
-    return () => window.cancelIdleCallback?.(handle);
+    return () => window.cancelIdleCallback(handle);
   }
 
   const handle = window.setTimeout(loadGoogleTagManager, 2500);
