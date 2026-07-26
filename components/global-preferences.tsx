@@ -25,19 +25,6 @@ export function GlobalPreferences() {
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
           }
 
-          main > section:first-of-type > div:last-child > div:last-child {
-            display: none !important;
-          }
-
-          main > section:first-of-type {
-            min-height: 100svh;
-          }
-
-          main > section:not(:first-of-type) {
-            content-visibility: auto;
-            contain-intrinsic-size: auto 760px;
-          }
-
           .backdrop-blur-xl,
           .backdrop-blur {
             -webkit-backdrop-filter: none !important;
