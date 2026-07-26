@@ -1,12 +1,12 @@
-import { AlertTriangle, CheckCircle2, CircleHelp, Info, ShieldAlert } from "lucide-react";
+import { Check, Code2, ShieldCheck, Sparkles } from "lucide-react";
 import type { IntelligenceItem, IntelligenceSection, SiteIntelligenceResult } from "@/lib/website-check/types";
 
 function statusIcon(status: IntelligenceItem["status"]) {
-  if (status === "good") return <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-300" aria-hidden="true" />;
-  if (status === "warning") return <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-300" aria-hidden="true" />;
-  if (status === "critical") return <ShieldAlert className="h-4 w-4 text-red-600 dark:text-red-300" aria-hidden="true" />;
-  if (status === "unknown") return <CircleHelp className="h-4 w-4 text-muted-foreground" aria-hidden="true" />;
-  return <Info className="h-4 w-4 text-sky-600 dark:text-sky-300" aria-hidden="true" />;
+  if (status === "good") return <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-300" aria-hidden="true" />;
+  if (status === "warning") return <Sparkles className="h-4 w-4 text-amber-600 dark:text-amber-300" aria-hidden="true" />;
+  if (status === "critical") return <ShieldCheck className="h-4 w-4 text-red-600 dark:text-red-300" aria-hidden="true" />;
+  if (status === "unknown") return <Code2 className="h-4 w-4 text-muted-foreground" aria-hidden="true" />;
+  return <Sparkles className="h-4 w-4 text-sky-600 dark:text-sky-300" aria-hidden="true" />;
 }
 
 function scoreLabel(score: number | null) {
