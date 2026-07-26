@@ -11,9 +11,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const cookieName = "website_check_doi";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pllana.io";
 
 export async function POST(request: Request) {
-  const destination = new URL("/website-check", request.url);
+  const destination = new URL("/website-check", siteUrl);
   try {
     assertSameOrigin(request);
     await enforceRateLimit(`doi:ip:${getClientIp(request)}`, 10, 60 * 60 * 1000);
