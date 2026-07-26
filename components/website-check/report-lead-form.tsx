@@ -3,165 +3,53 @@
 import Link from "next/link";
 import { ChangeEvent, FormEvent, useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { useLocale } from "@/components/locale-provider";
 import { trackWebsiteCheckEvent } from "@/lib/website-check/analytics";
 import type { WebsiteCheckResult } from "@/lib/website-check/types";
 
 const fieldClass = "mt-2 w-full rounded-2xl border border-border bg-background/85 px-4 py-3.5 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-foreground focus:ring-2 focus:ring-accent/35 disabled:cursor-not-allowed disabled:opacity-60";
-
-interface ErrorResponse {
-  ok: false;
-  error?: { code?: string; message?: string };
-}
+const labels = {
+  de: { security: "Sicherheitsprüfung", error: "Der Report konnte gerade nicht angefordert werden.", eyebrow: "Nächster Schritt", title: "Ausführlichen Website-Report erhalten", intro: "Wir senden Ihnen eine verständliche Zusammenfassung der wichtigsten technischen Schwachstellen und möglichen nächsten Schritte per E-Mail zu.", analysed: "Analysierte Website", locked: "Die URL ist über den signierten Analysebezug fest mit diesem Report verknüpft und kann im Formular nicht ausgetauscht werden.", first: "Vorname", last: "Nachname", company: "Unternehmen", email: "Geschäftliche E-Mail-Adresse", phone: "Telefonnummer", optional: "optional", privacy: "Ihre E-Mail-Adresse wird benötigt, um Ihnen den angeforderten Website-Report zuzusenden. Der Report ist nicht von einer Marketing-Einwilligung abhängig.", marketingA: "Ich möchte zusätzlich gelegentlich praktische Tipps zur Verbesserung meiner Website sowie Informationen zu den Leistungen von Leon Pllana IT-Solutions per E-Mail erhalten. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Weitere Informationen finde ich in der", privacyLink: "Datenschutzerklärung", sending: "Report wird angefordert …", submit: "Website-Report per E-Mail erhalten", successTitle: "Ihr Website-Report wurde angefordert.", successText: "Prüfen Sie bitte Ihr E-Mail-Postfach. Der Versand kann in Einzelfällen einige Minuten dauern.", confirmation: "Für zusätzliche Website-Tipps erhalten Sie separat eine Bestätigungs-E-Mail. Erst nach Ihrer Bestätigung werden Sie in den Verteiler aufgenommen.", cta: "Unverbindliches Erstgespräch vereinbaren" },
+  en: { security: "Security check", error: "The report could not be requested right now.", eyebrow: "Next step", title: "Receive the detailed website report", intro: "We will email you a clear summary of the most important technical weaknesses and possible next steps.", analysed: "Analysed website", locked: "The URL is securely linked to this report through the signed analysis reference and cannot be replaced in the form.", first: "First name", last: "Last name", company: "Company", email: "Business email address", phone: "Phone number", optional: "optional", privacy: "Your email address is required to send the requested website report. The report does not depend on marketing consent.", marketingA: "I would also like to occasionally receive practical website improvement tips and information about Leon Pllana IT-Solutions by email. I can withdraw my consent at any time. Further information is available in the", privacyLink: "privacy policy", sending: "Requesting report …", submit: "Receive website report by email", successTitle: "Your website report has been requested.", successText: "Please check your inbox. Delivery may take a few minutes in individual cases.", confirmation: "You will receive a separate confirmation email for additional website tips. You will only be added after confirming.", cta: "Book a non-binding initial consultation" },
+  sq: { security: "Kontroll sigurie", error: "Raporti nuk mund të kërkohej tani.", eyebrow: "Hapi tjetër", title: "Merrni raportin e detajuar të faqes", intro: "Do t'ju dërgojmë me email një përmbledhje të qartë të dobësive teknike dhe hapave të mundshëm.", analysed: "Faqja e analizuar", locked: "URL-ja është e lidhur në mënyrë të sigurt me këtë raport dhe nuk mund të zëvendësohet në formular.", first: "Emri", last: "Mbiemri", company: "Kompania", email: "Emaili i biznesit", phone: "Numri i telefonit", optional: "opsionale", privacy: "Adresa e emailit nevojitet për t'ju dërguar raportin. Raporti nuk varet nga pëlqimi për marketing.", marketingA: "Dëshiroj të marr herë pas here këshilla praktike për përmirësimin e faqes dhe informacione për Leon Pllana IT-Solutions me email. Mund ta tërheq pëlqimin në çdo kohë. Informacione të tjera gjenden te", privacyLink: "politika e privatësisë", sending: "Po kërkohet raporti …", submit: "Merrni raportin me email", successTitle: "Raporti juaj u kërkua.", successText: "Ju lutemi kontrolloni emailin. Dërgimi mund të zgjasë disa minuta.", confirmation: "Për këshilla shtesë do të merrni një email konfirmimi. Do të shtoheni vetëm pas konfirmimit.", cta: "Rezervoni një bisedë fillestare pa detyrim" },
+} as const;
 
 type ReportStatus = "idle" | "sending" | "success" | "error";
+interface ErrorResponse { ok: false; error?: { code?: string; message?: string }; }
+interface TurnstileApi { render: (container: HTMLElement, options: { sitekey: string; callback: (token: string) => void; "expired-callback": () => void; theme: "auto" }) => string; reset: (widgetId?: string) => void; }
 
-interface TurnstileApi {
-  render: (container: HTMLElement, options: { sitekey: string; callback: (token: string) => void; "expired-callback": () => void; theme: "auto" }) => string;
-  reset: (widgetId?: string) => void;
-}
-
-function TurnstileField({ onToken }: { onToken: (token: string) => void }) {
+function TurnstileField({ onToken, ariaLabel }: { onToken: (token: string) => void; ariaLabel: string }) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
   const containerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (!siteKey || !containerRef.current) return;
-    const windowWithTurnstile = window as Window & { turnstile?: TurnstileApi };
+    const apiWindow = window as Window & { turnstile?: TurnstileApi };
     let cancelled = false;
-    const render = () => {
-      if (cancelled || !containerRef.current || !windowWithTurnstile.turnstile) return;
-      windowWithTurnstile.turnstile.render(containerRef.current, {
-        sitekey: siteKey,
-        callback: onToken,
-        "expired-callback": () => onToken(""),
-        theme: "auto",
-      });
-    };
+    const render = () => { if (!cancelled && containerRef.current && apiWindow.turnstile) apiWindow.turnstile.render(containerRef.current, { sitekey: siteKey, callback: onToken, "expired-callback": () => onToken(""), theme: "auto" }); };
     const existing = document.querySelector<HTMLScriptElement>('script[data-website-check-turnstile="true"]');
-    if (windowWithTurnstile.turnstile) render();
-    else if (existing) existing.addEventListener("load", render, { once: true });
-    else {
-      const script = document.createElement("script");
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      script.async = true;
-      script.defer = true;
-      script.dataset.websiteCheckTurnstile = "true";
-      script.addEventListener("load", render, { once: true });
-      document.head.appendChild(script);
-    }
+    if (apiWindow.turnstile) render(); else if (existing) existing.addEventListener("load", render, { once: true }); else { const script = document.createElement("script"); script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"; script.async = true; script.defer = true; script.dataset.websiteCheckTurnstile = "true"; script.addEventListener("load", render, { once: true }); document.head.appendChild(script); }
     return () => { cancelled = true; };
   }, [onToken, siteKey]);
-
   if (!siteKey) return null;
-  return <div ref={containerRef} className="mt-5 min-h-[65px]" aria-label="Sicherheitsprüfung" />;
+  return <div ref={containerRef} className="mt-5 min-h-[65px]" aria-label={ariaLabel} />;
 }
 
 export function ReportLeadForm({ result, analysisToken, onSuccess }: { result: WebsiteCheckResult; analysisToken: string; onSuccess: (marketingConfirmationSent: boolean) => void }) {
-  const [status, setStatus] = useState<ReportStatus>("idle");
-  const [error, setError] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const [marketingConsent, setMarketingConsent] = useState(false);
-  const formId = useId();
-
+  const { locale } = useLocale(); const t = labels[locale];
+  const [status, setStatus] = useState<ReportStatus>("idle"); const [error, setError] = useState(""); const [turnstileToken, setTurnstileToken] = useState(""); const [marketingConsent, setMarketingConsent] = useState(false); const formId = useId();
   async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === "sending") return;
-    setStatus("sending");
-    setError("");
-    const data = new FormData(event.currentTarget);
+    event.preventDefault(); if (status === "sending") return; setStatus("sending"); setError(""); const data = new FormData(event.currentTarget);
     try {
-      const response = await fetch("/api/website-check/request-report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: data.get("firstName"),
-          lastName: data.get("lastName"),
-          company: data.get("company"),
-          email: data.get("email"),
-          phone: data.get("phone"),
-          website: data.get("website"),
-          analysisToken,
-          marketingConsent,
-          consentTextVersion: "2026-07-22",
-          source: "website-check-v1",
-          turnstileToken,
-        }),
-      });
+      const response = await fetch("/api/website-check/request-report", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ firstName: data.get("firstName"), lastName: data.get("lastName"), company: data.get("company"), email: data.get("email"), phone: data.get("phone"), website: data.get("website"), analysisToken, marketingConsent, consentTextVersion: "2026-07-22", source: "website-check-v1", turnstileToken, locale }) });
       const payload = await response.json().catch(() => null) as ({ ok: true; marketingConfirmationSent: boolean } | ErrorResponse | null);
-      if (!response.ok || !payload || !payload.ok) {
-        throw new Error(payload && "error" in payload ? payload.error?.message : "Der Report konnte gerade nicht angefordert werden.");
-      }
-      trackWebsiteCheckEvent({ event: "report_requested", analysis_id: result.id, domain: result.domain, strategy: result.strategy });
-      setStatus("success");
-      onSuccess(payload.marketingConfirmationSent);
-    } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "Der Report konnte gerade nicht angefordert werden.");
-      setStatus("error");
-    }
+      if (!response.ok || !payload || !payload.ok) throw new Error(payload && "error" in payload ? payload.error?.message : t.error);
+      trackWebsiteCheckEvent({ event: "report_requested", analysis_id: result.id, domain: result.domain, strategy: result.strategy }); setStatus("success"); onSuccess(payload.marketingConfirmationSent);
+    } catch (submitError) { setError(submitError instanceof Error ? submitError.message : t.error); setStatus("error"); }
   }
-
-  return (
-    <section id="detailreport" className="mt-20 scroll-mt-28 rounded-[2.5rem] border border-border bg-card/90 p-6 shadow-premium backdrop-blur-xl sm:p-10 lg:p-14" aria-labelledby={`${formId}-title`}>
-      <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
-        <div>
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Nächster Schritt</p>
-          <h3 id={`${formId}-title`} className="mt-4 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl">Ausführlichen Website-Report erhalten</h3>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">Wir senden Ihnen eine verständliche Zusammenfassung der wichtigsten technischen Schwachstellen und möglichen nächsten Schritte per E-Mail zu.</p>
-          <div className="mt-8 rounded-3xl border border-border bg-muted/35 p-5">
-            <p className="text-sm text-muted-foreground">Analysierte Website</p>
-            <p className="mt-2 break-all font-medium">{result.normalizedUrl}</p>
-            <p className="mt-3 text-sm text-muted-foreground">Die URL ist über den signierten Analysebezug fest mit diesem Report verknüpft und kann im Formular nicht ausgetauscht werden.</p>
-          </div>
-        </div>
-
-        <form onSubmit={submit} aria-describedby={`${formId}-privacy`}>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <label className="text-sm font-medium">Vorname <span aria-hidden="true">*</span><input name="firstName" autoComplete="given-name" required maxLength={80} className={fieldClass} /></label>
-            <label className="text-sm font-medium">Nachname <span className="font-normal text-muted-foreground">optional</span><input name="lastName" autoComplete="family-name" maxLength={80} className={fieldClass} /></label>
-            <label className="text-sm font-medium sm:col-span-2">Unternehmen <span aria-hidden="true">*</span><input name="company" autoComplete="organization" required maxLength={120} className={fieldClass} /></label>
-            <label className="text-sm font-medium sm:col-span-2">Geschäftliche E-Mail-Adresse <span aria-hidden="true">*</span><input name="email" type="email" inputMode="email" autoComplete="email" required maxLength={254} className={fieldClass} aria-describedby={`${formId}-privacy`} /></label>
-            <label className="text-sm font-medium sm:col-span-2">Telefonnummer <span className="font-normal text-muted-foreground">optional</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={30} className={fieldClass} /></label>
-          </div>
-          <label className="hidden" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
-          <p id={`${formId}-privacy`} className="mt-5 text-sm leading-6 text-muted-foreground">Ihre E-Mail-Adresse wird benötigt, um Ihnen den angeforderten Website-Report zuzusenden. Der Report ist nicht von einer Marketing-Einwilligung abhängig.</p>
-          <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-2xl border border-border bg-background/55 p-4 text-sm leading-6">
-            <input
-              type="checkbox"
-              checked={marketingConsent}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                setMarketingConsent(event.target.checked);
-                if (event.target.checked) trackWebsiteCheckEvent({ event: "marketing_opt_in_selected", analysis_id: result.id, domain: result.domain });
-              }}
-              className="mt-1 h-5 w-5 shrink-0 accent-current"
-            />
-            <span>Ich möchte zusätzlich gelegentlich praktische Tipps zur Verbesserung meiner Website sowie Informationen zu den Leistungen von Leon Pllana IT-Solutions per E-Mail erhalten. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Weitere Informationen finde ich in der <Link href="/datenschutz" className="underline underline-offset-4 hover:text-foreground">Datenschutzerklärung</Link>.</span>
-          </label>
-          <TurnstileField onToken={setTurnstileToken} />
-          <div className="mt-7">
-            <button type="submit" disabled={status === "sending"} className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-foreground px-8 text-base font-medium text-background shadow-premium transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-60 sm:w-auto">
-              {status === "sending" ? "Report wird angefordert …" : "Website-Report per E-Mail erhalten"}
-              {status !== "sending" && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
-            </button>
-            <div className="min-h-7 pt-3 text-sm" aria-live="polite">
-              {status === "error" && <p className="text-red-700 dark:text-red-300">{error}</p>}
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
+  return <section id="detailreport" className="mt-20 scroll-mt-28 rounded-[2.5rem] border border-border bg-card/90 p-6 shadow-premium backdrop-blur-xl sm:p-10 lg:p-14" aria-labelledby={`${formId}-title`}><div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16"><div><p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">{t.eyebrow}</p><h3 id={`${formId}-title`} className="mt-4 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl">{t.title}</h3><p className="mt-6 text-lg leading-8 text-muted-foreground">{t.intro}</p><div className="mt-8 rounded-3xl border border-border bg-muted/35 p-5"><p className="text-sm text-muted-foreground">{t.analysed}</p><p className="mt-2 break-all font-medium">{result.normalizedUrl}</p><p className="mt-3 text-sm text-muted-foreground">{t.locked}</p></div></div><form onSubmit={submit} aria-describedby={`${formId}-privacy`}><div className="grid gap-5 sm:grid-cols-2"><label className="text-sm font-medium">{t.first} *<input name="firstName" autoComplete="given-name" required maxLength={80} className={fieldClass} /></label><label className="text-sm font-medium">{t.last} <span className="font-normal text-muted-foreground">{t.optional}</span><input name="lastName" autoComplete="family-name" maxLength={80} className={fieldClass} /></label><label className="text-sm font-medium sm:col-span-2">{t.company} *<input name="company" autoComplete="organization" required maxLength={120} className={fieldClass} /></label><label className="text-sm font-medium sm:col-span-2">{t.email} *<input name="email" type="email" inputMode="email" autoComplete="email" required maxLength={254} className={fieldClass} /></label><label className="text-sm font-medium sm:col-span-2">{t.phone} <span className="font-normal text-muted-foreground">{t.optional}</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={30} className={fieldClass} /></label></div><label className="hidden" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label><p id={`${formId}-privacy`} className="mt-5 text-sm leading-6 text-muted-foreground">{t.privacy}</p><label className="mt-6 flex cursor-pointer items-start gap-3 rounded-2xl border border-border bg-background/55 p-4 text-sm leading-6"><input type="checkbox" checked={marketingConsent} onChange={(event: ChangeEvent<HTMLInputElement>) => setMarketingConsent(event.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-current" /><span>{t.marketingA} <Link href="/datenschutz" className="underline underline-offset-4 hover:text-foreground">{t.privacyLink}</Link>.</span></label><TurnstileField onToken={setTurnstileToken} ariaLabel={t.security} /><div className="mt-7"><button type="submit" disabled={status === "sending"} className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-foreground px-8 text-base font-medium text-background shadow-premium transition hover:opacity-90 disabled:opacity-60 sm:w-auto">{status === "sending" ? t.sending : t.submit}{status !== "sending" && <ArrowRight className="ml-2 h-4 w-4" />}</button><div className="min-h-7 pt-3 text-sm" aria-live="polite">{status === "error" && <p className="text-red-700 dark:text-red-300">{error}</p>}</div></div></form></div></section>;
 }
 
 export function WebsiteCheckSuccess({ marketingConfirmationSent }: { marketingConfirmationSent: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => ref.current?.focus(), []);
-  return (
-    <section ref={ref} tabIndex={-1} className="mt-20 rounded-[2.5rem] border border-emerald-500/30 bg-emerald-500/8 p-8 shadow-premium outline-none sm:p-12" aria-labelledby="website-check-success-title">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-500/35 text-emerald-700 dark:text-emerald-300"><Check className="h-6 w-6" aria-hidden="true" /></div>
-      <h3 id="website-check-success-title" className="mt-7 text-4xl font-semibold tracking-[-0.05em]">Ihr Website-Report wurde angefordert.</h3>
-      <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Prüfen Sie bitte Ihr E-Mail-Postfach. Der Versand kann in Einzelfällen einige Minuten dauern.</p>
-      {marketingConfirmationSent && <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Für zusätzliche Website-Tipps erhalten Sie separat eine Bestätigungs-E-Mail. Erst nach Ihrer Bestätigung werden Sie in den Verteiler aufgenommen.</p>}
-      <Link href="/#kontakt" onClick={() => trackWebsiteCheckEvent({ event: "consultation_cta_clicked" })} className="mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-foreground px-8 font-medium text-background shadow-premium transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Unverbindliches Erstgespräch vereinbaren <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
-    </section>
-  );
+  const { locale } = useLocale(); const t = labels[locale]; const ref = useRef<HTMLDivElement>(null); useEffect(() => ref.current?.focus(), []);
+  return <section ref={ref} tabIndex={-1} className="mt-20 rounded-[2.5rem] border border-emerald-500/30 bg-emerald-500/8 p-8 shadow-premium outline-none sm:p-12"><div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-500/35 text-emerald-700 dark:text-emerald-300"><Check className="h-6 w-6" /></div><h3 className="mt-7 text-4xl font-semibold tracking-[-0.05em]">{t.successTitle}</h3><p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{t.successText}</p>{marketingConfirmationSent && <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{t.confirmation}</p>}<Link href="/#kontakt" onClick={() => trackWebsiteCheckEvent({ event: "consultation_cta_clicked" })} className="mt-8 inline-flex min-h-14 items-center justify-center rounded-full bg-foreground px-8 font-medium text-background shadow-premium transition hover:opacity-90">{t.cta}<ArrowRight className="ml-2 h-4 w-4" /></Link></section>;
 }
