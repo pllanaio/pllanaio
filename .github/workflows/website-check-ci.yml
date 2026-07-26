@@ -1,0 +1,71 @@
+name: Website Check CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SITE_URL: https://pllana.io
+      PAGESPEED_API_KEY: ci-placeholder-key
+      WEBSITE_CHECK_TOKEN_SECRET: ci-only-placeholder-secret-with-at-least-32-characters
+      SMTP_HOST: smtp.example.invalid
+      SMTP_PORT: "587"
+      SMTP_SECURE: "false"
+      SMTP_USER: ci@example.invalid
+      SMTP_PASSWORD: ci-placeholder-password
+      SMTP_FROM: ci@example.invalid
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Verify tests, types, lint and build
+        id: verify
+        shell: bash
+        run: |
+          set +e
+          npm test > ci-tests.log 2>&1
+          tests_status=$?
+          npm run typecheck > ci-typecheck.log 2>&1
+          typecheck_status=$?
+          npm run lint > ci-lint.log 2>&1
+          lint_status=$?
+          npm run build > ci-build.log 2>&1
+          build_status=$?
+
+          printf 'tests=%s\ntypecheck=%s\nlint=%s\nbuild=%s\n' \
+            "$tests_status" "$typecheck_status" "$lint_status" "$build_status" | tee ci-status.txt
+
+          if (( tests_status != 0 || typecheck_status != 0 || lint_status != 0 || build_status != 0 )); then
+            exit 1
+          fi
+
+      - name: Upload verification logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-check-ci-logs
+          path: |
+            ci-status.txt
+            ci-tests.log
+            ci-typecheck.log
+            ci-lint.log
+            ci-build.log
+          if-no-files-found: error
+          retention-days: 7

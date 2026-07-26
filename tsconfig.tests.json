@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "isolatedModules": false,
+    "noEmit": false,
+    "incremental": false,
+    "outDir": ".test-dist",
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "include": [
+    "lib/website-check/errors.ts",
+    "lib/website-check/types.ts",
+    "lib/website-check/url-security.ts",
+    "lib/website-check/pagespeed.ts",
+    "lib/website-check/lead.ts",
+    "lib/website-check/rate-limit.ts",
+    "lib/website-check/idempotency.ts",
+    "lib/website-check/request-guards.ts",
+    "lib/website-check/tokens.ts",
+    "tests/**/*.test.ts"
+  ]
+}

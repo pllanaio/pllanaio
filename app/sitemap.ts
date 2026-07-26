@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages },
     },
     {
+      url: `${siteUrl}/website-check`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${siteUrl}/impressum`,
       lastModified,
       changeFrequency: "yearly",
