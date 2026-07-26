@@ -10,10 +10,15 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <div id="main-content" tabIndex={-1}>
         {children}
       </div>
-      <address className="sr-only">
-        Leon Pllana IT-Solutions, Rothschwaiger Straße 4, 82256 Fürstenfeldbruck, Deutschland.
-        Telefon: +49 172 7255810. E-Mail: info@pllana.io.
-      </address>
+      <div className="sr-only">
+        <address>
+          Leon Pllana IT-Solutions, Rothschwaiger Straße 4, 82256 Fürstenfeldbruck, Deutschland.
+          Telefon: +49 172 7255810. E-Mail: info@pllana.io.
+        </address>
+        <p>
+          Datenschutzhinweis zum Kontaktformular: Die eingegebenen Daten werden ausschließlich zur Bearbeitung der Anfrage verwendet. Weitere Informationen stehen in der Datenschutzerklärung.
+        </p>
+      </div>
     </>
   );
 }
