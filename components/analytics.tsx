@@ -5,6 +5,10 @@ import { hasAnalyticsConsent } from "@/components/cookie-banner";
 import { GTM_ID, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
 
 type ClickEvent = { event: string; label: string };
+type IdleWindow = Window & {
+  requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
 
 function getClickEventName(anchor: HTMLAnchorElement): ClickEvent | null {
   const href = anchor.getAttribute("href") ?? "";
@@ -39,13 +43,14 @@ function loadGoogleTagManager() {
 function scheduleGoogleTagManager() {
   if (document.getElementById("google-tag-manager-script")) return () => undefined;
 
-  if ("requestIdleCallback" in window) {
-    const handle = window.requestIdleCallback(loadGoogleTagManager, { timeout: 4000 });
-    return () => window.cancelIdleCallback(handle);
+  const idleWindow = window as IdleWindow;
+  if (typeof idleWindow.requestIdleCallback === "function") {
+    const handle = idleWindow.requestIdleCallback(loadGoogleTagManager, { timeout: 4000 });
+    return () => idleWindow.cancelIdleCallback?.(handle);
   }
 
-  const handle = window.setTimeout(loadGoogleTagManager, 2500);
-  return () => window.clearTimeout(handle);
+  const handle = globalThis.setTimeout(loadGoogleTagManager, 2500);
+  return () => globalThis.clearTimeout(handle);
 }
 
 export function trackEvent(event: string, params?: Record<string, string | number | boolean>) {
