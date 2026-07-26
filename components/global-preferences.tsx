@@ -21,6 +21,10 @@ export function GlobalPreferences() {
             --muted-foreground: 220 14% 76%;
           }
 
+          body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+          }
+
           main > section:first-of-type > div:last-child > div:last-child {
             display: none !important;
           }
