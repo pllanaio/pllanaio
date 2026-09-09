@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLocale } from "@/components/locale-provider";
 import { useOfferSelection } from "@/components/offer-selection-provider";
 import { getOfferSummary } from "@/lib/offer-selection";
@@ -43,7 +44,7 @@ export function OfferSelectionSummary() {
       </dl>
       <p className="mt-4 text-sm leading-6 text-muted-foreground">{copy.costsNote}</p>
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-        <a href="#pakete" className={actionClass}>{copy.change}</a>
+        <Link href="/#pakete" className={actionClass}>{copy.change}</Link>
         <button type="button" disabled={sending} onClick={() => removeOffers(selectedOffers)} className={actionClass}>{copy.clear}</button>
       </div>
     </section>

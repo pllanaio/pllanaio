@@ -159,91 +159,9 @@ const organizationSchema = {
   sameAs: ["https://instagram.com/pllanaio", "https://www.linkedin.com/in/leon-pllana/"],
 };
 
-const offerCatalogSchema = {
-  "@type": "OfferCatalog",
-  "@id": `${siteUrl}/#offers`,
-  name: "Leistungen von Leon Pllana IT-Solutions",
-  itemListElement: [
-    "Digitalisierungsberatung",
-    "Prozessanalyse und Prozessoptimierung",
-    "IT-Strategie und technische Unternehmensberatung",
-    "Microsoft 365 und Digital Workplace",
-    "Cloud, IT-Infrastruktur und Cyber Security",
-    "Backup und Monitoring",
-    "Softwareentwicklung und API-Integration",
-    "KI und Automatisierung im Unternehmen",
-    "IT-Projektleitung und IT-Outsourcing",
-  ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-};
-
-const serviceSchema = {
-  "@type": "Service",
-  "@id": `${siteUrl}/#service`,
-  name: "Strategische Digitalisierung und IT-Beratung für B2B-Unternehmen",
-  serviceType: "Digitalisierungsberatung, IT-Strategie, Prozessoptimierung, Automatisierung und technische Unternehmensberatung",
-  provider: { "@id": `${siteUrl}/#organization` },
-  hasOfferCatalog: { "@id": `${siteUrl}/#offers` },
-  areaServed: ["Deutschland", "Bayern", "München", "Fürstenfeldbruck", "Österreich", "Schweiz", "Europa"],
-  audience: {
-    "@type": "BusinessAudience",
-    audienceType: "B2B-Unternehmen, Mittelstand, Startups, Familienunternehmen, Dienstleister, Produktion, Kanzleien, Agenturen und Unternehmensgruppen",
-  },
-  description:
-    "Leon Pllana IT-Solutions analysiert Unternehmen, versteht Prozesse, identifiziert Ineffizienzen und entwickelt darauf aufbauend passende technologische Lösungen. Die Leistung richtet sich ausschließlich an B2B-Kunden.",
-};
-
-const faqSchema = {
-  "@type": "FAQPage",
-  "@id": `${siteUrl}/#faq`,
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Was macht Leon Pllana IT-Solutions?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Leon Pllana IT-Solutions ist ein strategischer Digitalisierungspartner für B2B-Unternehmen. Das Unternehmen analysiert Prozesse, erkennt Ineffizienzen und entwickelt nachhaltige digitale Lösungen mit IT, Cloud, Automatisierung, Softwareentwicklung, Cyber Security und KI.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Ist Leon Pllana IT-Solutions ein klassischer IT-Dienstleister?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Nein. IT ist das Werkzeug, nicht der Ausgangspunkt. Zuerst werden Unternehmen, Prozesse und Ziele verstanden. Erst danach wird entschieden, welche Technologie eingesetzt wird.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Warum folgt Technologie dem Prozess?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Weil neue Software einen schlechten Prozess nicht automatisch verbessert. Erst wenn Abläufe, Entscheidungen und Verantwortlichkeiten verstanden sind, kann Technologie nachhaltigen Mehrwert schaffen.",
-      },
-    },
-  ],
-};
-
-const webPageSchema = {
-  "@type": "WebPage",
-  "@id": `${siteUrl}/#webpage`,
-  url: siteUrl,
-  name: "Leon Pllana IT-Solutions | Strategischer Digitalisierungspartner",
-  headline: "Innovation in every Step.",
-  description: businessDescription,
-  inLanguage: ["de-DE", "en", "sq"],
-  about: { "@id": `${siteUrl}/#organization` },
-  mainEntity: { "@id": `${siteUrl}/#service` },
-  primaryImageOfPage: `${siteUrl}/og-image.png`,
-  reviewedBy: { "@id": founderId },
-  speakable: {
-    "@type": "SpeakableSpecification",
-    cssSelector: ["h1", "#aeo-summary", "#ai-seo"],
-  },
-};
-
 const structuredData = {
   "@context": "https://schema.org",
-  "@graph": [personSchema, organizationSchema, offerCatalogSchema, serviceSchema, faqSchema, webPageSchema],
+  "@graph": [personSchema, organizationSchema],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

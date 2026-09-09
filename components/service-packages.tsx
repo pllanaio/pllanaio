@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/button";
 import { useLocale } from "@/components/locale-provider";
 import { useOfferSelection } from "@/components/offer-selection-provider";
@@ -9,6 +10,9 @@ import { additionalHourlyRate, portfolioCopy, servicePackages } from "@/lib/serv
 import { projectCopy, projectOffers } from "@/lib/project-offers";
 import { selectionCopy, type OfferMode } from "@/lib/offer-selection-copy";
 import type { OfferId } from "@/lib/offer-selection";
+import { serviceLinks } from "@/lib/services/catalog";
+import { servicesUiCopy } from "@/lib/services/ui-copy";
+import type { ServicePackageId } from "@/lib/services/types";
 
 const careGroups = {
   web: ["web-care", "website-setup"],
@@ -24,7 +28,13 @@ function goToContactForm() {
   }
 }
 
-function CareCard({ service }: { service: (typeof servicePackages)[number] }) {
+function ServiceDetailLink({ packageId }: { packageId: ServicePackageId }) {
+  const { locale } = useLocale();
+  const service = serviceLinks.find((item) => item.packageId === packageId)!;
+  return <Link href={service.href} className="mt-5 inline-flex min-h-11 items-center text-sm font-medium underline underline-offset-4" aria-label={`${service.name}: ${servicesUiCopy[locale].details}`}>{servicesUiCopy[locale].details} <span aria-hidden="true" className="ml-2">→</span></Link>;
+}
+
+function CareCard({ service, showDetailLink }: { service: (typeof servicePackages)[number]; showDetailLink: boolean }) {
   const { locale } = useLocale();
   const { selectedOffers, replaceGroup, sending } = useOfferSelection();
   const copy = portfolioCopy[locale];
@@ -94,11 +104,12 @@ function CareCard({ service }: { service: (typeof servicePackages)[number] }) {
           <p className="mt-2 leading-7 text-muted-foreground">{item.exclusions}</p>
         </details>
       </>}
+      {showDetailLink && <ServiceDetailLink packageId={service.id} />}
     </article>
   );
 }
 
-function IndividualCard() {
+function IndividualCard({ showDetailLink }: { showDetailLink: boolean }) {
   const { locale } = useLocale();
   const { selectedOffers, replaceGroup, sending } = useOfferSelection();
   const choice = selectionCopy[locale];
@@ -113,27 +124,23 @@ function IndividualCard() {
       <Button type="button" size="lg" disabled={sending} className="mt-6 w-full px-3" onClick={() => { replaceGroup(["individual-care"], ["individual-care"]); goToContactForm(); }} aria-label={`Individual Care: ${inRequest ? choice.update : choice.select}`}>{inRequest ? choice.update : choice.select}</Button>
       {inRequest && <p className="mt-2 text-center text-sm text-muted-foreground">{choice.selected}</p>}
       <ul className="mt-7 list-disc space-y-3 border-t border-border pl-5 pt-5 leading-7 text-muted-foreground">{choice.individualFeatures.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+      {showDetailLink && <ServiceDetailLink packageId="individual" />}
     </article>
   );
 }
 
-export function ServicePackages() {
-  const { locale } = useLocale();
+export function ServicePackageCard({ packageId, showDetailLink = true }: { packageId: ServicePackageId; showDetailLink?: boolean }) {
   const { selectedOffers } = useOfferSelection();
+  if (packageId === "individual") return <IndividualCard showDetailLink={showDetailLink} />;
+  const service = servicePackages.find((item) => item.id === packageId)!;
+  const selectionKey = selectedOffers.filter((id) => (careGroups[packageId] as readonly OfferId[]).includes(id)).join(",");
+  return <CareCard key={`${packageId}:${selectionKey}`} service={service} showDetailLink={showDetailLink} />;
+}
+
+export function ServiceTerms() {
+  const { locale } = useLocale();
   const copy = portfolioCopy[locale];
-
-  return (
-    <Section id="pakete" className="scroll-mt-20 border-y border-border bg-muted/30">
-      <SectionEyebrow>{copy.eyebrow}</SectionEyebrow>
-      <SectionTitle>{copy.title}</SectionTitle>
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
-
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">{selectionCopy[locale].requestNote}</p>
-      <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
-        {servicePackages.map((service) => <CareCard key={`${service.id}:${selectedOffers.filter((id) => (careGroups[service.id] as readonly OfferId[]).includes(id)).join(",")}`} service={service} />)}
-        <IndividualCard />
-      </div>
-
+  return <>
       <div className="mt-10 grid gap-8 border-b border-border pb-10 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <h3 className="text-xl font-semibold">{copy.budgetTitle}</h3>
@@ -145,7 +152,6 @@ export function ServicePackages() {
           <p className="mt-3 leading-7 text-muted-foreground">{copy.additionalText}</p>
         </div>
       </div>
-
       <h3 className="mt-10 text-2xl font-semibold">{copy.conditionsTitle}</h3>
       <div className="mt-6 grid gap-x-10 gap-y-7 md:grid-cols-2">
         {copy.conditions.map((condition) => (
@@ -155,6 +161,24 @@ export function ServicePackages() {
           </div>
         ))}
       </div>
+  </>;
+}
+
+export function ServicePackages() {
+  const { locale } = useLocale();
+  const copy = portfolioCopy[locale];
+  return (
+    <Section id="pakete" className="scroll-mt-20 border-y border-border bg-muted/30">
+      <SectionEyebrow>{copy.eyebrow}</SectionEyebrow>
+      <SectionTitle>{copy.title}</SectionTitle>
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
+      <Link href="/leistungen" className="mt-5 inline-flex min-h-11 items-center font-medium underline underline-offset-4">{servicesUiCopy[locale].overview} <span aria-hidden="true" className="ml-2">→</span></Link>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">{selectionCopy[locale].requestNote}</p>
+      <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
+        {serviceLinks.map((service) => <ServicePackageCard key={service.slug} packageId={service.packageId} />)}
+      </div>
+      <ServiceTerms />
+
     </Section>
   );
 }

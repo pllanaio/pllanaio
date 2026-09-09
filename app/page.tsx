@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { homeStructuredData } from "@/lib/home-structured-data";
 import { ArrowRight, Check, Instagram, Linkedin, MessageCircle, Music2 } from "lucide-react";
 import { Button } from "@/components/button";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { FadeIn } from "@/components/motion";
 import { PartnerLogoMarquee } from "@/components/partner-logo-marquee";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { ServicePackages } from "@/components/service-packages";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { Section, SectionEyebrow, SectionTitle } from "@/components/ui/section";
 import { useLocale } from "@/components/locale-provider";
-import { contactEmail, siteNav, socialLinks } from "@/lib/site-content";
+import { contactEmail, socialLinks } from "@/lib/site-content";
 
 const localizedContent = {
   de: {
@@ -172,19 +172,6 @@ const localizedContent = {
   },
 };
 
-function Header() {
-  const { t } = useLocale();
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link href="#" className="flex items-center gap-3 text-sm font-semibold tracking-[-0.02em]"><Image src="/logo.png" alt="Leon Pllana IT-Solutions Logo" width={32} height={32} className="h-8 w-8 rounded-xl" priority /><span>Leon Pllana IT-Solutions</span></Link>
-        <nav className="hidden items-center gap-5 xl:flex" aria-label="Hauptnavigation">{siteNav.map((item, index) => <Link key={item.href} href={item.href} className="text-sm text-muted-foreground transition hover:text-foreground">{t.nav[index]}</Link>)}</nav>
-        <div className="flex items-center gap-2"><div className="hidden md:block"><LanguageSwitcher /></div><div className="hidden md:block"><ThemeToggle /></div><Button asChild size="sm"><Link href="#kontakt">{t.headerCta}</Link></Button></div>
-      </div>
-    </header>
-  );
-}
-
 function SignalNode({ className, label, value }: { className?: string; label: string; value: string }) {
   return <div className={`absolute rounded-2xl border border-border/80 bg-background/80 p-4 shadow-premium backdrop-blur-xl ${className}`}><p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">{label}</p><p className="mt-2 text-sm font-medium tracking-[-0.02em] text-foreground">{value}</p></div>;
 }
@@ -197,7 +184,7 @@ function HeroGraphic() {
 
 function Hero() {
   const { t } = useLocale();
-  return <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24"><div className="gradient-grid absolute inset-0 -z-10 opacity-50" /><div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" /><div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]"><FadeIn><div className="relative z-10"><div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div><h1 className="max-w-5xl text-6xl font-semibold tracking-[-0.075em] sm:text-7xl lg:text-8xl">{t.heroTitle}</h1><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p><div className="mt-10 flex flex-col gap-3 sm:flex-row"><Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link href="#pakete">{t.heroSecondary}</Link></Button></div><div className="mt-12 grid max-w-2xl grid-cols-3 gap-3 border-t border-border pt-6 text-sm text-muted-foreground">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div></div></FadeIn><FadeIn delay={0.15}><HeroGraphic /></FadeIn></div></section>;
+  return <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24"><div className="gradient-grid absolute inset-0 -z-10 opacity-50" /><div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" /><div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]"><FadeIn><div className="relative z-10"><div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div><h1 className="max-w-5xl text-6xl font-semibold tracking-[-0.075em] sm:text-7xl lg:text-8xl">{t.heroTitle}</h1><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p><div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link href="#pakete">{t.heroSecondary}</Link></Button><Button asChild size="lg"><Link href="/website-check">{t.websiteCheck.hero} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div><div className="mt-12 grid max-w-2xl grid-cols-3 gap-3 border-t border-border pt-6 text-sm text-muted-foreground">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div></div></FadeIn><FadeIn delay={0.15}><HeroGraphic /></FadeIn></div></section>;
 }
 
 function AeoSummary() {
@@ -225,8 +212,6 @@ function ContactSection() {
   return <section id="kontakt" className="px-6 py-28"><div className="mx-auto max-w-5xl text-center"><FadeIn><SectionEyebrow>{t.contactEyebrow}</SectionEyebrow><h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{t.contactTitle}</h2><p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.contactText}</p><div className="mt-12 flex justify-center"><Button asChild size="lg"><a href={`mailto:${contactEmail}`} className="min-w-64 justify-center">{t.contactCta} <ArrowRight className="ml-2 h-4 w-4" /></a></Button></div><div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8"><p className="text-sm text-muted-foreground">{t.socialHint}</p><div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg" variant="outline"><a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.instagram} target="_blank" rel="noreferrer"><Instagram className="mr-2 h-4 w-4" /> Instagram</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.tiktok} target="_blank" rel="noreferrer"><Music2 className="mr-2 h-4 w-4" /> TikTok</a></Button></div></div></FadeIn></div></section>;
 }
 
-function Footer() { const { t } = useLocale(); return <footer className="border-t border-border px-6 py-10"><div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between"><div><p>© {new Date().getFullYear()} Leon Pllana IT-Solutions</p><p className="mt-1">{t.footerClaim}</p></div><nav className="flex flex-wrap gap-4" aria-label="Rechtliche Links"><Link href="/impressum" className="transition hover:text-foreground">{t.legal.imprint}</Link><Link href="/datenschutz" className="transition hover:text-foreground">{t.legal.privacy}</Link><Link href="/agb" className="transition hover:text-foreground">{t.legal.terms}</Link><Link href="/cookie-richtlinie" className="transition hover:text-foreground">{t.legal.cookies}</Link></nav></div></footer>; }
-
 export default function Home() {
-  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><Header /><Hero /><AeoSummary /><ServicePackages /><PartnerSection /><ThinkingSection /><MethodologySection /><CapabilitiesSection /><CaseStudiesSection /><BrandPromiseSection /><ExpertiseSection /><FAQSection /><ContactSection /><Footer /></main>;
+  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") }} /><SiteHeader /><Hero /><AeoSummary /><ServicePackages /><PartnerSection /><ThinkingSection /><MethodologySection /><CapabilitiesSection /><CaseStudiesSection /><BrandPromiseSection /><ExpertiseSection /><FAQSection /><ContactSection /><SiteFooter /></main>;
 }

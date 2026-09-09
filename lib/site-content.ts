@@ -26,12 +26,13 @@ export const partnerCompanies: PartnerCompany[] = [
 ];
 
 export const siteNav = [
-  { label: "Denkweise", href: "#denkweise" },
-  { label: "Vorgehen", href: "#vorgehen" },
-  { label: "Kompetenzen", href: "#kompetenzen" },
-  { label: "Pakete", href: "#pakete" },
-  { label: "Cases", href: "#cases" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Denkweise", href: "/#denkweise" },
+  { label: "Vorgehen", href: "/#vorgehen" },
+  { label: "Kompetenzen", href: "/#kompetenzen" },
+  { label: "Leistungen", href: "/leistungen" },
+  { label: "Pakete", href: "/#pakete" },
+  { label: "Cases", href: "/#cases" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export const painPoints = [

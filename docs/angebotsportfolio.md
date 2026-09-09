@@ -1,10 +1,12 @@
 # Angebotsportfolio für Projekte und laufende Betreuung
 
-Status: Die einmaligen Pauschalen von 1.500 € für die Website-Erstellung und 1.000 €
-für die Microsoft-365-Einrichtung sind von Leon festgelegt. Individual Care wird
-auf Anfrage angeboten. Die monatlichen Care-Preise und deren Leistungsgrenzen bleiben
-ein Entwurf zur Abstimmung. Die Umsetzung liegt auf einem Entwurfsbranch. Den jeweiligen
-Projektumfang, Servicefenster und Vertragsbedingungen vor Beauftragung festhalten.
+Status: Das Angebotsportfolio ist auf `main` integriert und veröffentlicht; Leon hat
+die Funktion der Auswahl und Anfrage bestätigt. Die einmaligen Pauschalen von 1.500 €
+für die Website-Erstellung und 1.000 € für die Microsoft-365-Einrichtung sind von Leon
+festgelegt. Individual Care wird auf Anfrage angeboten. Die monatlichen Care-Preise
+gelten als Einstiegspreise für den beschriebenen Referenzumfang. Den jeweiligen
+Projektumfang, Servicefenster und Vertragsbedingungen vor Beauftragung schriftlich
+mit dem Kunden festhalten.
 
 ## Kunden und Leistungen
 
@@ -135,6 +137,41 @@ Das Absenden übermittelt eine unverbindliche Leistungsanfrage samt Auswahl übe
 bestehende Kontakt-API per E-Mail. Es löst keinen Kauf, keine Zahlung und keinen
 Betreuungsvertrag aus. Das verbindliche Angebot folgt nach der Klärung des Umfangs.
 
+## Leistungsübersicht und Detailseiten
+
+Die Leistungsübersicht unter `/leistungen` stellt die vier Angebote nebeneinander
+vor und verlinkt auf jeweils eine eigene Detailseite. Der Navigationspunkt
+**Leistungen** ist über die gemeinsame Desktop- und Mobilnavigation erreichbar.
+Auch die Angebotskarten auf der Startseite enthalten direkte Links zur passenden
+Detailseite; der Paketbereich mit seiner bestehenden Auswahl bleibt erhalten.
+
+| Leistung | Detailseite | Inhaltlicher Schwerpunkt |
+| --- | --- | --- |
+| Web Care | `/leistungen/web-care` | Website-Erstellung von der Domain bis zum Go-live, technische Wartung und Inhaltspflege |
+| Workplace Care | `/leistungen/workplace-care` | Microsoft 365, Entra ID und Intune einrichten und laufend betreuen |
+| Cloud & App Care | `/leistungen/cloud-app-care` | Linux- und Cloud-Server, Unternehmensanwendungen und überprüfte Datensicherungen |
+| Individual Care | `/leistungen/individual-care` | Individualsoftware, Shopify-Shops und weitere individuelle Projekte samt optionaler Pflege |
+
+Jede Detailseite beschreibt typische Ausgangssituationen, den konkreten Nutzen,
+Leistungen, Projektablauf und häufige Fragen. Sie enthält die passende Paketauswahl
+mit getrennten Einmal- und Monatskosten sowie ein eigenes Kontaktformular auf
+derselben Seite. Einrichtung und Betreuung bleiben bei Web Care und Workplace Care
+unabhängig kombinierbar; Individual Care bleibt eine Anfrage ohne festen Preis.
+Die Auswahlaktionen führen zum jeweiligen Kontaktformular. Alle Formulare nutzen
+dieselbe Auswahlzusammenfassung und Kontakt-API wie die Startseite.
+
+Beim Wechsel zwischen Startseite, Übersicht und Detailseiten über die internen
+Links bleibt die bereits gewählte Auswahl erhalten. Damit können Kunden Leistungen
+auf mehreren Seiten kennenlernen und in einer Anfrage zusammenfassen. Die Auswahl
+liegt im gemeinsamen Seitenzustand; eine dauerhafte Speicherung nach Neuladen oder
+Schließen des Browsers ist damit nicht zugesagt.
+
+Die Übersicht und jede Detailseite erhalten eigene serverseitige Seitentitel,
+Beschreibungen und kanonische URLs; alle fünf Routen sind in der Sitemap enthalten.
+Die deutschen Inhalte werden bereits serverseitig ausgegeben. Englisch und Albanisch
+sind über die bestehende Sprachauswahl innerhalb derselben Seiten verfügbar. Es
+werden keine gesonderten übersetzten kanonischen URLs oder Sprachrouten beworben.
+
 ## Wiederverwendbare Angebotsstruktur
 
 Für jeden Kunden ein eigenes Angebot mit folgenden Feldern erstellen:
@@ -178,9 +215,19 @@ Einrichtungsoptionen werden in die zugehörigen Care-Karten eingebunden. Individ
 ist die vierte Karte derselben Auswahloberfläche. Es gibt keine getrennte
 Projektkartenreihe vor den monatlichen Angeboten.
 
-Navigation und Hauptaufruf führen zum Paketbereich; die Auswahlaktionen übergeben
-die gewählten Leistungen an das bestehende Kontaktformular. `lib/offer-selection.ts`
-fasst die Auswahl und ihre getrennten einmaligen/monatlichen Summen zusammen.
+Die Navigation führt unter **Pakete** zum Paketbereich und unter **Leistungen** zur
+Leistungsübersicht. `components/site-header.tsx` stellt die gemeinsame Navigation
+für Startseite und Leistungsseiten bereit. Routen und Zuordnungen der Leistungen
+liegen in `lib/services/catalog.ts`; die ausführlichen Texte und lokalen
+Darstellungen werden in `lib/services/` gepflegt. Die Übersicht wird über
+`app/leistungen/page.tsx`, die Detailseiten über `app/leistungen/[slug]/page.tsx`
+bereitgestellt. Metadaten und Sitemap bei Änderungen an Routen oder Inhalten
+entsprechend mitpflegen.
+
+Die Auswahlaktionen übergeben die gewählten Leistungen an das Kontaktformular auf
+der jeweiligen Seite. `components/offer-selection-provider.tsx` hält die gemeinsame
+Auswahl über interne Seitenwechsel hinweg. `lib/offer-selection.ts` fasst die
+Auswahl und ihre getrennten einmaligen/monatlichen Summen zusammen.
 `app/api/contact/route.ts` prüft die ausgewählten Leistungs-IDs und lehnt ungültige
 IDs ab. Preise und Summen für die E-Mail werden serverseitig aus den maßgeblichen
 Leistungsdaten ermittelt; übermittelte Browserpreise sind keine Preisquelle.
