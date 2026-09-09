@@ -22,6 +22,7 @@ type PortfolioCopy = {
   eyebrow: string;
   title: string;
   intro: string;
+  careTitle: string;
   from: string;
   monthly: string;
   net: string;
@@ -43,9 +44,10 @@ type PortfolioCopy = {
 
 export const portfolioCopy = {
   de: {
-    eyebrow: "Betreuung für KMU · München und 50 km Umland",
-    title: "Drei Pakete. Passend zu Ihren Systemen.",
-    intro: "Ihre Website aktuell halten, digitale Arbeitsplätze betreuen oder Unternehmensanwendungen betreiben: Wählen Sie die passende Betreuung. Alle Pakete sind einzeln buchbar und miteinander kombinierbar.",
+    eyebrow: "Leistungen für KMU · München und 50 km Umland",
+    title: "Projekte umsetzen. Systeme betreuen.",
+    intro: "Eine neue Website, Microsoft 365, individuelle Software oder laufende Wartung: Wählen Sie die passende Leistung. Einmalige Projekte und monatliche Betreuung sind einzeln buchbar und miteinander kombinierbar.",
+    careTitle: "Laufende Betreuung",
     from: "ab", monthly: "/ Monat", net: "netto · Umsatzsteuer gemäß Angebot",
     timeLabel: "Gesamte Servicezeit", hours: "Std. / Monat",
     scopeLabel: "Referenzumfang", details: "Pflege und Leistungsgrenzen", separately: "Separat vereinbaren",
@@ -86,9 +88,10 @@ export const portfolioCopy = {
     },
   },
   en: {
-    eyebrow: "Support for SMEs · Munich and within 50 km",
-    title: "Three packages. Built around your systems.",
-    intro: "Keep your website current, manage digital workplaces or maintain business applications. Choose the support you need. Every package is available separately and can be combined with the others.",
+    eyebrow: "Services for SMEs · Munich and within 50 km",
+    title: "Deliver projects. Maintain systems.",
+    intro: "A new website, Microsoft 365, custom software or ongoing maintenance: choose the service you need. One-off projects and monthly support are available separately and can be combined.",
+    careTitle: "Ongoing support",
     from: "from", monthly: "/ month", net: "net · VAT as stated in your quote",
     timeLabel: "Total service time", hours: "hours / month",
     scopeLabel: "Reference scope", details: "Maintenance and scope", separately: "Agreed separately",
@@ -126,9 +129,10 @@ export const portfolioCopy = {
     },
   },
   sq: {
-    eyebrow: "Mbështetje për NVM · Mynih dhe 50 km përreth",
-    title: "Tri paketa sipas sistemeve tuaja.",
-    intro: "Mbani faqen tuaj të përditësuar, administroni vendet digjitale të punës ose mirëmbani aplikacionet e biznesit. Zgjidhni mbështetjen që ju nevojitet. Çdo paketë mund të blihet veçmas ose të kombinohet me të tjerat.",
+    eyebrow: "Shërbime për NVM · Mynih dhe 50 km përreth",
+    title: "Realizim projektesh dhe mirëmbajtje sistemesh.",
+    intro: "Një faqe e re, Microsoft 365, softuer i personalizuar apo mirëmbajtje e vazhdueshme: zgjidhni shërbimin e duhur. Projektet e njëhershme dhe mbështetja mujore mund të blihen veçmas ose të kombinohen.",
+    careTitle: "Mbështetje e vazhdueshme",
     from: "nga", monthly: "/ muaj", net: "neto · TVSH sipas ofertës",
     timeLabel: "Koha totale e shërbimit", hours: "orë / muaj",
     scopeLabel: "Fusha referuese", details: "Mirëmbajtja dhe kufijtë", separately: "Dakordohen veçmas",

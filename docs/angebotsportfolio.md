@@ -1,15 +1,46 @@
-# Angebotsportfolio für laufende Betreuung
+# Angebotsportfolio für Projekte und laufende Betreuung
 
-Status: Preis- und Leistungsentwurf zur Abstimmung. Die Umsetzung liegt auf einem
-Entwurfsbranch. Preise, Servicefenster und Vertragsbedingungen vor Veröffentlichung
-abschließend festlegen. Die Vorlage ersetzt keine kundenspezifische Leistungsvereinbarung.
+Status: Die einmaligen Pauschalen von 1.500 € für die Website-Erstellung und 1.000 €
+für die Microsoft-365-Einrichtung sind von Leon festgelegt. Individualsoftware wird
+auf Anfrage angeboten. Die monatlichen Care-Preise und deren Leistungsgrenzen bleiben
+ein Entwurf zur Abstimmung. Die Umsetzung liegt auf einem Entwurfsbranch. Den jeweiligen
+Projektumfang, Servicefenster und Vertragsbedingungen vor Beauftragung festhalten.
 
 ## Kunden und Leistungen
 
 Leon Pllana IT-Solutions betreut KMU in München und 50 km Umland bei Websites,
 Microsoft 365 mit Intune sowie Unternehmensanwendungen auf Linux- und Cloud-Servern.
-Die drei Fachpakete sind einzeln buchbar und kombinierbar. Größere Umgebungen
+Einmalige Projekte und die drei monatlichen Fachpakete sind einzeln buchbar und
+kombinierbar. Größere Betreuungsumgebungen
 erhalten ein Angebot mit passenden Mengen und einem ausreichend großen Zeitbudget.
+
+## Einmalige Projekte
+
+| Projektleistung | Einmaliger Preis netto | Enthaltene Leistung |
+| --- | ---: | --- |
+| Website-Erstellung | **1.500 € pauschal** | Von der Abstimmung und Domainregistrierung über DNS-/Hosting-Anbindung und responsive Umsetzung der vereinbarten Seiten und Inhalte bis zu Funktionstests, Go-live und Übergabe |
+| Microsoft-365-Einrichtung | **1.000 € pauschal**, exklusive Lizenzkosten | Neuer Tenant, Anlage der vereinbarten Benutzer, Entra-ID-Grundstruktur und grundlegende Zugriffsrichtlinien, Intune-Grundkonfiguration, vereinbarte Geräte-/Richtlinienkonfiguration, Funktionstest und dokumentierte Übergabe |
+| Individualsoftware | **Auf Anfrage** | Anforderungsaufnahme, Konzeption, Entwicklung der vereinbarten Anwendung und Schnittstellen, Tests, Dokumentation und Übergabe nach vereinbarten Abnahmekriterien |
+
+Die beiden Pauschalen sind Festpreise und werden nicht als „ab“-Preise dargestellt.
+Seitenzahl, Funktionen, Inhalte und Korrekturrunden der Website werden im Angebot
+vereinbart. Die Tätigkeit der Domainregistrierung ist enthalten; laufende Domain-
+und Hostinggebühren werden separat ausgewiesen.
+
+Für die Microsoft-365-Einrichtung werden Benutzerzahl, Gerätezahl, Geräteeinbindung,
+Richtlinien und gewünschte Konfiguration vor Projektbeginn schriftlich festgelegt.
+Die Referenzmengen des monatlichen Workplace-Care-Pakets definieren nicht automatisch
+den Einrichtungsumfang. Lizenzen sind ausgeschlossen; Datenmigrationen und besondere
+App-Paketierungen werden gesondert angeboten. Microsoft Entra ID ist das frühere
+Azure AD; ein lokaler Active-Directory-Domänendienst ist damit nicht automatisch
+beauftragt. Namensreferenz: [Microsoft Learn](https://learn.microsoft.com/en-us/entra/fundamentals/new-name).
+
+Bei Individualsoftware werden Preis, Umfang, Zeitplan, Mitwirkung und Abnahmekriterien
+im individuellen Angebot festgehalten. Hosting, Drittanbieterlizenzen und anschließende
+Wartung werden gesondert vereinbart. Die Projektbeauftragung schließt keinen
+monatlichen Betreuungsvertrag automatisch ein.
+
+## Monatliche Betreuung
 
 | Paket | Einstiegspreis netto je Monat | Gesamte Servicezeit | Referenzumfang |
 | --- | ---: | ---: | --- |
@@ -42,11 +73,12 @@ Ergebnis nach; ein vollständiger Notfall-Wiederanlauf ist separat zu planen.
 
 ## Einrichtung und Zusatzleistungen
 
-Erstaufnahme, neue Websites, Relaunches, Microsoft-365- und Intune-Einrichtungen,
-Migrationen, neue Softwareinstallationen, App-Paketierungen, Backup-Einrichtung und
-die Bereinigung bestehender Probleme werden als eigene einmalige Leistungen angeboten.
-Neue Entwicklungen, Shops, individuelle Webanwendungen, größere Designänderungen,
-umfangreiche Richtlinienänderungen und größere Versionssprünge sind eigene Projekte.
+Website-Erstellung und Microsoft-365-Einrichtung werden zu den oben genannten
+Pauschalen angeboten, Individualsoftware auf Anfrage. Erstaufnahme, Migrationen,
+weitere Softwareinstallationen, App-Paketierungen, Backup-Einrichtung und die
+Bereinigung bestehender Probleme werden separat kalkuliert. Relaunches, Shops,
+größere Designänderungen, umfangreiche Richtlinienänderungen und größere
+Versionssprünge werden im jeweiligen Projektumfang ausdrücklich vereinbart.
 
 Zusatzleistungen: **100 € netto je Stunde**, nach vorheriger Freigabe,
 in **15-Minuten-Schritten zu 25 € netto**. Ist Mehrbedarf absehbar, wird er vor
@@ -62,7 +94,8 @@ werden vorab vereinbart. Umsatzsteuer gemäß dem konkreten Angebot.
 Für jeden Kunden ein eigenes Angebot mit folgenden Feldern erstellen:
 
 1. Angebotsnummer, Datum, Kunde, Ansprechpartner, Gültigkeit und konkrete Ziele.
-2. Gewählte Pakete, vereinbarte Mengen, Monatsbeträge und gesamtes Zeitbudget.
+2. Gewählte Einmalprojekte mit Pauschale oder individuellem Angebot; getrennt davon
+   monatliche Pakete mit vereinbarten Mengen, Monatsbeträgen und gesamtem Zeitbudget.
 3. Systemverzeichnis mit eindeutiger Zuordnung der betreuten Systeme.
 4. Aufgabenliste mit Häufigkeit, Zuständigkeit und Leistungsnachweis; Aufwand gegen
    das gesamte Budget prüfen, einschließlich Monaten mit Wiederherstellungstest.
@@ -93,6 +126,9 @@ Lösungszeit getrennt behandeln.
 Numerische Paketwerte liegen zentral in `lib/service-packages.ts`. Derselbe Datensatz
 liefert die deutsch-, englisch- und albanischsprachige Darstellung. Die Komponente
 `components/service-packages.tsx` wird auf der Startseite unter `#pakete` eingebunden.
+Die einmaligen Projektpreise und Texte liegen in `lib/project-offers.ts` und werden
+durch `components/project-offers.tsx` innerhalb desselben Bereichs unter `#projekte`
+vor den monatlichen Paketen angezeigt.
 Navigation und Hauptaufruf führen zu diesem Bereich; die Paketaktionen führen zum
 bestehenden Kontaktformular. Bei Preisänderungen diese Übersicht und bestehende
 Angebotsvorlagen mit aktualisieren. Kundendaten und interne Kalkulation gehören nicht

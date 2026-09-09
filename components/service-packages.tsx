@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/button";
 import { useLocale } from "@/components/locale-provider";
+import { ProjectOffers } from "@/components/project-offers";
 import { Section, SectionEyebrow, SectionTitle } from "@/components/ui/section";
 import { additionalHourlyRate, portfolioCopy, servicePackages } from "@/lib/service-packages";
 
@@ -17,13 +18,15 @@ export function ServicePackages() {
       <SectionTitle>{copy.title}</SectionTitle>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
 
-      <div className="mt-12 grid items-start gap-5 lg:grid-cols-3">
+      <ProjectOffers />
+      <h3 className="mt-16 text-3xl font-semibold tracking-tight">{copy.careTitle}</h3>
+      <div className="mt-8 grid items-start gap-5 lg:grid-cols-3">
         {servicePackages.map((service) => {
           const item = copy.packages[service.id];
           return (
             <article key={service.id} aria-labelledby={`package-${service.id}`} className="min-w-0 rounded-3xl border border-border bg-card p-6 shadow-premium sm:p-8">
               <p className="text-sm text-muted-foreground">{item.audience}</p>
-              <h3 id={`package-${service.id}`} className="mt-3 text-3xl font-semibold tracking-tight">{service.name}</h3>
+              <h4 id={`package-${service.id}`} className="mt-3 text-3xl font-semibold tracking-tight">{service.name}</h4>
               <p className="mt-4 min-h-20 leading-7 text-muted-foreground">{item.outcome}</p>
               <p className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <span className="text-sm text-muted-foreground">{copy.from}</span>
