@@ -29,6 +29,7 @@ export const siteNav = [
   { label: "Denkweise", href: "#denkweise" },
   { label: "Vorgehen", href: "#vorgehen" },
   { label: "Kompetenzen", href: "#kompetenzen" },
+  { label: "Pakete", href: "#pakete" },
   { label: "Cases", href: "#cases" },
   { label: "FAQ", href: "#faq" },
 ];
