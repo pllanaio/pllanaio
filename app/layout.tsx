@@ -4,6 +4,7 @@ import { Analytics } from "@/components/analytics";
 import { CookieBanner } from "@/components/cookie-banner";
 import { GlobalPreferences } from "@/components/global-preferences";
 import { LocaleProvider } from "@/components/locale-provider";
+import { OfferSelectionProvider } from "@/components/offer-selection-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GTM_ID } from "@/lib/tracking";
 import "./globals.css";
@@ -259,7 +260,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LocaleProvider>
-            {children}
+            <OfferSelectionProvider>{children}</OfferSelectionProvider>
             <GlobalPreferences />
             <CookieBanner />
             <Analytics />

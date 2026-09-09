@@ -3,6 +3,10 @@
 import { FormEvent, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
+import { useOfferSelection } from "@/components/offer-selection-provider";
+import { OfferSelectionSummary } from "@/components/offer-selection-summary";
+import { isOfferMessageValid } from "@/lib/offer-selection";
+import { selectionCopy } from "@/lib/offer-selection-copy";
 
 type FormValues = {
   firstName: string;
@@ -96,10 +100,15 @@ const copy = {
 
 export function ContactForm() {
   const { locale } = useLocale();
+  const { selectedOffers, removeOffers, sending, setSending } = useOfferSelection();
   const t = copy[locale];
+  const messageRequired = selectedOffers.length === 0 || selectedOffers.includes("individual-care");
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  // A newly selected service starts a new enquiry after the previous one was sent.
+  if (status === "success" && selectedOffers.length > 0) setStatus("idle");
 
   const validate = () => {
     const next: FormErrors = {};
@@ -113,48 +122,56 @@ export function ContactForm() {
     else if (!phonePattern.test(values.phone.trim())) next.phone = t.phoneInvalid;
     if (!values.company.trim()) next.company = t.required;
     else if (!companyPattern.test(values.company.trim())) next.company = t.companyInvalid;
-    if (!values.message.trim()) next.message = t.required;
-    else if (values.message.trim().length < 10 || values.message.trim().length > 2000) next.message = t.messageInvalid;
+    if (!isOfferMessageValid(values.message, selectedOffers)) next.message = values.message.trim() ? t.messageInvalid : t.required;
     setErrors(next);
     return Object.keys(next).length === 0;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (sending) return;
     setStatus("idle");
     if (!validate()) return;
     setStatus("sending");
+    setSending(true);
+    const submittedOffers = [...selectedOffers];
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, selectedOffers: submittedOffers }),
       });
       if (!response.ok) throw new Error("Request failed");
       setValues(initialValues);
       setErrors({});
+      removeOffers(submittedOffers);
       setStatus("success");
     } catch {
       setStatus("error");
+    } finally {
+      setSending(false);
     }
   };
 
   const fieldClass = "mt-2 w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-foreground focus:ring-2 focus:ring-foreground/10";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="mx-auto max-w-3xl rounded-[2rem] border border-border bg-card p-6 text-left shadow-premium sm:p-10">
+    <form id="angebotsanfrage" tabIndex={-1} aria-labelledby="contact-form-title" onSubmit={handleSubmit} onChange={() => { if (status !== "idle" && status !== "sending") setStatus("idle"); }} noValidate className="mx-auto max-w-3xl scroll-mt-24 rounded-[2rem] border border-border bg-card p-6 text-left shadow-premium focus:outline-none sm:p-10">
       <div className="text-center">
-        <h3 className="text-3xl font-semibold tracking-[-0.04em]">{t.title}</h3>
+        <h3 id="contact-form-title" className="text-3xl font-semibold tracking-[-0.04em]">{t.title}</h3>
         <p className="mx-auto mt-3 max-w-xl leading-7 text-muted-foreground">{t.intro}</p>
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <OfferSelectionSummary />
+
+      <fieldset disabled={sending} className="mt-8 grid gap-5 sm:grid-cols-2">
         {(["firstName", "lastName"] as const).map((name) => (
           <label key={name} className="text-sm font-medium">
             {t[name]}
             <input
               name={name}
+              required
               value={values[name]}
               onChange={(event) => setValues((current) => ({ ...current, [name]: event.target.value.replace(/[\d]/g, "") }))}
               autoComplete={name === "firstName" ? "given-name" : "family-name"}
@@ -168,28 +185,29 @@ export function ContactForm() {
 
         <label className="text-sm font-medium">
           {t.email}
-          <input name="email" type="email" inputMode="email" autoComplete="email" value={values.email} onChange={(event) => setValues((current) => ({ ...current, email: event.target.value }))} maxLength={254} aria-invalid={Boolean(errors.email)} className={fieldClass} />
+          <input name="email" required type="email" inputMode="email" autoComplete="email" value={values.email} onChange={(event) => setValues((current) => ({ ...current, email: event.target.value }))} maxLength={254} aria-invalid={Boolean(errors.email)} className={fieldClass} />
           {errors.email && <span className="mt-2 block text-sm text-red-600">{errors.email}</span>}
         </label>
 
         <label className="text-sm font-medium">
           {t.phone}
-          <input name="phone" type="tel" inputMode="tel" autoComplete="tel" value={values.phone} onChange={(event) => setValues((current) => ({ ...current, phone: event.target.value.replace(/(?!^\+)\D/g, "").replace(/\+(?=.+\+)/g, "") }))} maxLength={21} aria-invalid={Boolean(errors.phone)} className={fieldClass} />
+          <input name="phone" required type="tel" inputMode="tel" autoComplete="tel" value={values.phone} onChange={(event) => setValues((current) => ({ ...current, phone: event.target.value.replace(/(?!^\+)\D/g, "").replace(/\+(?=.+\+)/g, "") }))} maxLength={21} aria-invalid={Boolean(errors.phone)} className={fieldClass} />
           {errors.phone && <span className="mt-2 block text-sm text-red-600">{errors.phone}</span>}
         </label>
 
         <label className="text-sm font-medium sm:col-span-2">
           {t.company}
-          <input name="company" autoComplete="organization" value={values.company} onChange={(event) => setValues((current) => ({ ...current, company: event.target.value }))} maxLength={120} aria-invalid={Boolean(errors.company)} className={fieldClass} />
+          <input name="company" required autoComplete="organization" value={values.company} onChange={(event) => setValues((current) => ({ ...current, company: event.target.value }))} maxLength={120} aria-invalid={Boolean(errors.company)} className={fieldClass} />
           {errors.company && <span className="mt-2 block text-sm text-red-600">{errors.company}</span>}
         </label>
 
         <label className="text-sm font-medium sm:col-span-2">
           {t.message}
-          <textarea name="message" rows={6} value={values.message} onChange={(event) => setValues((current) => ({ ...current, message: event.target.value }))} maxLength={2000} aria-invalid={Boolean(errors.message)} className={`${fieldClass} resize-y`} />
+          {selectedOffers.length > 0 && <span id="message-hint" className="mt-2 block text-sm font-normal leading-6 text-muted-foreground">{messageRequired ? selectionCopy[locale].messageIndividual : selectionCopy[locale].messageOptional}</span>}
+          <textarea name="message" required={messageRequired} aria-describedby={selectedOffers.length > 0 ? "message-hint" : undefined} rows={6} value={values.message} onChange={(event) => setValues((current) => ({ ...current, message: event.target.value }))} maxLength={2000} aria-invalid={Boolean(errors.message)} className={`${fieldClass} resize-y`} />
           <span className="mt-2 flex justify-between gap-4 text-sm text-muted-foreground"><span>{errors.message && <span className="text-red-600">{errors.message}</span>}</span><span>{values.message.length}/2000</span></span>
         </label>
-      </div>
+      </fieldset>
 
       <label className="hidden" aria-hidden="true">
         Website
