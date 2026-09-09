@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getServiceSitemapEntries } from "@/lib/services/seo";
 
 const siteUrl = "https://pllana.io";
 
@@ -24,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...getServiceSitemapEntries(),
     {
       url: `${siteUrl}/impressum`,
       lastModified,

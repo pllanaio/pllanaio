@@ -10,8 +10,10 @@ export const defaultLocale: Locale = "de";
 
 export const dictionary = {
   de: {
-    nav: ["Denkweise", "Vorgehen", "Kompetenzen", "Pakete", "Cases", "FAQ"],
+    nav: ["Denkweise", "Vorgehen", "Kompetenzen", "Leistungen", "Pakete", "Cases", "FAQ"],
+    navigation: { main: "Hauptnavigation", footer: "Weitere Seiten", open: "Menü öffnen", close: "Menü schließen", services: "Leistungen anzeigen", serviceList: "Leistungsseiten" },
     headerCta: "Gespräch starten",
+    websiteCheck: { hero: "Website kostenlos prüfen", footer: "Website-Check" },
     badge: "Strategische Digitalisierung · B2B · Prozess zuerst",
     heroTitle: "Innovation in every Step.",
     heroText: "Wir verkaufen keine IT. Wir analysieren Unternehmen, verstehen Prozesse und entwickeln digitale Systeme, die jeden Schritt klarer, effizienter und skalierbarer machen.",
@@ -56,8 +58,10 @@ export const dictionary = {
     },
   },
   en: {
-    nav: ["Mindset", "Approach", "Capabilities", "Packages", "Cases", "FAQ"],
+    nav: ["Mindset", "Approach", "Capabilities", "Services", "Packages", "Cases", "FAQ"],
+    navigation: { main: "Main navigation", footer: "More pages", open: "Open menu", close: "Close menu", services: "Show services", serviceList: "Service pages" },
     headerCta: "Start a conversation",
+    websiteCheck: { hero: "Check your website for free", footer: "Website check" },
     badge: "Strategic Digital Transformation · B2B · Process first",
     heroTitle: "Innovation in every Step.",
     heroText: "We do not sell IT. We analyse companies, understand processes and build digital systems that make every step clearer, more efficient and more scalable.",
@@ -102,8 +106,10 @@ export const dictionary = {
     },
   },
   sq: {
-    nav: ["Mendësia", "Qasja", "Kompetencat", "Paketat", "Rastet", "FAQ"],
+    nav: ["Mendësia", "Qasja", "Kompetencat", "Shërbimet", "Paketat", "Rastet", "FAQ"],
+    navigation: { main: "Navigimi kryesor", footer: "Faqe të tjera", open: "Hap menynë", close: "Mbyll menynë", services: "Shfaq shërbimet", serviceList: "Faqet e shërbimeve" },
     headerCta: "Fillo bisedën",
+    websiteCheck: { hero: "Kontrolloni faqen falas", footer: "Kontrolli i faqes" },
     badge: "Transformim digjital strategjik · B2B · Procesi i pari",
     heroTitle: "Innovation in every Step.",
     heroText: "Ne nuk shesim IT. Ne analizojmë kompani, kuptojmë procese dhe ndërtojmë sisteme digjitale që e bëjnë çdo hap më të qartë, më efikas dhe më të shkallëzueshëm.",
