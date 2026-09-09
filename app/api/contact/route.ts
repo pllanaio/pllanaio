@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { getOfferSummary, isOfferMessageValid, parseOfferSelection } from "../../../lib/offer-selection";
 
 export const runtime = "nodejs";
 
@@ -19,17 +20,31 @@ const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => (
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+    }
+    const form = body as Record<string, unknown>;
 
-    const firstName = clean(body.firstName);
-    const lastName = clean(body.lastName);
-    const email = clean(body.email);
-    const phone = clean(body.phone);
-    const company = clean(body.company);
-    const message = clean(body.message);
-    const website = clean(body.website);
+    const firstName = clean(form.firstName);
+    const lastName = clean(form.lastName);
+    const email = clean(form.email);
+    const phone = clean(form.phone);
+    const company = clean(form.company);
+    const message = clean(form.message);
+    const website = clean(form.website);
 
     if (website) return NextResponse.json({ ok: true });
+
+    const selectedOffers = parseOfferSelection(form.selectedOffers);
+    if (selectedOffers === null) {
+      return NextResponse.json({ error: "Invalid offer selection" }, { status: 400 });
+    }
 
     const isValid =
       namePattern.test(firstName) &&
@@ -38,8 +53,8 @@ export async function POST(request: Request) {
       email.length <= 254 &&
       phonePattern.test(phone) &&
       companyPattern.test(company) &&
-      message.length >= 10 &&
-      message.length <= 2000;
+      (form.message === undefined || typeof form.message === "string") &&
+      isOfferMessageValid(message, selectedOffers);
 
     if (!isValid) {
       return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
@@ -69,14 +84,37 @@ export async function POST(request: Request) {
     });
 
     const fullName = `${firstName} ${lastName}`;
+    const summary = getOfferSummary(selectedOffers);
+    const currency = (amount: number) => new Intl.NumberFormat("de-DE", {
+      style: "currency", currency: "EUR", maximumFractionDigits: 0,
+    }).format(amount);
+    const selectionLines = summary.items.length ? [
+      "Ausgewählte Leistungen (unverbindliche Angebotsanfrage):",
+      ...summary.items.map((item) => `${item.name}: ${
+        item.onRequest ? "auf Anfrage, nicht in bezifferten Summen enthalten" :
+          item.once !== null ? `${currency(item.once)} einmalig netto` : `ab ${currency(item.monthly!)} monatlich netto`
+      }`),
+      "",
+      `Einmalig netto: ${summary.items.some((item) => item.once !== null) ? currency(summary.oneTimeTotal) :
+        summary.hasIndividual ? "auf Anfrage (noch nicht kalkuliert)" : "keine Einmalleistung ausgewählt"}`,
+      `Monatlich netto ab: ${summary.items.some((item) => item.monthly !== null) ? currency(summary.monthlyTotal) :
+        summary.hasIndividual ? "auf Anfrage (noch nicht kalkuliert)" : "keine monatliche Betreuung ausgewählt"}`,
+      ...(summary.hasIndividual ? ["Individual Care wird individuell angeboten und ist nicht in den bezifferten Summen enthalten."] : []),
+      "Die Auswahl ist keine verbindliche Bestellung. Umfang, Fremdkosten und Umsatzsteuer gemäß Angebot.",
+      "Monatliche Betreuung beginnt nach vereinbarter Übergabe.",
+    ] : [];
+    const selectionHtml = selectionLines.length
+      ? `<h3>Ausgewählte Leistungen</h3><p>${selectionLines.map(escapeHtml).join("<br>")}</p>`
+      : "";
     const html = `
       <h2>Neue Website-Anfrage</h2>
       <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
       <p><strong>E-Mail:</strong> ${escapeHtml(email)}</p>
       <p><strong>Telefon:</strong> ${escapeHtml(phone)}</p>
       <p><strong>Firma:</strong> ${escapeHtml(company)}</p>
+      ${selectionHtml}
       <p><strong>Nachricht:</strong></p>
-      <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
+      <p>${escapeHtml(message || "Keine zusätzliche Nachricht.").replace(/\n/g, "<br>")}</p>
     `;
 
     await transporter.sendMail({
@@ -91,8 +129,10 @@ export async function POST(request: Request) {
         `Telefon: ${phone}`,
         `Firma: ${company}`,
         "",
+        ...selectionLines,
+        ...(selectionLines.length ? [""] : []),
         "Nachricht:",
-        message,
+        message || "Keine zusätzliche Nachricht.",
       ].join("\n"),
       html,
     });

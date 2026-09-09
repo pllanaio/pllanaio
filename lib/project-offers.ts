@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n";
+import { selectionCopy } from "./offer-selection-copy";
 
 // Fixed project prices specified by Leon; independent of recurring care fees.
 export const projectOffers = [
@@ -53,14 +54,10 @@ export const projectCopy = {
         scope: "Lizenzkosten sind nicht enthalten. Benutzer- und Gerätezahl sowie die konkrete Konfiguration werden vorab vereinbart. Datenmigrationen und besondere App-Paketierungen werden gesondert angeboten. Microsoft Entra ID bezeichnet das frühere Azure AD.",
       },
       software: {
-        title: "Individualsoftware",
-        outcome: "Software, die Ihre Abläufe und Anforderungen abbildet.",
-        features: [
-          "Gemeinsame Anforderungsaufnahme und Definition des gewünschten Ergebnisses.",
-          "Konzeption und Entwicklung der vereinbarten Anwendung und Schnittstellen.",
-          "Tests, Dokumentation und Übergabe nach vereinbarten Abnahmekriterien.",
-        ],
-        scope: "Umfang, Preis und Zeitplan ergeben sich aus dem individuellen Angebot. Hosting, Lizenzen und anschließende Wartung werden gesondert vereinbart.",
+        title: "Individual Care",
+        outcome: selectionCopy.de.individualOutcome,
+        features: selectionCopy.de.individualFeatures,
+        scope: selectionCopy.de.individualScope,
       },
     },
   },
@@ -91,14 +88,10 @@ export const projectCopy = {
         scope: "Licence costs are excluded. User and device counts and the specific configuration are agreed in advance. Data migrations and specialist app packaging are quoted separately. Microsoft Entra ID is the former Azure AD.",
       },
       software: {
-        title: "Custom software",
-        outcome: "Software built around your workflows and requirements.",
-        features: [
-          "Define requirements and the desired outcome together.",
-          "Design and develop the agreed application and integrations.",
-          "Testing, documentation and handover against agreed acceptance criteria.",
-        ],
-        scope: "Scope, price and timeline are set out in an individual quote. Hosting, licences and ongoing maintenance are agreed separately.",
+        title: "Individual Care",
+        outcome: selectionCopy.en.individualOutcome,
+        features: selectionCopy.en.individualFeatures,
+        scope: selectionCopy.en.individualScope,
       },
     },
   },
@@ -129,14 +122,10 @@ export const projectCopy = {
         scope: "Kostot e licencave nuk përfshihen. Numri i përdoruesve dhe pajisjeve dhe konfigurimi konkret dakordohen paraprakisht. Migrimet e të dhënave dhe paketimi i veçantë i aplikacioneve ofertohen veçmas. Microsoft Entra ID është emri i ri i Azure AD.",
       },
       software: {
-        title: "Softuer i personalizuar",
-        outcome: "Softuer sipas proceseve dhe kërkesave tuaja.",
-        features: [
-          "Përcaktimi i përbashkët i kërkesave dhe rezultatit të dëshiruar.",
-          "Konceptimi dhe zhvillimi i aplikacionit dhe integrimeve të dakorduara.",
-          "Testimi, dokumentimi dhe dorëzimi sipas kritereve të dakorduara të pranimit.",
-        ],
-        scope: "Fusha, çmimi dhe afati përcaktohen në ofertën individuale. Hostimi, licencat dhe mirëmbajtja e mëvonshme dakordohen veçmas.",
+        title: "Individual Care",
+        outcome: selectionCopy.sq.individualOutcome,
+        features: selectionCopy.sq.individualFeatures,
+        scope: selectionCopy.sq.individualScope,
       },
     },
   },
