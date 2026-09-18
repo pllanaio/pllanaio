@@ -20,11 +20,11 @@ const businessDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Leon Pllana IT-Solutions | Strategischer Digitalisierungspartner",
+    default: "Digitalisierung & IT für KMU in München | Leon Pllana IT-Solutions",
     template: "%s | Leon Pllana IT-Solutions",
   },
   description:
-    "Strategischer Digitalisierungspartner aus Fürstenfeldbruck bei München: Digitalisierungsberatung, Prozessoptimierung, IT-Strategie, Microsoft 365, Cloud, Cyber Security, Automatisierung und KI für B2B-Unternehmen.",
+    "Prozesse vereinfachen, Systeme verbinden und IT langfristig betreiben: Microsoft 365, Automatisierung, Cloud, Security und Software für KMU im Raum München.",
   applicationName: businessName,
   manifest: "/manifest.webmanifest",
   authors: [{ name: "Leon Pllana", url: siteUrl }],
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Leon Pllana IT-Solutions | Innovation in every Step.",
+    title: "Weniger manuelle Arbeit. Klarere Prozesse. | Leon Pllana IT-Solutions",
     description:
-      "Strategischer Digitalisierungspartner aus Fürstenfeldbruck bei München. Technologie folgt dem Prozess: Beratung, IT-Strategie, Automatisierung, Cloud, Cyber Security und KI für B2B-Unternehmen.",
+      "Digitalisierung und IT für KMU im Raum München: Prozesse vereinfachen, Microsoft 365 sauber aufsetzen, Systeme verbinden, automatisieren und sicher betreiben.",
     url: siteUrl,
     siteName: businessName,
     locale: "de_DE",
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Leon Pllana IT-Solutions | Innovation in every Step.",
+    title: "Weniger manuelle Arbeit. Klarere Prozesse. | Leon Pllana IT-Solutions",
     description:
-      "Strategischer Digitalisierungspartner für Prozessoptimierung, IT-Strategie, Cloud, Cyber Security, Automatisierung und KI.",
+      "Digitalisierung und IT für KMU: Prozessoptimierung, Microsoft 365, Automatisierung, Cloud, Security und Software aus einer Hand.",
     images: ["/og-image.png"],
   },
   robots: {

@@ -38,8 +38,30 @@ export async function POST(request: Request) {
     const company = clean(form.company);
     const message = clean(form.message);
     const website = clean(form.website);
+    const inquiryGoal = clean(form.inquiryGoal);
+    const timeline = clean(form.timeline);
 
     if (website) return NextResponse.json({ ok: true });
+
+    const inquiryGoalLabels: Record<string, string> = {
+      automation: "Prozesse & Automatisierung",
+      workplace: "Microsoft 365 & Arbeitsplatz",
+      website: "Website & Web Care",
+      cloud: "Cloud & Anwendungen",
+      software: "Individuelle Software",
+      security: "Security & Backup",
+      unsure: "Noch nicht sicher",
+    };
+    const timelineLabels: Record<string, string> = {
+      asap: "So bald wie möglich",
+      "one-to-three": "In den nächsten 1–3 Monaten",
+      "three-plus": "In mehr als 3 Monaten",
+      exploring: "Orientiert sich erst einmal",
+    };
+
+    if ((inquiryGoal && !inquiryGoalLabels[inquiryGoal]) || (timeline && !timelineLabels[timeline])) {
+      return NextResponse.json({ error: "Invalid qualification data" }, { status: 400 });
+    }
 
     const selectedOffers = parseOfferSelection(form.selectedOffers);
     if (selectedOffers === null) {
@@ -112,6 +134,8 @@ export async function POST(request: Request) {
       <p><strong>E-Mail:</strong> ${escapeHtml(email)}</p>
       <p><strong>Telefon:</strong> ${escapeHtml(phone)}</p>
       <p><strong>Firma:</strong> ${escapeHtml(company)}</p>
+      ${inquiryGoal ? `<p><strong>Anliegen:</strong> ${escapeHtml(inquiryGoalLabels[inquiryGoal])}</p>` : ""}
+      ${timeline ? `<p><strong>Zeitrahmen:</strong> ${escapeHtml(timelineLabels[timeline])}</p>` : ""}
       ${selectionHtml}
       <p><strong>Nachricht:</strong></p>
       <p>${escapeHtml(message || "Keine zusätzliche Nachricht.").replace(/\n/g, "<br>")}</p>
@@ -128,6 +152,8 @@ export async function POST(request: Request) {
         `E-Mail: ${email}`,
         `Telefon: ${phone}`,
         `Firma: ${company}`,
+        ...(inquiryGoal ? [`Anliegen: ${inquiryGoalLabels[inquiryGoal]}`] : []),
+        ...(timeline ? [`Zeitrahmen: ${timelineLabels[timeline]}`] : []),
         "",
         ...selectionLines,
         ...(selectionLines.length ? [""] : []),
