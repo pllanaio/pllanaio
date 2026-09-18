@@ -64,7 +64,7 @@ export const portfolioCopy = {
       { title: "Bestand prüfen und Umfang festlegen", text: "Die Einstiegspreise gelten für den beschriebenen Referenzumfang bei übernahmefähigen Systemen. Vor Beginn prüfen wir Zustand, Zugänge und Pflegeaufwand. Größere oder komplexere Umgebungen erhalten ein angepasstes Angebot." },
       { title: "Einrichtung als eigenes Projekt", text: "Neue Websites, Microsoft-365- und Intune-Einrichtungen, Migrationen, neue Apps, Backup-Einrichtung und die Behebung bestehender Probleme werden einmalig separat angeboten. Die monatliche Betreuung beginnt nach der vereinbarten Übergabe." },
       { title: "Fremdkosten transparent ausweisen", text: "Hosting, Domains, Microsoft-Lizenzen, kostenpflichtige Software und Backup-Speicher sind nicht in der Betreuungspauschale enthalten. Vor-Ort-Einsätze und Fahrtkosten werden vorab vereinbart." },
-      { title: "Zusammenarbeit planbar vereinbaren", text: "Servicefenster, Reaktionszeiten, Laufzeit, Kündigung und Zahlungsweise werden im Angebot festgehalten. Eine Rufbereitschaft oder 24/7-Betreuung ist nicht enthalten. Ungenutzte Servicezeit wird nicht in den Folgemonat übertragen." },
+      { title: "Zusammenarbeit planbar vereinbaren", text: "Servicefenster, Reaktionszeiten, Laufzeit, Kündigung und Zahlungsweise werden im Angebot festgehalten. Eine Rufbereitschaft oder 24/7-Betreuung ist nicht enthalten. Der monatliche Betreuungsumfang ist als laufende Leistung vereinbart und wird nicht als Guthaben angesammelt." },
     ],
     packages: {
       web: {
@@ -109,7 +109,7 @@ export const portfolioCopy = {
       { title: "Review the systems and agree the scope", text: "Starting prices apply to the reference scope for systems ready for ongoing support. We review their condition, access and maintenance effort first. Larger or more complex environments receive an adjusted quote." },
       { title: "Set up through a separate project", text: "New websites, Microsoft 365 and Intune setup, migrations, new apps, backup setup and existing issues are quoted separately as one-off work. Monthly support starts after the agreed handover." },
       { title: "Show third-party costs separately", text: "Hosting, domains, Microsoft licences, paid software and backup storage are not included in the service fee. On-site visits and travel costs are agreed in advance." },
-      { title: "Agree how we work together", text: "Service windows, response times, contract term, cancellation and payment are specified in the quote. On-call or 24/7 support is not included. Unused service time does not carry over to the following month." },
+      { title: "Agree how we work together", text: "Service windows, response times, contract term, cancellation and payment are specified in the quote. On-call or 24/7 support is not included. The monthly support scope is an ongoing service and does not accumulate as credit." },
     ],
     packages: {
       web: {
@@ -151,7 +151,7 @@ export const portfolioCopy = {
       { title: "Kontrolli i sistemeve dhe përcaktimi i fushës", text: "Çmimet fillestare vlejnë për fushën referuese dhe sisteme të gatshme për mbështetje. Fillimisht kontrollojmë gjendjen, qasjet dhe nevojën për mirëmbajtje. Mjediset më të mëdha ose më komplekse marrin ofertë të përshtatur." },
       { title: "Konfigurimi si projekt më vete", text: "Faqet e reja, konfigurimi i Microsoft 365 dhe Intune, migrimet, aplikacionet e reja, konfigurimi i backup-it dhe problemet ekzistuese ofertohen veçmas. Mbështetja mujore fillon pas dorëzimit të dakorduar." },
       { title: "Kostot e palëve të treta veçmas", text: "Hostimi, domenet, licencat Microsoft, softueri me pagesë dhe hapësira e backup-it nuk përfshihen në tarifën e shërbimit. Vizitat në vend dhe shpenzimet e udhëtimit dakordohen paraprakisht." },
-      { title: "Bashkëpunim i planifikueshëm", text: "Oraret e shërbimit, koha e reagimit, afati, ndërprerja dhe pagesa përcaktohen në ofertë. Gatishmëria emergjente dhe mbështetja 24/7 nuk përfshihen. Koha e papërdorur nuk bartet në muajin pasues." },
+      { title: "Bashkëpunim i planifikueshëm", text: "Oraret e shërbimit, koha e reagimit, afati, ndërprerja dhe pagesa përcaktohen në ofertë. Gatishmëria emergjente dhe mbështetja 24/7 nuk përfshihen. Fusha mujore e mirëmbajtjes është shërbim i vazhdueshëm dhe nuk grumbullohet si kredit." },
     ],
     packages: {
       web: {
