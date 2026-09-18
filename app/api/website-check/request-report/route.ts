@@ -39,6 +39,7 @@ export async function POST(request: Request) {
     const delivery = await sendReportEmails(lead, result, token);
     return NextResponse.json({
       ok: true,
+      result,
       marketingConfirmationSent: delivery.marketingConfirmationSent,
     }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
