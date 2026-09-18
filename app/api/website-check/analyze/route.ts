@@ -31,7 +31,16 @@ export async function POST(request: Request) {
     const analysisToken = createEncryptedToken(payload, 30 * 24 * 60 * 60);
 
     return NextResponse.json(
-      { ok: true, result, analysisToken, cacheHit },
+      {
+        ok: true,
+        preview: {
+          normalizedUrl: result.normalizedUrl,
+          domain: result.domain,
+          strategy: result.strategy,
+        },
+        analysisToken,
+        cacheHit,
+      },
       { headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } },
     );
   } catch (error) {
