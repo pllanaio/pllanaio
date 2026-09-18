@@ -189,8 +189,8 @@ export function ServiceTerms() {
         </div>
         <div>
           <h3 className="text-xl font-semibold">{copy.additionalTitle}</h3>
-          <p className="mt-3 text-2xl font-semibold">{additionalHourlyRate} <span className="text-base font-normal">{copy.hourly}</span></p>
           <p className="mt-3 leading-7 text-muted-foreground">{copy.additionalText}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{additionalHourlyRate} {copy.hourly}</p>
         </div>
       </div>
       <h3 className="mt-10 text-2xl font-semibold">{copy.conditionsTitle}</h3>
