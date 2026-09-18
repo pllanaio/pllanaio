@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { Button } from "@/components/button";
 import { useLocale } from "@/components/locale-provider";
 import { useOfferSelection } from "@/components/offer-selection-provider";
@@ -59,52 +60,92 @@ function CareCard({ service, showDetailLink }: { service: (typeof servicePackage
   ];
 
   return (
-    <article aria-labelledby={`package-${service.id}`} className="min-w-0 rounded-3xl border border-border bg-card p-6 shadow-premium sm:p-8">
-      <p className="text-sm text-muted-foreground">{item.audience}</p>
-      <h3 id={`package-${service.id}`} className="mt-3 text-3xl font-semibold tracking-tight">{service.name}</h3>
-      <p className="mt-4 leading-7 text-muted-foreground">{item.outcome}</p>
-      {project && (
-        <fieldset disabled={sending} className="mt-6 space-y-2">
-          <legend className="mb-3 text-sm font-medium">{choice.configure}</legend>
-          {modes.map((option) => (
-            <label key={option.value} className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm leading-5 ${mode === option.value ? "border-foreground bg-muted" : "border-border"}`}>
-              <input type="radio" name={`mode-${service.id}`} value={option.value} checked={mode === option.value} onChange={() => setMode(option.value)} className="h-4 w-4 shrink-0 accent-foreground" />
-              {option.label}
-            </label>
-          ))}
-        </fieldset>
-      )}
-      <div className="mt-6 space-y-3" aria-live="polite" aria-atomic="true">
-        {hasSetup && setupPrice !== null && <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1"><span className="text-4xl font-semibold tracking-tight">{euro(setupPrice)}</span><span className="text-sm text-muted-foreground">{choice.once}</span></p>}
-        {hasCare ? <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1"><span className="text-sm text-muted-foreground">{copy.from}</span><span className="text-4xl font-semibold tracking-tight">{euro(service.monthlyPrice)}</span><span className="text-sm text-muted-foreground">{copy.monthly}</span></p> : <p className="text-sm text-muted-foreground">{choice.noMonthly}</p>}
-        <p className="text-sm text-muted-foreground">{copy.net}</p>
+    <article aria-labelledby={`package-${service.id}`} className="group min-w-0 overflow-hidden rounded-[2rem] border border-border bg-card shadow-premium transition hover:-translate-y-1 hover:border-foreground/20">
+      <div className="p-6 sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="rounded-full border border-border bg-muted/45 px-3 py-1.5 text-xs font-medium text-muted-foreground">{item.audience}</span>
+          {hasCare && <span className="text-sm font-medium text-muted-foreground">{copy.from} {euro(service.monthlyPrice)} {copy.monthly}</span>}
+        </div>
+
+        <h3 id={`package-${service.id}`} className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">{service.name}</h3>
+        <p className="mt-4 max-w-xl text-lg leading-8 text-muted-foreground">{item.outcome}</p>
+
+        {hasCare && (
+          <div className="mt-7 rounded-2xl border border-border bg-muted/25 p-5">
+            <p className="text-sm font-medium">{copy.includedLabel}</p>
+            <ul className="mt-4 space-y-3">
+              {item.features.map((feature) => (
+                <li key={feature} className="flex gap-3 leading-6 text-muted-foreground">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border bg-background">
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                  </span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {project && (
+          <fieldset disabled={sending} className="mt-7 space-y-2">
+            <legend className="mb-3 text-sm font-medium">{choice.configure}</legend>
+            {modes.map((option) => (
+              <label key={option.value} className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm leading-5 transition ${mode === option.value ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:bg-muted/45"}`}>
+                <input type="radio" name={`mode-${service.id}`} value={option.value} checked={mode === option.value} onChange={() => setMode(option.value)} className="h-4 w-4 shrink-0 accent-current" />
+                {option.label}
+              </label>
+            ))}
+          </fieldset>
+        )}
+
+        <div className="mt-7 rounded-2xl bg-foreground p-5 text-background" aria-live="polite" aria-atomic="true">
+          {hasSetup && setupPrice !== null && (
+            <div className="mb-4 border-b border-background/20 pb-4">
+              <p className="text-sm text-background/70">{choice.once}</p>
+              <p className="mt-1 text-3xl font-semibold tracking-tight">{euro(setupPrice)}</p>
+            </div>
+          )}
+          {hasCare ? (
+            <div>
+              <p className="text-sm text-background/70">{copy.careTitle}</p>
+              <p className="mt-1 flex flex-wrap items-baseline gap-2"><span className="text-4xl font-semibold tracking-tight">{euro(service.monthlyPrice)}</span><span className="text-sm text-background/70">{copy.monthly}</span></p>
+            </div>
+          ) : (
+            <p className="text-sm text-background/70">{choice.noMonthly}</p>
+          )}
+          <p className="mt-3 text-xs leading-5 text-background/60">{copy.net}</p>
+        </div>
+
+        {hasCare && (
+          <div className="mt-6">
+            <p className="text-sm font-medium text-muted-foreground">{copy.scopeLabel}</p>
+            <p className="mt-2 leading-7">{item.scope}</p>
+          </div>
+        )}
+
+        <Button type="button" size="lg" disabled={sending} className="mt-7 w-full px-3" onClick={() => { replaceGroup(group, nextSelection); goToContactForm(); }} aria-label={`${service.name}: ${inRequest ? choice.update : choice.select}`}>{inRequest ? choice.update : choice.select}</Button>
+        {inRequest && <p className="mt-2 text-center text-sm text-muted-foreground">{choice.selected}</p>}
+
+        {hasSetup && project && (
+          <details className="mt-6 border-t border-border pt-5">
+            <summary className="cursor-pointer py-2 font-medium underline decoration-border underline-offset-4">{choice.setupDetails}</summary>
+            <h4 className="mt-3 font-semibold">{project.title}</h4>
+            <p className="mt-2 leading-7 text-muted-foreground">{project.outcome}</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-muted-foreground">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.scope}</p>
+          </details>
+        )}
+
+        {hasCare && (
+          <details className="mt-5 border-t border-border pt-4">
+            <summary className="cursor-pointer rounded-sm py-2 font-medium underline decoration-border underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground">{copy.details}</summary>
+            <p className="mt-4 font-medium">{copy.separately}</p>
+            <p className="mt-2 leading-7 text-muted-foreground">{item.exclusions}</p>
+          </details>
+        )}
+
+        {showDetailLink && <ServiceDetailLink packageId={service.id} />}
       </div>
-      <Button type="button" size="lg" disabled={sending} className="mt-6 w-full px-3" onClick={() => { replaceGroup(group, nextSelection); goToContactForm(); }} aria-label={`${service.name}: ${inRequest ? choice.update : choice.select}`}>{inRequest ? choice.update : choice.select}</Button>
-      {inRequest && <p className="mt-2 text-center text-sm text-muted-foreground">{choice.selected}</p>}
-      {hasSetup && project && <div className="mt-7 border-t border-border pt-5">
-        <h4 className="font-semibold">{project.title}</h4>
-        <p className="mt-2 leading-7 text-muted-foreground">{project.outcome}</p>
-        <details className="mt-3">
-          <summary className="cursor-pointer py-2 font-medium underline underline-offset-4">{choice.setupDetails}</summary>
-          <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-muted-foreground">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-        </details>
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.scope}</p>
-      </div>}
-      {hasCare && <>
-        <dl className="mt-7 border-y border-border py-5">
-          <dt className="text-sm text-muted-foreground">{copy.timeLabel}</dt>
-          <dd className="mt-1 text-lg font-semibold">{new Intl.NumberFormat(locale).format(service.serviceHours)} {copy.hours}</dd>
-          <dt className="mt-4 text-sm text-muted-foreground">{copy.scopeLabel}</dt>
-          <dd className="mt-1 leading-7">{item.scope}</dd>
-        </dl>
-        <details className="mt-5">
-          <summary className="cursor-pointer rounded-sm py-2 font-medium underline decoration-border underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground">{copy.details}</summary>
-          <ul className="mt-4 list-disc space-y-3 pl-5 leading-7 text-muted-foreground">{item.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-          <p className="mt-5 font-medium">{copy.separately}</p>
-          <p className="mt-2 leading-7 text-muted-foreground">{item.exclusions}</p>
-        </details>
-      </>}
-      {showDetailLink && <ServiceDetailLink packageId={service.id} />}
     </article>
   );
 }
@@ -115,7 +156,7 @@ function IndividualCard({ showDetailLink }: { showDetailLink: boolean }) {
   const choice = selectionCopy[locale];
   const inRequest = selectedOffers.includes("individual-care");
   return (
-    <article aria-labelledby="package-individual" className="min-w-0 rounded-3xl border border-border bg-card p-6 shadow-premium sm:p-8">
+    <article aria-labelledby="package-individual" className="min-w-0 rounded-[2rem] border border-border bg-card p-6 shadow-premium transition hover:-translate-y-1 hover:border-foreground/20 sm:p-8">
       <p className="text-sm text-muted-foreground">{choice.individualAudience}</p>
       <h3 id="package-individual" className="mt-3 text-3xl font-semibold tracking-tight">Individual Care</h3>
       <p className="mt-4 leading-7 text-muted-foreground">{choice.individualOutcome}</p>
@@ -123,7 +164,7 @@ function IndividualCard({ showDetailLink }: { showDetailLink: boolean }) {
       <p className="mt-3 leading-7 text-muted-foreground">{choice.individualScope}</p>
       <Button type="button" size="lg" disabled={sending} className="mt-6 w-full px-3" onClick={() => { replaceGroup(["individual-care"], ["individual-care"]); goToContactForm(); }} aria-label={`Individual Care: ${inRequest ? choice.update : choice.select}`}>{inRequest ? choice.update : choice.select}</Button>
       {inRequest && <p className="mt-2 text-center text-sm text-muted-foreground">{choice.selected}</p>}
-      <ul className="mt-7 list-disc space-y-3 border-t border-border pl-5 pt-5 leading-7 text-muted-foreground">{choice.individualFeatures.map((feature) => <li key={feature}>{feature}</li>)}</ul>
+      <ul className="mt-7 space-y-3 border-t border-border pt-5 leading-7 text-muted-foreground">{choice.individualFeatures.map((feature) => <li key={feature} className="flex gap-3"><span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border bg-background"><Check className="h-3.5 w-3.5" aria-hidden="true" /></span><span>{feature}</span></li>)}</ul>
       {showDetailLink && <ServiceDetailLink packageId="individual" />}
     </article>
   );
@@ -148,8 +189,8 @@ export function ServiceTerms() {
         </div>
         <div>
           <h3 className="text-xl font-semibold">{copy.additionalTitle}</h3>
-          <p className="mt-3 text-2xl font-semibold">{additionalHourlyRate} <span className="text-base font-normal">{copy.hourly}</span></p>
           <p className="mt-3 leading-7 text-muted-foreground">{copy.additionalText}</p>
+          <p className="mt-3 text-sm text-muted-foreground">{additionalHourlyRate} {copy.hourly}</p>
         </div>
       </div>
       <h3 className="mt-10 text-2xl font-semibold">{copy.conditionsTitle}</h3>
@@ -177,7 +218,10 @@ export function ServicePackages() {
       <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
         {serviceLinks.map((service) => <ServicePackageCard key={service.slug} packageId={service.packageId} />)}
       </div>
-      <ServiceTerms />
+      <details className="mt-10 rounded-2xl border border-border bg-background/60 px-6 py-4">
+        <summary className="cursor-pointer py-2 font-medium">{copy.termsSummary}</summary>
+        <ServiceTerms />
+      </details>
 
     </Section>
   );
