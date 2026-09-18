@@ -18,6 +18,10 @@ function BrandIcon({ children, ...props }: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ArrowLeft(props: SVGProps<SVGSVGElement>) {
+  return <Icon {...props}><path d="M19 12H5" /><path d="m12 19-7-7 7-7" /></Icon>;
+}
+
 export function ArrowRight(props: SVGProps<SVGSVGElement>) {
   return <Icon {...props}><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></Icon>;
 }
@@ -60,6 +64,10 @@ export function Code2(props: SVGProps<SVGSVGElement>) {
 
 export function Layers3(props: SVGProps<SVGSVGElement>) {
   return <Icon {...props}><path d="m12 3 9 5-9 5-9-5 9-5z" /><path d="m3 12 9 5 9-5" /><path d="m3 16 9 5 9-5" /></Icon>;
+}
+
+export function LockKeyhole(props: SVGProps<SVGSVGElement>) {
+  return <Icon {...props}><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /><circle cx="12" cy="16" r="1" /><path d="M12 17v2" /></Icon>;
 }
 
 export function Network(props: SVGProps<SVGSVGElement>) {
