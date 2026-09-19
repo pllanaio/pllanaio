@@ -219,7 +219,7 @@ export function getHubStructuredData(content: HubContent) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebPage",
+        "@type": content.slug === "ueber-uns" ? "AboutPage" : "WebPage",
         "@id": `${url}#webpage`,
         url,
         name: content.title,
