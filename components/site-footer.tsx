@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { useLocale } from "@/components/locale-provider";
 
+const footerHeadings = {
+  de: { topics: "Themen", legal: "Rechtliches" },
+  en: { topics: "Topics", legal: "Legal" },
+  sq: { topics: "Tema", legal: "Ligjore" },
+} as const;
+
 const pageLabels = {
   de: [
     ["Leistungen", "/leistungen"],
@@ -49,13 +55,13 @@ export function SiteFooter() {
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
           <nav aria-label={t.navigation.footer}>
-            <p className="mb-3 font-medium text-foreground">Themen</p>
+            <p className="mb-3 font-medium text-foreground">{footerHeadings[locale].topics}</p>
             <div className="flex flex-wrap gap-x-4 gap-y-3">
               {pageLabels[locale].map(([label, href]) => <Link key={href} href={href} className="transition hover:text-foreground">{label}</Link>)}
             </div>
           </nav>
           <nav aria-label="Rechtliches">
-            <p className="mb-3 font-medium text-foreground">Rechtliches</p>
+            <p className="mb-3 font-medium text-foreground">{footerHeadings[locale].legal}</p>
             <div className="flex flex-wrap gap-x-4 gap-y-3">
               <Link href="/impressum" className="transition hover:text-foreground">{t.legal.imprint}</Link>
               <Link href="/datenschutz" className="transition hover:text-foreground">{t.legal.privacy}</Link>
