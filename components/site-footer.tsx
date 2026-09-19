@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { Instagram, Linkedin, MessageCircle, Music2 } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
+import { socialLinks } from "@/lib/site-content";
 
 const footerHeadings = {
-  de: { topics: "Themen", legal: "Rechtliches" },
-  en: { topics: "Topics", legal: "Legal" },
-  sq: { topics: "Tema", legal: "Ligjore" },
+  de: { topics: "Themen", legal: "Rechtliches", social: "Direkt Kontakt aufnehmen" },
+  en: { topics: "Topics", legal: "Legal", social: "Get in touch directly" },
+  sq: { topics: "Tema", legal: "Ligjore", social: "Kontakto direkt" },
 } as const;
 
 const pageLabels = {
@@ -52,6 +54,15 @@ export function SiteFooter() {
           <p className="font-medium text-foreground">Leon Pllana IT-Solutions</p>
           <p className="mt-2">{t.footerClaim}</p>
           <Link href="/website-check" className="mt-5 inline-flex font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground">{t.websiteCheck.footer}</Link>
+          <div className="mt-7">
+            <p className="text-sm font-medium text-foreground">{footerHeadings[locale].social}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background transition hover:bg-muted hover:text-foreground"><Linkedin className="h-4 w-4" aria-hidden="true" /></a>
+              <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background transition hover:bg-muted hover:text-foreground"><MessageCircle className="h-4 w-4" aria-hidden="true" /></a>
+              <a href={socialLinks.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background transition hover:bg-muted hover:text-foreground"><Instagram className="h-4 w-4" aria-hidden="true" /></a>
+              <a href={socialLinks.tiktok} target="_blank" rel="noreferrer" aria-label="TikTok" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background transition hover:bg-muted hover:text-foreground"><Music2 className="h-4 w-4" aria-hidden="true" /></a>
+            </div>
+          </div>
         </div>
         <div className="grid gap-8 sm:grid-cols-2">
           <nav aria-label={t.navigation.footer}>

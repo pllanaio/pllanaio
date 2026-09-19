@@ -20,8 +20,6 @@ const homepageCopy = {
     primary: "Potenziale besprechen",
     secondary: "Website kostenlos prüfen",
     motto: "Innovation In Every Step.",
-    principle: "Process first. Technology second.",
-    principles: ["Prozesse klären", "Systeme verbinden", "Betrieb absichern"],
     proofEyebrow: "Referenzen",
     proofTitle: "Vertrauen entsteht durch Zusammenarbeit.",
     servicesEyebrow: "Was wir lösen",
@@ -54,8 +52,6 @@ const homepageCopy = {
     primary: "Discuss your potential",
     secondary: "Check your website for free",
     motto: "Innovation In Every Step.",
-    principle: "Process first. Technology second.",
-    principles: ["Clarify processes", "Connect systems", "Secure operations"],
     proofEyebrow: "References",
     proofTitle: "Trust grows through collaboration.",
     servicesEyebrow: "What we solve",
@@ -88,8 +84,6 @@ const homepageCopy = {
     primary: "Diskuto potencialin",
     secondary: "Kontrollo faqen falas",
     motto: "Innovation In Every Step.",
-    principle: "Process first. Technology second.",
-    principles: ["Qartëso proceset", "Lidh sistemet", "Siguro operimin"],
     proofEyebrow: "Referenca",
     proofTitle: "Besimi krijohet përmes bashkëpunimit.",
     servicesEyebrow: "Çfarë zgjidhim",
@@ -124,7 +118,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden px-6 pb-20 pt-32 sm:pb-24 sm:pt-40">
       <div className="gradient-grid absolute inset-0 -z-10 opacity-40" />
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.15fr_.85fr]">
+      <div className="mx-auto max-w-7xl">
         <FadeIn>
           <div>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.heroKicker}</p>
@@ -136,19 +130,6 @@ function Hero() {
             </div>
             <p className="mt-8 text-sm font-medium text-muted-foreground">{copy.motto}</p>
           </div>
-        </FadeIn>
-        <FadeIn delay={0.08}>
-          <aside className="rounded-[2rem] border border-border bg-card p-7 shadow-premium sm:p-9">
-            <p className="text-sm font-medium text-muted-foreground">{copy.principle}</p>
-            <div className="mt-8 space-y-5">
-              {copy.principles.map((item, index) => (
-                <div key={item} className="flex items-center gap-4 border-b border-border pb-5 last:border-0 last:pb-0">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold">{index + 1}</span>
-                  <p className="text-xl font-semibold tracking-[-0.03em]">{item}</p>
-                </div>
-              ))}
-            </div>
-          </aside>
         </FadeIn>
       </div>
     </section>
