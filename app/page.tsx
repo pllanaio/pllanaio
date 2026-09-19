@@ -4,6 +4,7 @@ import Link from "next/link";
 import { homeStructuredData } from "@/lib/home-structured-data";
 import { ArrowRight, Check, Instagram, Linkedin, MessageCircle, Music2 } from "lucide-react";
 import { Button } from "@/components/button";
+import { ContactForm } from "@/components/contact-form";
 import { FadeIn } from "@/components/motion";
 import { PartnerLogoMarquee } from "@/components/partner-logo-marquee";
 import { ServicePackages } from "@/components/service-packages";
@@ -11,7 +12,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section, SectionEyebrow, SectionTitle } from "@/components/ui/section";
 import { useLocale } from "@/components/locale-provider";
-import { contactEmail, socialLinks } from "@/lib/site-content";
+import { socialLinks } from "@/lib/site-content";
 
 const localizedContent = {
   de: {
@@ -42,6 +43,47 @@ const localizedContent = {
       ["Dienstleister", "Mehr Transparenz zwischen Vertrieb, Projekt und Abrechnung.", "Entwicklung einer Integrationslogik zwischen CRM, Projektmanagement und Dokumentation."],
       ["Produktion", "Sicherere Infrastruktur für langfristiges Wachstum.", "Bewertung der bestehenden IT-Landschaft und Einführung von Backup-, Monitoring- und Security-Prozessen."],
     ],
+    diagnosis: {
+      eyebrow: "Selbstdiagnose",
+      title: "IT-Probleme beginnen meistens lange vor dem Ausfall.",
+      text: "Wenn Ihnen zwei oder drei dieser Situationen bekannt vorkommen, lohnt sich ein genauerer Blick auf Prozesse, Betrieb und Verantwortung.",
+      items: [
+        ["Doppelte Arbeit", "Daten werden mehrfach gepflegt, zwischen Excel, E-Mail und Fachsoftware kopiert oder manuell weitergegeben."],
+        ["Unklare Verantwortung", "Bei Updates, Benutzerrechten, Backups oder Störungen ist nicht eindeutig geregelt, wer sich darum kümmert."],
+        ["Backup ohne Gewissheit", "Sicherungen laufen – aber niemand hat kürzlich geprüft, ob sich wichtige Daten wirklich wiederherstellen lassen."],
+        ["Gewachsene Zugriffe", "Benutzer, Geräte und Berechtigungen wurden über Jahre ergänzt, ohne regelmäßig aufgeräumt zu werden."],
+        ["Digitale Bremsen", "Website, Systeme oder Freigaben kosten mehr Zeit als nötig und erschweren Anfragen oder interne Abläufe."],
+      ],
+    },
+    why: {
+      eyebrow: "Warum Pllana",
+      title: "Nicht mehr IT. Sondern bessere Entscheidungen darüber, was Ihre IT leisten soll.",
+      text: "Wir beginnen nicht mit einem Produktkatalog. Wir beginnen dort, wo Zeit verloren geht, Risiken entstehen oder Verantwortung unklar ist.",
+      items: [
+        ["Andere starten mit einem Tool.", "Wir starten mit dem Prozess – und wählen Technologie erst danach."],
+        ["Andere reagieren, wenn etwas ausfällt.", "Wir schauen auf Betrieb, Wiederherstellbarkeit und Risiken, bevor daraus ein Notfall wird."],
+        ["Andere verkaufen einzelne Stunden.", "Wir definieren einen klaren Betreuungsumfang, Verantwortung und nachvollziehbare nächste Schritte."],
+      ],
+    },
+    websiteProof: {
+      eyebrow: "Diagnose statt Verkaufsversprechen",
+      title: "Sie müssen uns nicht glauben. Prüfen Sie Ihre Website selbst.",
+      text: "Der kostenlose Website-Check analysiert öffentlich sichtbare technische Signale und zeigt Ihnen konkrete Verbesserungspotenziale. Das Ergebnis wird erst nach Ihren Kontaktdaten freigeschaltet.",
+      cta: "Website jetzt prüfen",
+    },
+    risk: {
+      eyebrow: "Was passiert, wenn man es liegen lässt?",
+      title: "IT-Probleme werden selten günstiger, wenn man sie ignoriert.",
+      text: "Nicht jedes Risiko wird zum Vorfall. Aber ungeklärte Verantwortung, manuelle Abläufe und ungeprüfte Sicherungen werden mit Wachstum meist schwieriger statt einfacher.",
+      items: [
+        ["Backup", "Ein Backup, das nie wiederhergestellt wurde, ist im Ernstfall nur eine Annahme."],
+        ["Zugänge", "Historisch gewachsene Rechte können unnötige Zugriffe und Sicherheitsrisiken erzeugen."],
+        ["Prozesse", "Manuelle Zwischenschritte kosten nicht einmal Zeit – sondern jeden Monat erneut."],
+        ["Website", "Langsame, unklare oder schlecht auffindbare Seiten können potenzielle Anfragen verlieren, bevor ein Gespräch entsteht."],
+      ],
+      closing: "Sie müssen nicht alles auf einmal lösen. Sie sollten nur wissen, womit Sie anfangen.",
+      cta: "Ausgangslage besprechen",
+    },
     faq: [
       ["Bieten Sie klassische IT-Dienstleistungen an?", "Ja, aber nicht isoliert. Infrastruktur, Cloud, Microsoft 365, Security oder Software werden immer aus dem Unternehmenskontext heraus geplant."],
       ["Arbeiten Sie mit kleinen Unternehmen oder nur mit Konzernen?", "Die Unternehmensgröße ist nicht entscheidend. Entscheidend ist, ob Digitalisierung echten Mehrwert schaffen kann."],
@@ -94,6 +136,47 @@ const localizedContent = {
       ["Service provider", "More transparency between sales, projects and billing.", "Integration logic between CRM, project management and documentation."],
       ["Production", "More secure infrastructure for long-term growth.", "Assessment of the IT landscape and implementation of backup, monitoring and security processes."],
     ],
+    diagnosis: {
+      eyebrow: "Self-diagnosis",
+      title: "IT problems usually start long before something fails.",
+      text: "If two or three of these situations sound familiar, it is worth taking a closer look at processes, operations and ownership.",
+      items: [
+        ["Duplicate work", "Data is maintained several times, copied between spreadsheets, email and business software or passed on manually."],
+        ["Unclear ownership", "Updates, permissions, backups and incidents do not have a clearly defined owner."],
+        ["Backups without certainty", "Backups run, but nobody has recently verified that important data can actually be restored."],
+        ["Grown access rights", "Users, devices and permissions have accumulated over time without regular clean-up."],
+        ["Digital friction", "Your website, systems or approvals take more time than necessary and slow down enquiries or internal work."],
+      ],
+    },
+    why: {
+      eyebrow: "Why Pllana",
+      title: "Not more IT. Better decisions about what your IT should achieve.",
+      text: "We do not start with a product catalogue. We start where time is lost, risks emerge or ownership is unclear.",
+      items: [
+        ["Others start with a tool.", "We start with the process and choose technology afterwards."],
+        ["Others react when something breaks.", "We look at operations, recoverability and risk before it becomes an emergency."],
+        ["Others sell individual hours.", "We define a clear support scope, ownership and understandable next steps."],
+      ],
+    },
+    websiteProof: {
+      eyebrow: "Diagnosis instead of sales promises",
+      title: "You do not have to take our word for it. Check your website yourself.",
+      text: "The free website check analyses publicly visible technical signals and highlights concrete improvement opportunities. Full results are unlocked after you provide your contact details.",
+      cta: "Check your website",
+    },
+    risk: {
+      eyebrow: "What happens if you leave it alone?",
+      title: "IT problems rarely become cheaper by being ignored.",
+      text: "Not every risk becomes an incident. But unclear ownership, manual workflows and untested backups usually become harder to manage as a company grows.",
+      items: [
+        ["Backups", "A backup that has never been restored is only an assumption when an incident happens."],
+        ["Access", "Historically grown permissions can create unnecessary access and security risks."],
+        ["Processes", "Manual steps do not cost time once – they cost it again every month."],
+        ["Website", "Slow, unclear or hard-to-find pages can lose potential enquiries before a conversation starts."],
+      ],
+      closing: "You do not need to solve everything at once. You only need to know where to start.",
+      cta: "Discuss your starting point",
+    },
     faq: [
       ["Do you offer classic IT services?", "Yes, but not in isolation. Infrastructure, cloud, Microsoft 365, security and software are always planned from the company context."],
       ["Do you work with small companies or only corporations?", "Company size is not decisive. What matters is whether digitalisation can create real value."],
@@ -146,6 +229,47 @@ const localizedContent = {
       ["Ofrues shërbimesh", "Më shumë transparencë mes shitjeve, projekteve dhe faturimit.", "Logjikë integrimi mes CRM, menaxhimit të projekteve dhe dokumentimit."],
       ["Prodhim", "Infrastrukturë më e sigurt për rritje afatgjatë.", "Vlerësim i IT-së ekzistuese dhe zbatim i backup, monitorimit dhe sigurisë."],
     ],
+    diagnosis: {
+      eyebrow: "Vetë-diagnostikim",
+      title: "Problemet e IT-së zakonisht fillojnë shumë përpara një dështimi.",
+      text: "Nëse dy ose tre nga këto situata ju duken të njohura, ia vlen të shikohen më nga afër proceset, operimi dhe përgjegjësitë.",
+      items: [
+        ["Punë e dyfishtë", "Të dhënat mirëmbahen disa herë, kopjohen mes Excel, emailit dhe softuerit të biznesit ose përcillen manualisht."],
+        ["Përgjegjësi të paqarta", "Përditësimet, të drejtat, backup-et dhe incidentet nuk kanë një përgjegjës të përcaktuar qartë."],
+        ["Backup pa siguri", "Backup-et funksionojnë, por askush nuk ka verifikuar kohët e fundit nëse të dhënat e rëndësishme rikthehen realisht."],
+        ["Qasje të rritura me kohën", "Përdoruesit, pajisjet dhe të drejtat janë shtuar gjatë viteve pa pastrim të rregullt."],
+        ["Pengesa digjitale", "Faqja, sistemet ose aprovimet marrin më shumë kohë se duhet dhe ngadalësojnë kërkesat ose punën e brendshme."],
+      ],
+    },
+    why: {
+      eyebrow: "Pse Pllana",
+      title: "Jo më shumë IT. Vendime më të mira për atë që IT-ja duhet të arrijë.",
+      text: "Nuk fillojmë me katalog produktesh. Fillojmë aty ku humbet kohë, lindin rreziqe ose përgjegjësia është e paqartë.",
+      items: [
+        ["Të tjerët fillojnë me një mjet.", "Ne fillojmë me procesin dhe zgjedhim teknologjinë më pas."],
+        ["Të tjerët reagojnë kur diçka prishet.", "Ne shikojmë operimin, rikuperimin dhe rreziqet përpara se të bëhen emergjencë."],
+        ["Të tjerët shesin orë individuale.", "Ne përcaktojmë fushë të qartë mbështetjeje, përgjegjësi dhe hapa të kuptueshëm."],
+      ],
+    },
+    websiteProof: {
+      eyebrow: "Diagnozë në vend të premtimeve",
+      title: "Nuk duhet të na besoni pa provë. Kontrolloni vetë faqen tuaj.",
+      text: "Kontrolli falas analizon sinjale teknike publike dhe tregon potenciale konkrete për përmirësim. Rezultati i plotë hapet pasi të jepni të dhënat e kontaktit.",
+      cta: "Kontrollo faqen",
+    },
+    risk: {
+      eyebrow: "Çfarë ndodh nëse e lini për më vonë?",
+      title: "Problemet e IT-së rrallë bëhen më të lira duke u injoruar.",
+      text: "Jo çdo rrezik bëhet incident. Por përgjegjësitë e paqarta, proceset manuale dhe backup-et e patestuara zakonisht bëhen më të vështira me rritjen e kompanisë.",
+      items: [
+        ["Backup", "Një backup që nuk është rikthyer kurrë është vetëm një supozim kur ndodh incidenti."],
+        ["Qasje", "Të drejtat e krijuara me kohën mund të krijojnë qasje të panevojshme dhe rreziqe sigurie."],
+        ["Procese", "Hapat manualë nuk kushtojnë kohë vetëm një herë – por çdo muaj përsëri."],
+        ["Website", "Faqet e ngadalta, të paqarta ose vështirë të gjendshme mund të humbasin kërkesa përpara se të nisë një bisedë."],
+      ],
+      closing: "Nuk duhet të zgjidhni gjithçka menjëherë. Duhet vetëm të dini ku të filloni.",
+      cta: "Diskuto situatën",
+    },
     faq: [
       ["A ofroni shërbime klasike IT?", "Po, por jo të izoluara. Infrastruktura, cloud, Microsoft 365, siguria dhe softueri planifikohen gjithmonë nga konteksti i kompanisë."],
       ["Punoni me kompani të vogla apo vetëm me korporata?", "Madhësia nuk është vendimtare. E rëndësishme është nëse digjitalizimi krijon vlerë reale."],
@@ -184,7 +308,7 @@ function HeroGraphic() {
 
 function Hero() {
   const { t } = useLocale();
-  return <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-24"><div className="gradient-grid absolute inset-0 -z-10 opacity-50" /><div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" /><div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]"><FadeIn><div className="relative z-10"><div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div><h1 className="max-w-5xl text-5xl font-semibold tracking-[-0.065em] sm:text-6xl lg:text-7xl">{t.heroTitle}</h1><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p><div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link href="/leistungen">{t.heroSecondary}</Link></Button></div><p className="mt-5 text-sm text-muted-foreground"><Link href="/website-check" className="inline-flex items-center gap-1 font-medium text-foreground underline decoration-border underline-offset-4 transition hover:decoration-foreground">{t.websiteCheck.hero} <ArrowRight className="h-3.5 w-3.5" /></Link></p><div className="mt-12 grid max-w-2xl grid-cols-1 gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:grid-cols-3">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div></div></FadeIn><FadeIn delay={0.15}><HeroGraphic /></FadeIn></div></section>;
+  return <section className="relative isolate flex min-h-screen items-center overflow-hidden px-6 pt-32"><div className="gradient-grid absolute inset-0 -z-10 opacity-50" /><div className="absolute left-1/2 top-24 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" /><div className="mx-auto grid max-w-7xl items-center gap-20 py-24 lg:grid-cols-[1.02fr_.98fr]"><FadeIn><div className="relative z-10"><div className="mb-8 inline-flex rounded-full border border-border bg-background/70 px-4 py-2 text-sm text-muted-foreground shadow-premium backdrop-blur">{t.badge}</div><h1 className="max-w-5xl text-5xl font-semibold tracking-[-0.065em] sm:text-6xl lg:text-7xl">{t.heroTitle}</h1><p className="mt-8 max-w-2xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">{t.heroText}</p><div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg"><Link href="#kontakt">{t.heroPrimary} <ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link href="/leistungen">{t.heroSecondary}</Link></Button></div><p className="mt-5 text-sm text-muted-foreground"><Link href="/website-check" className="inline-flex items-center gap-1 font-medium text-foreground underline decoration-border underline-offset-4 transition hover:decoration-foreground">{t.websiteCheck.hero} <ArrowRight className="h-3.5 w-3.5" /></Link></p><div className="mt-12 grid max-w-2xl grid-cols-1 gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:grid-cols-3">{t.pillars.map((item) => <p key={item}>{item}</p>)}</div></div></FadeIn><FadeIn delay={0.15}><HeroGraphic /></FadeIn></div></section>;
 }
 
 function AeoSummary() {
@@ -193,6 +317,30 @@ function AeoSummary() {
 }
 
 function PartnerSection() { const { t } = useLocale(); return <section className="px-6 pb-24"><div className="mx-auto max-w-7xl"><FadeIn><p className="mb-6 text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">{t.partners}</p><PartnerLogoMarquee /></FadeIn></div></section>; }
+function DiagnosticSection() {
+  const { locale } = useLocale();
+  const content = localizedContent[locale].diagnosis;
+  return <section className="border-y border-border bg-muted/30 px-6 py-24"><div className="mx-auto max-w-7xl"><FadeIn><SectionEyebrow>{content.eyebrow}</SectionEyebrow><h2 className="max-w-4xl text-4xl font-semibold tracking-[-0.055em] sm:text-6xl">{content.title}</h2><p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{content.text}</p></FadeIn><div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">{content.items.map(([title, text], index) => <FadeIn key={title} delay={index * 0.04}><article className="h-full rounded-3xl border border-border bg-card p-6 shadow-premium"><div className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold">{index + 1}</div><h3 className="mt-6 text-xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p></article></FadeIn>)}</div></div></section>;
+}
+
+function WhyPllanaSection() {
+  const { locale } = useLocale();
+  const content = localizedContent[locale].why;
+  return <section className="px-6 py-28"><div className="mx-auto max-w-7xl"><div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]"><FadeIn><div className="lg:sticky lg:top-32"><SectionEyebrow>{content.eyebrow}</SectionEyebrow><h2 className="max-w-4xl text-4xl font-semibold tracking-[-0.055em] sm:text-6xl">{content.title}</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">{content.text}</p></div></FadeIn><div className="space-y-4">{content.items.map(([frame, answer], index) => <FadeIn key={frame} delay={index * 0.05}><article className="overflow-hidden rounded-3xl border border-border bg-card shadow-premium"><div className="border-b border-border bg-muted/40 px-7 py-5"><p className="text-sm font-medium text-muted-foreground">{frame}</p></div><div className="flex gap-4 p-7"><Check className="mt-1 h-5 w-5 shrink-0" aria-hidden="true" /><p className="text-xl font-medium leading-8">{answer}</p></div></article></FadeIn>)}</div></div></div></section>;
+}
+
+function WebsiteProofSection() {
+  const { locale } = useLocale();
+  const content = localizedContent[locale].websiteProof;
+  return <section className="px-6 py-24"><div className="mx-auto max-w-7xl"><FadeIn><div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-foreground p-8 text-background shadow-premium sm:p-14 lg:p-16"><div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-background/10 blur-3xl" /><p className="relative text-sm font-medium uppercase tracking-[0.2em] text-background/65">{content.eyebrow}</p><h2 className="relative mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.055em] sm:text-6xl">{content.title}</h2><p className="relative mt-6 max-w-3xl text-lg leading-8 text-background/70">{content.text}</p><Button asChild size="lg" variant="secondary" className="relative mt-8"><Link href="/website-check">{content.cta}<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div></FadeIn></div></section>;
+}
+
+function RiskSection() {
+  const { locale } = useLocale();
+  const content = localizedContent[locale].risk;
+  return <section className="border-y border-border bg-muted/35 px-6 py-28"><div className="mx-auto max-w-7xl"><FadeIn><SectionEyebrow>{content.eyebrow}</SectionEyebrow><h2 className="max-w-5xl text-4xl font-semibold tracking-[-0.055em] sm:text-6xl">{content.title}</h2><p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{content.text}</p></FadeIn><div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2 lg:grid-cols-4">{content.items.map(([title, text]) => <article key={title} className="bg-card p-7"><p className="text-sm font-medium uppercase tracking-[0.16em] text-muted-foreground">{title}</p><p className="mt-4 text-lg leading-8">{text}</p></article>)}</div><FadeIn><div className="mt-10 flex flex-col gap-5 rounded-3xl border border-border bg-background p-7 shadow-premium sm:flex-row sm:items-center sm:justify-between"><p className="max-w-3xl text-xl font-semibold tracking-[-0.03em]">{content.closing}</p><Button asChild size="lg"><Link href="#kontakt">{content.cta}<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div></FadeIn></div></section>;
+}
+
 function ThinkingSection() { const { t, locale } = useLocale(); return <section id="denkweise" className="premium-frame relative overflow-hidden bg-background px-6 py-32"><div className="relative mx-auto max-w-7xl"><div className="grid gap-16 lg:grid-cols-[0.92fr_1.08fr]"><FadeIn><div className="sticky top-28"><SectionEyebrow>{t.thinkingEyebrow}</SectionEyebrow><h2 className="max-w-3xl text-5xl font-semibold tracking-[-0.065em] sm:text-7xl">{t.thinkingTitle}</h2><p className="mt-8 max-w-xl text-xl leading-8 text-muted-foreground">{t.thinkingText}</p></div></FadeIn><div className="space-y-2">{localizedContent[locale].thinking.map(([number, title, text], index) => <FadeIn key={number} delay={index * 0.06}><div className="grid gap-5 border-b border-border/80 py-9 md:grid-cols-[96px_1fr]"><p className="text-sm text-muted-foreground">{number}</p><div><p className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">{title}</p><p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{text}</p></div></div></FadeIn>)}</div></div></div></section>; }
 function MethodologySection() { const { t, locale } = useLocale(); return <Section id="vorgehen"><FadeIn><SectionEyebrow>{t.methodologyEyebrow}</SectionEyebrow><SectionTitle>{t.methodologyTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-4 lg:grid-cols-3">{localizedContent[locale].methodology.map(([number, title, text], index) => <FadeIn key={title} delay={index * 0.04}><div className="group h-full rounded-3xl border border-border bg-card p-8 transition hover:-translate-y-1 hover:shadow-premium"><div className="flex items-center justify-between"><span className="text-sm text-muted-foreground">{number}</span><Check className="h-4 w-4 text-muted-foreground" /></div><h3 className="mt-10 text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div></FadeIn>)}</div></Section>; }
 function CapabilitiesSection() { const { t, locale } = useLocale(); return <section id="kompetenzen" className="premium-frame relative overflow-hidden bg-muted/35 px-6 py-28 text-foreground"><div className="relative mx-auto max-w-7xl"><FadeIn><SectionEyebrow>{t.capabilitiesEyebrow}</SectionEyebrow><SectionTitle>{t.capabilitiesTitle}</SectionTitle></FadeIn><div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-2 lg:grid-cols-3">{localizedContent[locale].capabilities.map(([title, text]) => <div key={title} className="bg-card p-8"><h3 className="text-2xl font-semibold tracking-[-0.03em]">{title}</h3><p className="mt-4 leading-7 text-muted-foreground">{text}</p></div>)}</div></div></section>; }
@@ -209,9 +357,9 @@ function FAQSection() { const { t, locale } = useLocale(); return <section id="f
 
 function ContactSection() {
   const { t } = useLocale();
-  return <section id="kontakt" className="px-6 py-28"><div className="mx-auto max-w-5xl text-center"><FadeIn><SectionEyebrow>{t.contactEyebrow}</SectionEyebrow><h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{t.contactTitle}</h2><p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.contactText}</p><div className="mt-12 flex justify-center"><Button asChild size="lg"><a href={`mailto:${contactEmail}`} className="min-w-64 justify-center">{t.contactCta} <ArrowRight className="ml-2 h-4 w-4" /></a></Button></div><div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8"><p className="text-sm text-muted-foreground">{t.socialHint}</p><div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg" variant="outline"><a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.instagram} target="_blank" rel="noreferrer"><Instagram className="mr-2 h-4 w-4" /> Instagram</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.tiktok} target="_blank" rel="noreferrer"><Music2 className="mr-2 h-4 w-4" /> TikTok</a></Button></div></div></FadeIn></div></section>;
+  return <section id="kontakt" className="px-6 py-28"><div className="mx-auto max-w-5xl"><FadeIn><div className="text-center"><SectionEyebrow>{t.contactEyebrow}</SectionEyebrow><h2 className="text-5xl font-semibold tracking-[-0.06em] sm:text-7xl">{t.contactTitle}</h2><p className="mx-auto mt-8 max-w-2xl text-xl leading-8 text-muted-foreground">{t.contactText}</p></div><div className="mt-12"><ContactForm /></div><div className="mx-auto mt-12 max-w-2xl border-t border-border pt-8 text-center"><p className="text-sm text-muted-foreground">{t.socialHint}</p><div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"><Button asChild size="lg" variant="outline"><a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><MessageCircle className="mr-2 h-4 w-4" /> WhatsApp</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.instagram} target="_blank" rel="noreferrer"><Instagram className="mr-2 h-4 w-4" /> Instagram</a></Button><Button asChild size="lg" variant="outline"><a href={socialLinks.tiktok} target="_blank" rel="noreferrer"><Music2 className="mr-2 h-4 w-4" /> TikTok</a></Button></div></div></FadeIn></div></section>;
 }
 
 export default function Home() {
-  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") }} /><SiteHeader /><Hero /><AeoSummary /><ServicePackages /><PartnerSection /><ThinkingSection /><MethodologySection /><CapabilitiesSection /><CaseStudiesSection /><BrandPromiseSection /><ExpertiseSection /><FAQSection /><ContactSection /><SiteFooter /></main>;
+  return <main className="min-h-screen overflow-hidden bg-background text-foreground"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData).replace(/</g, "\\u003c") }} /><SiteHeader /><Hero /><PartnerSection /><DiagnosticSection /><WhyPllanaSection /><ServicePackages /><ThinkingSection /><CapabilitiesSection /><MethodologySection /><CaseStudiesSection /><WebsiteProofSection /><BrandPromiseSection /><AeoSummary /><ExpertiseSection /><FAQSection /><RiskSection /><ContactSection /><SiteFooter /></main>;
 }
