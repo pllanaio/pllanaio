@@ -26,6 +26,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     ...getServiceSitemapEntries(),
+    ...[
+      "pakete",
+      "strategische-digitalisierung",
+      "kompetenzen",
+      "referenzen",
+      "it-risiken",
+      "ueber-uns",
+      "faq",
+    ].map((path) => ({
+      url: `${siteUrl}/${path}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
     {
       url: `${siteUrl}/impressum`,
       lastModified,

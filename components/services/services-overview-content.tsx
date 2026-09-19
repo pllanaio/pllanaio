@@ -12,6 +12,8 @@ import { servicesUiCopy } from "@/lib/services/ui-copy";
 
 const icons = { web: Layers3, workplace: Workflow, cloud: Network, individual: Code2 };
 
+const packageLinkLabel = { de: "Pakete & laufende Betreuung", en: "Packages & ongoing support", sq: "Paketat & mirëmbajtja e vazhdueshme" } as const;
+
 export function ServicesOverviewContent() {
   const { locale } = useLocale();
   const copy = servicesUiCopy[locale];
@@ -38,6 +40,7 @@ export function ServicesOverviewContent() {
               <Button asChild variant="outline" className="mt-6 h-auto min-h-12 justify-between gap-3 py-3"><Link href={service.href} aria-label={`${service.name}: ${copy.details}`}>{copy.details}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></Button>
             </article>;
           })}
+          <div className="md:col-span-2"><Button asChild variant="outline"><Link href="/pakete">{packageLinkLabel[locale]}<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link></Button></div>
         </div>
       </section>
       <section className="border-y border-border bg-muted/30 px-6 py-20">
