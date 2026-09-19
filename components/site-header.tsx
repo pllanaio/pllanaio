@@ -16,6 +16,7 @@ const iconButtonClass = "inline-flex h-11 w-11 shrink-0 items-center justify-cen
 export function SiteHeader() {
   const { t } = useLocale();
   const pathname = usePathname();
+  const showNotice = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -58,6 +59,11 @@ export function SiteHeader() {
         closeNavigation();
       }}
     >
+      {showNotice && (
+        <div className="border-b border-border/60 bg-foreground px-4 py-2 text-center text-xs font-medium tracking-[-0.01em] text-background sm:text-sm">
+          {t.headerNotice}
+        </div>
+      )}
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link href="/" onClick={closeNavigation} className="flex min-w-0 items-center gap-2 rounded-lg text-xs font-semibold tracking-[-0.02em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:gap-3 sm:text-sm">
           <Image src="/logo.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0 rounded-xl" priority />
@@ -122,7 +128,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <nav id={mobileId} hidden={!mobileOpen} aria-label={t.navigation.main} className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border px-4 py-4 sm:px-6 xl:hidden">
+      <nav id={mobileId} hidden={!mobileOpen} aria-label={t.navigation.main} className="max-h-[calc(100dvh-6.5rem)] overflow-y-auto border-t border-border px-4 py-4 sm:px-6 xl:hidden">
         <ul className="mx-auto max-w-7xl space-y-1">
           {siteNav.map((item, index) => (
             <li key={item.href}>

@@ -46,7 +46,7 @@ type PortfolioCopy = {
 
 export const portfolioCopy = {
   de: {
-    eyebrow: "Leistungen für KMU · München und 50 km Umland",
+    eyebrow: "Betreuung & digitale Lösungen · Process first",
     title: "Betreuung, die Verantwortung übernimmt.",
     intro: "Sie kaufen nicht einfach Stunden, sondern einen verlässlichen Rahmen für Betrieb, Pflege und Weiterentwicklung. Wir kümmern uns um die vereinbarten Systeme, prüfen regelmäßig den Zustand und stimmen zusätzliche Vorhaben transparent mit Ihnen ab.",
     careTitle: "Monatlich planbare Betreuung",
@@ -91,7 +91,7 @@ export const portfolioCopy = {
     },
   },
   en: {
-    eyebrow: "Services for SMEs · Munich and within 50 km",
+    eyebrow: "Ongoing support & digital solutions · Process first",
     title: "Ongoing support that takes ownership.",
     intro: "You are not simply buying hours. You are getting a reliable framework for operations, maintenance and continuous improvement. We look after the agreed systems, review their condition regularly and discuss additional projects transparently.",
     careTitle: "Predictable monthly support",
@@ -133,7 +133,7 @@ export const portfolioCopy = {
     },
   },
   sq: {
-    eyebrow: "Shërbime për NVM · Mynih dhe 50 km përreth",
+    eyebrow: "Mbështetje & zgjidhje digjitale · Process first",
     title: "Mirëmbajtje që merr përgjegjësi.",
     intro: "Nuk blini thjesht orë pune, por një kornizë të besueshme për funksionim, mirëmbajtje dhe përmirësim të vazhdueshëm. Ne kujdesemi për sistemet e dakorduara, kontrollojmë rregullisht gjendjen dhe koordinojmë projektet shtesë në mënyrë transparente.",
     careTitle: "Mbështetje mujore e planifikueshme",
