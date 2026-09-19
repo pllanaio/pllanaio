@@ -20,11 +20,11 @@ const businessDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Digitalisierung & IT, die im Alltag funktioniert | Leon Pllana IT-Solutions",
+    default: "Strategische Digitalisierung & IT | Leon Pllana IT-Solutions",
     template: "%s | Leon Pllana IT-Solutions",
   },
   description:
-    "Weniger manuelle Arbeit, klarere Prozesse und verlässlich betreute IT: Microsoft 365, Automatisierung, Cloud, Security und Software.",
+    "Strategische Digitalisierung von Prozessen und IT: Microsoft 365, Automatisierung, Cloud, Security, Software und Schnittstellen aus einer Hand.",
   applicationName: businessName,
   manifest: "/manifest.webmanifest",
   authors: [{ name: "Leon Pllana", url: siteUrl }],
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Ihre IT sollte Probleme lösen – nicht neue schaffen. | Leon Pllana IT-Solutions",
+    title: "Strategische Digitalisierung | Leon Pllana IT-Solutions",
     description:
-      "Prozesse vereinfachen, Systeme verbinden und IT verlässlich betreiben: Microsoft 365, Automatisierung, Cloud, Security und Software.",
+      "Prozesse vereinfachen, Systeme verbinden und digitale Lösungen nachhaltig umsetzen – von Microsoft 365 bis Automatisierung, Cloud, Security und Software.",
     url: siteUrl,
     siteName: businessName,
     locale: "de_DE",
@@ -133,7 +133,7 @@ const organizationSchema = {
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
   image: `${siteUrl}/og-image.png`,
-  slogan: "Innovation in every Step.",
+  slogan: "Innovation In Every Step.",
   description: businessDescription,
   email: "info@pllana.io",
   telephone: "+491727255810",
