@@ -27,7 +27,7 @@ export const partnerCompanies: PartnerCompany[] = [
 
 export const siteNav = [
   { label: "Leistungen", href: "/leistungen" },
-  { label: "Referenzen", href: "/#referenzen" },
+  { label: "Referenzen", href: "/referenzen" },
   { label: "Website-Check", href: "/website-check" },
   { label: "Kontakt", href: "/#kontakt" },
 ];
