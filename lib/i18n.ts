@@ -10,10 +10,9 @@ export const defaultLocale: Locale = "de";
 
 export const dictionary = {
   de: {
-    nav: ["Denkweise", "Vorgehen", "Kompetenzen", "Leistungen", "Pakete", "Cases", "FAQ"],
+    nav: ["Leistungen", "Referenzen", "Website-Check", "Kontakt"],
     navigation: { main: "Hauptnavigation", footer: "Weitere Seiten", open: "Menü öffnen", close: "Menü schließen", services: "Leistungen anzeigen", serviceList: "Leistungsseiten" },
     headerCta: "Gespräch starten",
-    headerNotice: "Die teuerste IT ist die, die erst auffällt, wenn sie ausfällt.",
     websiteCheck: { hero: "Website kostenlos prüfen", footer: "Website-Check" },
     badge: "Process first · Technology second",
     heroTitle: "Ihre IT sollte Probleme lösen – nicht neue schaffen.",
@@ -44,7 +43,7 @@ export const dictionary = {
     contactText: "Beschreiben Sie kurz, wo Arbeit hängen bleibt, Daten doppelt gepflegt werden oder Systeme nicht zusammenspielen. Wir ordnen die Situation ein und zeigen sinnvolle nächste Schritte.",
     contactCta: "Potenzialanalyse anfragen",
     socialHint: "Sie finden uns außerdem hier:",
-    footerClaim: "Innovation in every Step.",
+    footerClaim: "Innovation In Every Step.",
     legal: { imprint: "Impressum", privacy: "Datenschutz", terms: "AGB", cookies: "Cookie-Richtlinie" },
     cookie: {
       title: "Cookie-Einstellungen",
@@ -59,10 +58,9 @@ export const dictionary = {
     },
   },
   en: {
-    nav: ["Mindset", "Approach", "Capabilities", "Services", "Packages", "Cases", "FAQ"],
+    nav: ["Services", "References", "Website check", "Contact"],
     navigation: { main: "Main navigation", footer: "More pages", open: "Open menu", close: "Close menu", services: "Show services", serviceList: "Service pages" },
     headerCta: "Start a conversation",
-    headerNotice: "The most expensive IT is the IT you only notice when it fails.",
     websiteCheck: { hero: "Check your website for free", footer: "Website check" },
     badge: "Process first · Technology second",
     heroTitle: "Your IT should solve problems – not create new ones.",
@@ -93,7 +91,7 @@ export const dictionary = {
     contactText: "Tell us where work gets stuck, data is maintained twice or systems do not work together. We will structure the situation and outline sensible next steps.",
     contactCta: "Request a potential analysis",
     socialHint: "You can also find us here:",
-    footerClaim: "Innovation in every Step.",
+    footerClaim: "Innovation In Every Step.",
     legal: { imprint: "Imprint", privacy: "Privacy", terms: "Terms", cookies: "Cookie Policy" },
     cookie: {
       title: "Cookie settings",
@@ -108,10 +106,9 @@ export const dictionary = {
     },
   },
   sq: {
-    nav: ["Mendësia", "Qasja", "Kompetencat", "Shërbimet", "Paketat", "Rastet", "FAQ"],
+    nav: ["Shërbimet", "Referencat", "Kontrolli i faqes", "Kontakt"],
     navigation: { main: "Navigimi kryesor", footer: "Faqe të tjera", open: "Hap menynë", close: "Mbyll menynë", services: "Shfaq shërbimet", serviceList: "Faqet e shërbimeve" },
     headerCta: "Fillo bisedën",
-    headerNotice: "IT-ja më e shtrenjtë është ajo që vihet re vetëm kur dështon.",
     websiteCheck: { hero: "Kontrolloni faqen falas", footer: "Kontrolli i faqes" },
     badge: "Process first · Technology second",
     heroTitle: "IT-ja juaj duhet të zgjidhë probleme – jo të krijojë të reja.",
@@ -142,7 +139,7 @@ export const dictionary = {
     contactText: "Na tregoni ku ngec puna, ku të dhënat mirëmbahen dy herë ose ku sistemet nuk bashkëpunojnë. Ne e strukturojmë situatën dhe propozojmë hapat e arsyeshëm të radhës.",
     contactCta: "Kërko analizë potenciali",
     socialHint: "Na gjeni edhe këtu:",
-    footerClaim: "Innovation in every Step.",
+    footerClaim: "Innovation In Every Step.",
     legal: { imprint: "Impressum", privacy: "Privatësia", terms: "Kushtet", cookies: "Politika e Cookies" },
     cookie: {
       title: "Cilësimet e cookies",
