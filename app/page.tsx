@@ -195,7 +195,7 @@ function Services() {
             </FadeIn>
           ))}
         </div>
-        <FadeIn><Button asChild variant="outline" className="mt-8"><Link href="/leistungen">Alle Leistungen ansehen<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></FadeIn>
+        <FadeIn><div className="mt-8 flex flex-wrap gap-3"><Button asChild variant="outline"><Link href="/leistungen">Alle Leistungen ansehen<ArrowRight className="ml-2 h-4 w-4" /></Link></Button><Button asChild variant="ghost"><Link href="/strategische-digitalisierung">Unser Ansatz<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div></FadeIn>
       </div>
     </section>
   );
@@ -222,6 +222,7 @@ function WhyPllana() {
             </FadeIn>
           ))}
         </div>
+        <div className="mt-7"><Button asChild variant="ghost"><Link href="/ueber-uns">Mehr über Arbeitsweise & Vertrauen<ArrowRight className="ml-2 h-4 w-4" /></Link></Button></div>
       </div>
     </section>
   );
