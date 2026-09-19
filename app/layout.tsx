@@ -20,11 +20,11 @@ const businessDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Digitalisierung & IT für KMU in München | Leon Pllana IT-Solutions",
+    default: "Digitalisierung & IT, die im Alltag funktioniert | Leon Pllana IT-Solutions",
     template: "%s | Leon Pllana IT-Solutions",
   },
   description:
-    "Prozesse vereinfachen, Systeme verbinden und IT langfristig betreiben: Microsoft 365, Automatisierung, Cloud, Security und Software für KMU im Raum München.",
+    "Weniger manuelle Arbeit, klarere Prozesse und verlässlich betreute IT: Microsoft 365, Automatisierung, Cloud, Security und Software.",
   applicationName: businessName,
   manifest: "/manifest.webmanifest",
   authors: [{ name: "Leon Pllana", url: siteUrl }],
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Weniger manuelle Arbeit. Klarere Prozesse. | Leon Pllana IT-Solutions",
+    title: "Ihre IT sollte Probleme lösen – nicht neue schaffen. | Leon Pllana IT-Solutions",
     description:
-      "Digitalisierung und IT für KMU im Raum München: Prozesse vereinfachen, Microsoft 365 sauber aufsetzen, Systeme verbinden, automatisieren und sicher betreiben.",
+      "Prozesse vereinfachen, Systeme verbinden und IT verlässlich betreiben: Microsoft 365, Automatisierung, Cloud, Security und Software.",
     url: siteUrl,
     siteName: businessName,
     locale: "de_DE",
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Weniger manuelle Arbeit. Klarere Prozesse. | Leon Pllana IT-Solutions",
+    title: "Ihre IT sollte Probleme lösen – nicht neue schaffen. | Leon Pllana IT-Solutions",
     description:
-      "Digitalisierung und IT für KMU: Prozessoptimierung, Microsoft 365, Automatisierung, Cloud, Security und Software aus einer Hand.",
+      "Digitalisierung und IT: Prozessoptimierung, Microsoft 365, Automatisierung, Cloud, Security und Software aus einer Hand.",
     images: ["/og-image.png"],
   },
   robots: {
