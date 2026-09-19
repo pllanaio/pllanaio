@@ -128,7 +128,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <nav id={mobileId} hidden={!mobileOpen} aria-label={t.navigation.main} className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border px-4 py-4 sm:px-6 xl:hidden">
+      <nav id={mobileId} hidden={!mobileOpen} aria-label={t.navigation.main} className="max-h-[calc(100dvh-6.5rem)] overflow-y-auto border-t border-border px-4 py-4 sm:px-6 xl:hidden">
         <ul className="mx-auto max-w-7xl space-y-1">
           {siteNav.map((item, index) => (
             <li key={item.href}>
