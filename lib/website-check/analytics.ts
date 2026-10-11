@@ -22,4 +22,3 @@ export function trackWebsiteCheckEvent({ event, ...params }: EventPayload) {
   // Do not send user-entered domains or internal report IDs to analytics.
   pushDataLayer(event, { strategy: params.strategy, error_code: params.error_code });
 }
-
