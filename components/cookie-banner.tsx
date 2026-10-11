@@ -110,4 +110,3 @@ export function CookieSettingsButton() {
     </button>
   );
 }
-
