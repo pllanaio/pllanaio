@@ -7,6 +7,7 @@ import { useOfferSelection } from "@/components/offer-selection-provider";
 import { OfferSelectionSummary } from "@/components/offer-selection-summary";
 import { isOfferMessageValid } from "@/lib/offer-selection";
 import { selectionCopy } from "@/lib/offer-selection-copy";
+import { trackEvent } from "@/components/analytics";
 
 type InquiryGoal = "" | "automation" | "workplace" | "website" | "cloud" | "software" | "security" | "unsure";
 type Timeline = "" | "asap" | "one-to-three" | "three-plus" | "exploring";
@@ -205,7 +206,9 @@ export function ContactForm() {
   const totalSteps = 4;
 
   useEffect(() => {
-    stepTitleRef.current?.focus();
+    // Do not move the page on initial render: the form sits near the bottom
+    // of the homepage. Keep the focus announcement for subsequent steps.
+    if (step > 0) stepTitleRef.current?.focus();
   }, [step]);
 
   useEffect(() => {
@@ -286,6 +289,7 @@ export function ContactForm() {
       setValues(initialValues);
       setErrors({});
       removeOffers(submittedOffers);
+      trackEvent("generate_lead", { form_name: "contact" });
       setStatus("success");
       setStep(0);
     } catch {
@@ -459,3 +463,4 @@ export function ContactForm() {
     </form>
   );
 }
+
