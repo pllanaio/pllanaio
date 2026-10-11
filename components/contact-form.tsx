@@ -211,13 +211,6 @@ export function ContactForm() {
     if (step > 0) stepTitleRef.current?.focus();
   }, [step]);
 
-  useEffect(() => {
-    if (status === "success" && selectedOffers.length > 0) {
-      setStatus("idle");
-      setStep(0);
-    }
-  }, [selectedOffers.length, status]);
-
   const validateStep = (currentStep: number) => {
     const next: FormErrors = {};
 
