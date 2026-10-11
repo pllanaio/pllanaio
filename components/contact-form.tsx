@@ -7,6 +7,7 @@ import { useOfferSelection } from "@/components/offer-selection-provider";
 import { OfferSelectionSummary } from "@/components/offer-selection-summary";
 import { isOfferMessageValid } from "@/lib/offer-selection";
 import { selectionCopy } from "@/lib/offer-selection-copy";
+import { trackEvent } from "@/components/analytics";
 
 type InquiryGoal = "" | "automation" | "workplace" | "website" | "cloud" | "software" | "security" | "unsure";
 type Timeline = "" | "asap" | "one-to-three" | "three-plus" | "exploring";
@@ -202,18 +203,17 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [step, setStep] = useState(0);
   const stepTitleRef = useRef<HTMLHeadingElement>(null);
+  const previousStepRef = useRef(step);
   const totalSteps = 4;
 
   useEffect(() => {
-    stepTitleRef.current?.focus();
-  }, [step]);
-
-  useEffect(() => {
-    if (status === "success" && selectedOffers.length > 0) {
-      setStatus("idle");
-      setStep(0);
+    // Avoid focusing the form at mount, but announce every wizard transition,
+    // including returning to the first step.
+    if (previousStepRef.current !== step) {
+      previousStepRef.current = step;
+      stepTitleRef.current?.focus();
     }
-  }, [selectedOffers.length, status]);
+  }, [step]);
 
   const validateStep = (currentStep: number) => {
     const next: FormErrors = {};
@@ -286,6 +286,7 @@ export function ContactForm() {
       setValues(initialValues);
       setErrors({});
       removeOffers(submittedOffers);
+      trackEvent("generate_lead", { form_name: "contact" });
       setStatus("success");
       setStep(0);
     } catch {

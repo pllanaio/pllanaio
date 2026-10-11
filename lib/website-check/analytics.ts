@@ -1,4 +1,4 @@
-import { pushDataLayer } from "@/lib/tracking";
+import { hasAnalyticsConsent, pushDataLayer } from "@/lib/tracking";
 
 export type WebsiteCheckEvent =
   | "website_check_started"
@@ -18,5 +18,7 @@ type EventPayload = {
 };
 
 export function trackWebsiteCheckEvent({ event, ...params }: EventPayload) {
-  pushDataLayer(event, params);
+  if (!hasAnalyticsConsent()) return;
+  // Do not send user-entered domains or internal report IDs to analytics.
+  pushDataLayer(event, { strategy: params.strategy, error_code: params.error_code });
 }
