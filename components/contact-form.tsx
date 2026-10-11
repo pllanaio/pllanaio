@@ -203,12 +203,16 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [step, setStep] = useState(0);
   const stepTitleRef = useRef<HTMLHeadingElement>(null);
+  const previousStepRef = useRef(step);
   const totalSteps = 4;
 
   useEffect(() => {
-    // Do not move the page on initial render: the form sits near the bottom
-    // of the homepage. Keep the focus announcement for subsequent steps.
-    if (step > 0) stepTitleRef.current?.focus();
+    // Avoid focusing the form at mount, but announce every wizard transition,
+    // including returning to the first step.
+    if (previousStepRef.current !== step) {
+      previousStepRef.current = step;
+      stepTitleRef.current?.focus();
+    }
   }, [step]);
 
   const validateStep = (currentStep: number) => {
