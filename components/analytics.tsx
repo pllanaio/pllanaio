@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { hasAnalyticsConsent } from "@/components/cookie-banner";
-import { GTM_ID, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
+import { usePathname } from "next/navigation";
+import { GTM_ID, hasAnalyticsConsent, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
 
 type ClickEvent = { event: string; label: string };
 type IdleWindow = Window & {
@@ -64,6 +64,7 @@ export function trackEvent(event: string, params?: Record<string, string | numbe
 
 export function Analytics() {
   const scrollDepths = useRef(new Set<number>());
+  const pathname = usePathname();
 
   useEffect(() => {
     let cancelScheduledLoad: () => void = () => {};
@@ -73,11 +74,6 @@ export function Analytics() {
 
     if (consentGranted) {
       cancelScheduledLoad = scheduleGoogleTagManager();
-      pushDataLayer("page_view", {
-        page_path: window.location.pathname,
-        page_title: document.title,
-        analytics_consent: true,
-      });
     }
 
     function handleConsent(event: Event) {
@@ -94,6 +90,9 @@ export function Analytics() {
           page_title: document.title,
           analytics_consent: true,
         });
+      } else {
+        cancelScheduledLoad();
+        cancelScheduledLoad = () => {};
       }
     }
 
@@ -141,5 +140,16 @@ export function Analytics() {
     };
   }, []);
 
+  useEffect(() => {
+    scrollDepths.current.clear();
+    if (!hasAnalyticsConsent()) return;
+    pushDataLayer("page_view", {
+      page_path: pathname,
+      page_title: document.title,
+      analytics_consent: true,
+    });
+  }, [pathname]);
+
   return null;
 }
+
