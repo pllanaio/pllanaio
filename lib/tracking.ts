@@ -35,4 +35,3 @@ export function updateGoogleConsent(granted: boolean) {
     },
   ]);
 }
-
