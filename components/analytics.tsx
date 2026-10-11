@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { GTM_ID, hasAnalyticsConsent, pushDataLayer, updateGoogleConsent } from "@/lib/tracking";
+import { GTM_ID, hasAnalyticsConsent, pushDataLayer, setDefaultGoogleConsent, updateGoogleConsent } from "@/lib/tracking";
 
 type ClickEvent = { event: string; label: string };
 type IdleWindow = Window & {
@@ -69,10 +69,11 @@ export function Analytics() {
   useEffect(() => {
     let cancelScheduledLoad: () => void = () => {};
 
+    setDefaultGoogleConsent();
     const consentGranted = hasAnalyticsConsent();
-    updateGoogleConsent(consentGranted);
 
     if (consentGranted) {
+      updateGoogleConsent(true);
       cancelScheduledLoad = scheduleGoogleTagManager();
     }
 
