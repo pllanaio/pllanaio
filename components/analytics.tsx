@@ -87,6 +87,7 @@ export function Analytics() {
         pushDataLayer("cookie_accept", { analytics_consent: true });
         pushDataLayer("page_view", {
           page_path: window.location.pathname,
+          page_location: `${window.location.origin}${window.location.pathname}`,
           page_title: document.title,
           analytics_consent: true,
         });
@@ -145,6 +146,7 @@ export function Analytics() {
     if (!hasAnalyticsConsent()) return;
     pushDataLayer("page_view", {
       page_path: pathname,
+      page_location: `${window.location.origin}${pathname}`,
       page_title: document.title,
       analytics_consent: true,
     });
