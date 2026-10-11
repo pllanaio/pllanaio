@@ -21,12 +21,12 @@ export function hasAnalyticsConsent() {
   return window.localStorage.getItem(CONSENT_KEY) === "accepted";
 }
 
-export function updateGoogleConsent(granted: boolean) {
+function pushGoogleConsent(command: "default" | "update", granted: boolean) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push([
     "consent",
-    "update",
+    command,
     {
       analytics_storage: granted ? "granted" : "denied",
       ad_storage: "denied",
@@ -34,4 +34,12 @@ export function updateGoogleConsent(granted: boolean) {
       ad_personalization: "denied",
     },
   ]);
+}
+
+export function setDefaultGoogleConsent() {
+  pushGoogleConsent("default", false);
+}
+
+export function updateGoogleConsent(granted: boolean) {
+  pushGoogleConsent("update", granted);
 }
